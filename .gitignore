@@ -1,0 +1,25 @@
+syntax: glob
+.idea/*
+**.iml
+**.xml~
+lib/*
+*.*~
+
+*.orig
+*.rej
+nbactions.xml
+nb-configuration.xml
+cmd.lnk
+clean.cmd
+build.cmd
+.directory
+syntax: regexp
+^\.project$
+^(?=.*/target/)(?!((?!/src/|/target/).)*/src/.*(?<=/)target/)
+
+syntax: glob
+.settings/*
+target/*
+tmp/*
+.classpath
+.project
