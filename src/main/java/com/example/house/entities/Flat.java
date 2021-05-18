@@ -12,6 +12,9 @@ public class Flat {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "number")
+    private Integer number;
+
     @ManyToOne
     @JoinColumn(name = "block_id")
     private Block block;
@@ -30,8 +33,8 @@ public class Flat {
 
     public Flat() {}
 
-    public Flat(Long id, Block block, Integer floor, Double area) {
-        this.id = id;
+    public Flat(Integer number, Block block, Integer floor, Double area) {
+        this.number = number;
         this.block = block;
         this.floor = floor;
         this.area = area;

@@ -20,6 +20,10 @@ public class Block {
 
     public Block() {}
 
+    public Block(Integer number) {
+        this.number = number;
+    }
+
     public Long getId() {
         return id;
     }

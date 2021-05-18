@@ -26,6 +26,12 @@ public class Owner {
 
     public Owner() {}
 
+    public Owner(String firstName, String lastName, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Long getId() {
         return id;
     }
