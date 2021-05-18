@@ -1,7 +1,10 @@
 package com.example.house.utils;
 
+import com.example.house.entities.Bill;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 @Component
@@ -59,10 +62,6 @@ public class MyRandom {
             "Iakovlev", "Iashin", "Iankovskiy"
     };
 
-    private static final int PHONE_NUMBER_LENGTH = 11;
-
-    private static final double MAX_AREA = 150.0d;
-
     private Random random = new Random();
 
     public String getRandomFirstName() {
@@ -75,13 +74,31 @@ public class MyRandom {
 
     public String getRandomPhoneNumber() {
         StringBuilder randomPhoneNumber = new StringBuilder("8");
-        for (int i = 0; i < PHONE_NUMBER_LENGTH - 1; ++i) {
+        for (int i = 0; i < MyConstants.PHONE_NUMBER_LENGTH - 1; ++i) {
             randomPhoneNumber.append(random.nextInt(10));
         }
         return new String(randomPhoneNumber);
     }
 
     public Double getRandomArea() {
-        return random.nextDouble() % MAX_AREA;
+        return random.nextDouble() % MyConstants.MAX_AREA;
+    }
+
+    public Integer getRandomFlatNumber() {
+        return random.nextInt(MyConstants.NUMBER_OF_BLOCKS * MyConstants.NUMBER_OF_FLOORS *
+                MyConstants.NUMBER_OF_FLATS_PER_FLOOR);
+    }
+
+    public Calendar getRandomDate() {
+        return new GregorianCalendar(MyConstants.CURRENT_YEAR,
+                random.nextInt(MyConstants.MONTHS_PER_YEAR), MyConstants.BILLS_DAY);
+    }
+
+    public Bill.BillStatus getRandomBillStatus() {
+        return Bill.BillStatus.values()[random.nextInt(Bill.BillStatus.values().length)];
+    }
+
+    public boolean flatBelongsToOwner() {
+        return random.nextInt(500) == 1;
     }
 }

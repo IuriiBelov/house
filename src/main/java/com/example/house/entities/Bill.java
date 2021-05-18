@@ -30,6 +30,12 @@ public class Bill {
 
     public Bill() {}
 
+    public Bill(Flat billFlat, Calendar date, BillStatus billStatus) {
+        this.billFlat = billFlat;
+        this.date = date;
+        this.billStatus = billStatus;
+    }
+
     public Long getId() {
         return id;
     }

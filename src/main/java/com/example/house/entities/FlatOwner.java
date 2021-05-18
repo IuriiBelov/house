@@ -20,6 +20,11 @@ public class FlatOwner {
 
     public FlatOwner() {}
 
+    public FlatOwner(Flat flatOwnerFlat, Owner flatOwnerOwner) {
+        this.flatOwnerFlat = flatOwnerFlat;
+        this.flatOwnerOwner = flatOwnerOwner;
+    }
+
     public Long getId() {
         return id;
     }

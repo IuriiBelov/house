@@ -1,12 +1,8 @@
 package com.example.house;
 
-import com.example.house.entities.Block;
-import com.example.house.entities.Flat;
-import com.example.house.entities.Owner;
-import com.example.house.repositories.BillRepository;
-import com.example.house.repositories.BlockRepository;
-import com.example.house.repositories.FlatRepository;
-import com.example.house.repositories.OwnerRepository;
+import com.example.house.entities.*;
+import com.example.house.repositories.*;
+import com.example.house.utils.MyConstants;
 import com.example.house.utils.MyRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,11 +14,6 @@ import java.util.Random;
 
 @SpringBootApplication
 public class HouseApplication {
-	private static final int NUMBER_OF_BLOCKS = 7;
-	private static final int NUMBER_OF_FLOORS = 9;
-	private static final int NUMBER_OF_FLATS_PER_FLOOR = 6;
-	private static final int NUMBER_OF_OWNERS = 500;
-	private static final int NUMBER_OF_BILLS = 1000;
 
 	private MyRandom myRandom;
 
@@ -39,24 +30,40 @@ public class HouseApplication {
 	public CommandLineRunner demo(BlockRepository blockRepository,
 								  OwnerRepository ownerRepository,
 								  FlatRepository flatRepository,
-								  BillRepository billRepository) {
+								  BillRepository billRepository,
+								  FlatOwnerRepository flatOwnerRepository) {
 		return (args) -> {
-			for (int i = 0; i < NUMBER_OF_BLOCKS; ++i) {
+			for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
 				blockRepository.save(new Block(i + 1));
 			}
 
-			for (int i = 0; i < NUMBER_OF_OWNERS; ++i) {
+			for (int i = 0; i < MyConstants.NUMBER_OF_OWNERS; ++i) {
 				ownerRepository.save(new Owner(myRandom.getRandomFirstName(),
 						myRandom.getRandomLastName(), myRandom.getRandomPhoneNumber()));
 			}
 
 			int flatNumber = 1;
-			for (int i = 0; i < NUMBER_OF_BLOCKS; ++i) {
-				for (int j = 0; j < NUMBER_OF_FLOORS; ++j) {
-					for (int k = 0; k < NUMBER_OF_FLATS_PER_FLOOR; ++k) {
+			for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
+				for (int j = 0; j < MyConstants.NUMBER_OF_FLOORS; ++j) {
+					for (int k = 0; k < MyConstants.NUMBER_OF_FLATS_PER_FLOOR; ++k) {
 						flatRepository.save(new Flat(flatNumber++,
 								blockRepository.getOneByNumber(i + 1),j + 1,
 								myRandom.getRandomArea()));
+					}
+				}
+			}
+
+			for (int i = 0; i < MyConstants.NUMBER_OF_BILLS; ++i) {
+				billRepository.save(new Bill(
+						flatRepository.getOneByNumber(myRandom.getRandomFlatNumber()),
+						myRandom.getRandomDate(), myRandom.getRandomBillStatus()));
+			}
+
+			for (int i = 0; i < MyConstants.NUMBER_OF_FLATS; ++i) {
+				for (int j = 0; j < MyConstants.NUMBER_OF_OWNERS; ++j) {
+					if (myRandom.flatBelongsToOwner()) {
+						flatOwnerRepository.save(new FlatOwner(flatRepository.getOneByNumber(i + 1),
+								ownerRepository.getOneByNumber(j + 1)));
 					}
 				}
 			}
