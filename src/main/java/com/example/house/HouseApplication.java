@@ -62,8 +62,8 @@ public class HouseApplication {
 			for (int i = 0; i < MyConstants.NUMBER_OF_FLATS; ++i) {
 				for (int j = 0; j < MyConstants.NUMBER_OF_OWNERS; ++j) {
 					if (myRandom.flatBelongsToOwner()) {
-						flatOwnerRepository.save(new FlatOwner(flatRepository.getOneByNumber(i + 1),
-								ownerRepository.getOneByNumber(j + 1)));
+						flatOwnerRepository.save(new FlatOwner(flatRepository.getOne((long)(i + 1)),
+								ownerRepository.getOne((long)(j + 1))));
 					}
 				}
 			}
