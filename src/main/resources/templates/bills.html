@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>All flats</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <h1>List of all bills:</h1>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <td>Flat</td>
+            <td>Date</td>
+            <td>Status</td>
+            <td></td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bill : ${bills}">
+            <td th:text="${bill.flat.number}"/>
+            <td th:text="${bill.date}"/>
+            <td th:text="${bill.status}"/>
+            <!--
+            <td><a class="btn btn-secondary" th:href="@{'/details/' + ${product.id}}">Bills</a></td>
+            <td><a class="btn btn-secondary" th:href="@{'/products/delete/' + ${product.id}}">Owners</a></td>
+            -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
