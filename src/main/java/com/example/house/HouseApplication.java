@@ -31,37 +31,47 @@ public class HouseApplication {
 								  BillRepository billRepository,
 								  FlatOwnerRepository flatOwnerRepository) {
 		return (args) -> {
-			for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
-				blockRepository.save(new Block(i + 1));
+			if (blockRepository.findAll().size() == 0) {
+				for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
+					blockRepository.save(new Block(i + 1));
+				}
 			}
 
-			for (int i = 0; i < MyConstants.NUMBER_OF_OWNERS; ++i) {
-				ownerRepository.save(new Owner(myRandom.getRandomFirstName(),
-						myRandom.getRandomLastName(), myRandom.getRandomPhoneNumber()));
+			if (ownerRepository.findAll().size() == 0) {
+				for (int i = 0; i < MyConstants.NUMBER_OF_OWNERS; ++i) {
+					ownerRepository.save(new Owner(myRandom.getRandomFirstName(),
+							myRandom.getRandomLastName(), myRandom.getRandomPhoneNumber()));
+				}
 			}
 
-			int flatNumber = 1;
-			for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
-				for (int j = 0; j < MyConstants.NUMBER_OF_FLOORS; ++j) {
-					for (int k = 0; k < MyConstants.NUMBER_OF_FLATS_PER_FLOOR; ++k) {
-						flatRepository.save(new Flat(flatNumber++,
-								blockRepository.getOneByNumber(i + 1),j + 1,
-								myRandom.getRandomArea()));
+			if (flatRepository.findAll().size() == 0) {
+				int flatNumber = 1;
+				for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
+					for (int j = 0; j < MyConstants.NUMBER_OF_FLOORS; ++j) {
+						for (int k = 0; k < MyConstants.NUMBER_OF_FLATS_PER_FLOOR; ++k) {
+							flatRepository.save(new Flat(flatNumber++,
+									blockRepository.getOneByNumber(i + 1), j + 1,
+									myRandom.getRandomArea()));
+						}
 					}
 				}
 			}
 
-			for (int i = 0; i < MyConstants.NUMBER_OF_BILLS; ++i) {
-				billRepository.save(new Bill(
-						flatRepository.getOneByNumber(myRandom.getRandomFlatNumber()),
-						myRandom.getRandomDate(), myRandom.getRandomBillStatus()));
+			if (billRepository.findAll().size() == 0) {
+				for (int i = 0; i < MyConstants.NUMBER_OF_BILLS; ++i) {
+					billRepository.save(new Bill(
+							flatRepository.getOneByNumber(myRandom.getRandomFlatNumber()),
+							myRandom.getRandomDate(), myRandom.getRandomBillStatus()));
+				}
 			}
 
-			for (int i = 0; i < MyConstants.NUMBER_OF_FLATS; ++i) {
-				for (int j = 0; j < MyConstants.NUMBER_OF_OWNERS; ++j) {
-					if (myRandom.flatBelongsToOwner()) {
-						flatOwnerRepository.save(new FlatOwner(flatRepository.getOne((long)(i + 1)),
-								ownerRepository.getOne((long)(j + 1))));
+			if (flatOwnerRepository.findAll().size() == 0) {
+				for (int i = 0; i < MyConstants.NUMBER_OF_FLATS; ++i) {
+					for (int j = 0; j < MyConstants.NUMBER_OF_OWNERS; ++j) {
+						if (myRandom.flatBelongsToOwner()) {
+							flatOwnerRepository.save(new FlatOwner(flatRepository.getOne((long) (i + 1)),
+									ownerRepository.getOne((long) (j + 1))));
+						}
 					}
 				}
 			}
