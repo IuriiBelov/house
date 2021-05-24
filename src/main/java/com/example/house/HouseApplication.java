@@ -25,11 +25,11 @@ public class HouseApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BlockRepository blockRepository,
-								  OwnerRepository ownerRepository,
-								  FlatRepository flatRepository,
-								  BillRepository billRepository,
-								  FlatOwnerRepository flatOwnerRepository) {
+	public CommandLineRunner fillDatabase(BlockRepository blockRepository,
+								          OwnerRepository ownerRepository,
+										  FlatRepository flatRepository,
+										  BillRepository billRepository,
+										  FlatOwnerRepository flatOwnerRepository) {
 		return (args) -> {
 			if (blockRepository.findAll().size() == 0) {
 				for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
