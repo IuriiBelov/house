@@ -17,6 +17,12 @@ public class BlockService {
     }
 
     public List<Block> getAllBlocks() {
-        return blockRepository.findAll();
+        List<Block> allBlocks = blockRepository.findAll();
+        return allBlocks;
+    }
+
+    public Block getBlockById(String id) {
+        Block block = blockRepository.getOneById(Long.parseLong(id));
+        return block;
     }
 }

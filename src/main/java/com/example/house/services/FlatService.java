@@ -17,6 +17,12 @@ public class FlatService {
     }
 
     public List<Flat> getAllFlats() {
-        return flatRepository.findAll();
+        List<Flat> allFlats = flatRepository.findAll();
+        return allFlats;
+    }
+
+    public Flat getFlatById(String id) {
+        Flat flat = flatRepository.getOneById(Long.parseLong(id));
+        return flat;
     }
 }

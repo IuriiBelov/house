@@ -17,6 +17,12 @@ public class OwnerService {
     }
 
     public List<Owner> getAllOwners() {
-        return ownerRepository.findAll();
+        List<Owner> allOwners = ownerRepository.findAll();
+        return allOwners;
+    }
+
+    public Owner getOwnerById(String id) {
+        Owner owner = ownerRepository.getOneById(Long.parseLong(id));
+        return owner;
     }
 }

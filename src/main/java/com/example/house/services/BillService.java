@@ -17,6 +17,12 @@ public class BillService {
     }
 
     public List<Bill> getAllBills() {
-        return billRepository.findAll();
+        List<Bill> allBills = billRepository.findAll();
+        return  allBills;
+    }
+
+    public Bill getBillById(String id) {
+        Bill bill = billRepository.getOneById(Long.parseLong(id));
+        return bill;
     }
 }
