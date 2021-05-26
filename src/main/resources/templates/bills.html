@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>All flats</title>
+    <title>All flatEntities</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,7 +14,7 @@
 
 <body>
 <div class="container">
-    <h1>List of all bills:</h1>
+    <h1>List of all billEntities:</h1>
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -26,10 +26,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="bill : ${bills}">
-            <td th:text="${bill.flat.number}"/>
-            <td th:text="${bill.date}"/>
-            <td th:text="${bill.status}"/>
+        <tr th:each="billEntity : ${billEntities}">
+            <td th:text="${billEntity.flatEntity.number}"/>
+            <td th:text="${billEntity.date}"/>
+            <td th:text="${billEntity.status}"/>
             <!--
             <td><a class="btn btn-secondary" th:href="@{'/details/' + ${product.id}}">Bills</a></td>
             <td><a class="btn btn-secondary" th:href="@{'/products/delete/' + ${product.id}}">Owners</a></td>

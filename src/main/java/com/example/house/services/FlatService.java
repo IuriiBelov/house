@@ -1,6 +1,6 @@
 package com.example.house.services;
 
-import com.example.house.entities.Flat;
+import com.example.house.entities.FlatEntity;
 import com.example.house.repositories.FlatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,13 @@ public class FlatService {
         this.flatRepository = flatRepository;
     }
 
-    public List<Flat> getAllFlats() {
-        List<Flat> allFlats = flatRepository.findAll();
-        return allFlats;
+    public List<FlatEntity> getAllFlats() {
+        List<FlatEntity> allFlatEntities = flatRepository.findAll();
+        return allFlatEntities;
     }
 
-    public Flat getFlatById(String id) {
-        Flat flat = flatRepository.getOneById(Long.parseLong(id));
-        return flat;
+    public FlatEntity getFlatById(String id) {
+        FlatEntity flatEntity = flatRepository.getOneById(Long.parseLong(id));
+        return flatEntity;
     }
 }

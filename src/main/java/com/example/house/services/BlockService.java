@@ -1,6 +1,7 @@
 package com.example.house.services;
 
-import com.example.house.entities.Block;
+import com.example.house.entities.BlockEntity;
+import com.example.house.entities.FlatEntity;
 import com.example.house.repositories.BlockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,18 @@ public class BlockService {
         this.blockRepository = blockRepository;
     }
 
-    public List<Block> getAllBlocks() {
-        List<Block> allBlocks = blockRepository.findAll();
-        return allBlocks;
+    public List<BlockEntity> getAllBlocks() {
+        List<BlockEntity> allBlockEntities = blockRepository.findAll();
+        return allBlockEntities;
     }
 
-    public Block getBlockById(String id) {
-        Block block = blockRepository.getOneById(Long.parseLong(id));
-        return block;
+    public BlockEntity getBlockById(String id) {
+        BlockEntity blockEntity = blockRepository.getOneById(Long.parseLong(id));
+        return blockEntity;
+    }
+
+    public List<FlatEntity> getBlockFlatsById(String id) {
+        List<FlatEntity> blockFlatEntities = blockRepository.getOneById(Long.parseLong(id)).getFlats();
+        return blockFlatEntities;
     }
 }

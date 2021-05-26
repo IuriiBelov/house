@@ -1,11 +1,9 @@
 package com.example.house.controllers;
 
-import com.example.house.entities.Owner;
+import com.example.house.entities.OwnerEntity;
 import com.example.house.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,15 +17,32 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @RequestMapping
-    public List<Owner> getAllOwners() {
-        List<Owner> allOwners = ownerService.getAllOwners();
-        return allOwners;
+    @GetMapping
+    public List<OwnerEntity> getAllOwners() {
+        List<OwnerEntity> allOwnerEntities = ownerService.getAllOwners();
+        return allOwnerEntities;
     }
 
-    @RequestMapping("{id}")
-    public Owner getOwnerById(@PathVariable String id) {
-        Owner owner = ownerService.getOwnerById(id);
-        return owner;
+    @GetMapping("{id}")
+    public OwnerEntity getOwnerById(@PathVariable String id) {
+        OwnerEntity ownerEntity = ownerService.getOwnerById(id);
+        return ownerEntity;
+    }
+
+    @PostMapping
+    public OwnerEntity createNewOwner(@RequestBody OwnerEntity newOwnerEntity) {
+        ownerService.createNewOwner(newOwnerEntity);
+        return newOwnerEntity;
+    }
+
+    @PutMapping("{id}")
+    public OwnerEntity updateOwner(@PathVariable String id, @RequestBody OwnerEntity ownerEntity) {
+        ownerService.updateOwner(id, ownerEntity);
+        return ownerEntity;
+    }
+
+    @DeleteMapping("{id")
+    public void deleteOwner(@PathVariable String id) {
+        ownerService.deleteOwner(id);
     }
 }

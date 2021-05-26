@@ -1,12 +1,14 @@
 package com.example.house.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "flats")
-public class Flat {
+public class FlatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -15,9 +17,10 @@ public class Flat {
     @Column(name = "number")
     private Integer number;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "block_id")
-    private Block block;
+    private BlockEntity blockEntity;
 
     @Column(name = "floor")
     private Integer floor;
@@ -26,16 +29,16 @@ public class Flat {
     private Double area;
 
     @OneToMany(mappedBy = "billFlat")
-    private List<Bill> bills = new ArrayList<>();
+    private List<BillEntity> billEntities = new ArrayList<>();
 
     @OneToMany(mappedBy = "flatOwnerFlat")
-    private List<FlatOwner> flatOwners = new ArrayList<>();
+    private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
-    public Flat() {}
+    public FlatEntity() {}
 
-    public Flat(Integer number, Block block, Integer floor, Double area) {
+    public FlatEntity(Integer number, BlockEntity blockEntity, Integer floor, Double area) {
         this.number = number;
-        this.block = block;
+        this.blockEntity = blockEntity;
         this.floor = floor;
         this.area = area;
     }
@@ -44,8 +47,10 @@ public class Flat {
         return id;
     }
 
-    public Block getBlock() {
-        return block;
+
+
+    public BlockEntity getBlock() {
+        return blockEntity;
     }
 
     public Integer getFloor() {
@@ -56,20 +61,20 @@ public class Flat {
         return area;
     }
 
-    public List<Bill> getBills() {
-        return bills;
+    public List<BillEntity> getBills() {
+        return billEntities;
     }
 
-    public List<FlatOwner> getFlatOwners() {
-        return flatOwners;
+    public List<FlatOwnerEntity> getFlatOwners() {
+        return flatOwnerEntities;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setBlock(Block block) {
-        this.block = block;
+    public void setBlock(BlockEntity blockEntity) {
+        this.blockEntity = blockEntity;
     }
 
     public void setFloor(Integer floor) {
@@ -80,11 +85,11 @@ public class Flat {
         this.area = area;
     }
 
-    public void setBills(List<Bill> bills) {
-        this.bills = bills;
+    public void setBills(List<BillEntity> billEntities) {
+        this.billEntities = billEntities;
     }
 
-    public void setFlatOwners(List<FlatOwner> flatOwners) {
-        this.flatOwners = flatOwners;
+    public void setFlatOwners(List<FlatOwnerEntity> flatOwnerEntities) {
+        this.flatOwnerEntities = flatOwnerEntities;
     }
 }

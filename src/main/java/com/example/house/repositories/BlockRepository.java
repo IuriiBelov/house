@@ -1,10 +1,10 @@
 package com.example.house.repositories;
 
-import com.example.house.entities.Block;
+import com.example.house.entities.BlockEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BlockRepository extends JpaRepository<Block, Long> {
-    Block getOneById(Long id);
+public interface BlockRepository extends JpaRepository<BlockEntity, Long> {
+    BlockEntity getOneById(Long id);
 
-    Block getOneByNumber(Integer number);
+    BlockEntity getOneByNumber(Integer number);
 }

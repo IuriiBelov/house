@@ -1,6 +1,7 @@
 package com.example.house.controllers;
 
-import com.example.house.entities.Block;
+import com.example.house.entities.BlockEntity;
+import com.example.house.entities.FlatEntity;
 import com.example.house.services.BlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +22,20 @@ public class BlockController {
     }
 
     @GetMapping
-    public List<Block> getAllBlocks() {
-        List<Block> blocks = blockService.getAllBlocks();
-        return blocks;
+    public List<BlockEntity> getAllBlocks() {
+        List<BlockEntity> blockEntities = blockService.getAllBlocks();
+        return blockEntities;
     }
 
     @GetMapping("{id}")
-    public Block getBlockById(@PathVariable String id) {
-        Block block = blockService.getBlockById(id);
-        return block;
+    public BlockEntity getBlockById(@PathVariable String id) {
+        BlockEntity blockEntity = blockService.getBlockById(id);
+        return blockEntity;
+    }
+
+    @GetMapping("{id}/flats")
+    public List<FlatEntity> getBlockFlats(@PathVariable String id) {
+        List<FlatEntity> blockFlatEntities = blockService.getBlockFlatsById(id);
+        return blockFlatEntities;
     }
 }

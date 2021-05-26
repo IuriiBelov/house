@@ -1,7 +1,6 @@
 package com.example.house.controllers;
 
-import com.example.house.entities.Flat;
-import com.example.house.repositories.FlatRepository;
+import com.example.house.entities.FlatEntity;
 import com.example.house.services.FlatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +21,14 @@ public class FlatController {
     }
 
     @GetMapping
-    public List<Flat> getAllFlats() {
-        List<Flat> flats = flatService.getAllFlats();
-        return flats;
+    public List<FlatEntity> getAllFlats() {
+        List<FlatEntity> flatEntities = flatService.getAllFlats();
+        return flatEntities;
     }
 
     @GetMapping("{id}")
-    public Flat getFlatById(@PathVariable String id) {
-        Flat flat = flatService.getFlatById(id);
-        return flat;
+    public FlatEntity getFlatById(@PathVariable String id) {
+        FlatEntity flatEntity = flatService.getFlatById(id);
+        return flatEntity;
     }
 }

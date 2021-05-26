@@ -1,24 +1,23 @@
 package com.example.house.entities;
 
+import com.example.house.utils.BillStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
 @Table(name = "bills")
-public class Bill {
-    public enum BillStatus {
-        PAID,
-        UNPAID
-    }
-
+public class BillEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "flat_id")
-    private Flat billFlat;
+    private FlatEntity billFlatEntity;
 
     @Column(name = "bill_date")
     @Temporal(TemporalType.DATE)
@@ -28,10 +27,10 @@ public class Bill {
     @Enumerated(EnumType.STRING)
     private BillStatus billStatus;
 
-    public Bill() {}
+    public BillEntity() {}
 
-    public Bill(Flat billFlat, Calendar date, BillStatus billStatus) {
-        this.billFlat = billFlat;
+    public BillEntity(FlatEntity billFlatEntity, Calendar date, BillStatus billStatus) {
+        this.billFlatEntity = billFlatEntity;
         this.date = date;
         this.billStatus = billStatus;
     }
@@ -40,8 +39,8 @@ public class Bill {
         return id;
     }
 
-    public Flat getBillFlat() {
-        return billFlat;
+    public FlatEntity getBillFlat() {
+        return billFlatEntity;
     }
 
     public Calendar getDate() {
@@ -56,8 +55,8 @@ public class Bill {
         this.id = id;
     }
 
-    public void setBillFlat(Flat billFlat) {
-        this.billFlat = billFlat;
+    public void setBillFlat(FlatEntity billFlatEntity) {
+        this.billFlatEntity = billFlatEntity;
     }
 
     public void setDate(Calendar date) {
