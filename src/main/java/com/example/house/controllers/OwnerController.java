@@ -1,5 +1,6 @@
 package com.example.house.controllers;
 
+import com.example.house.dto.OwnerDto;
 import com.example.house.entities.OwnerEntity;
 import com.example.house.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +19,27 @@ public class OwnerController {
     }
 
     @GetMapping
-    public List<OwnerEntity> getAllOwners() {
-        List<OwnerEntity> allOwnerEntities = ownerService.getAllOwners();
-        return allOwnerEntities;
+    public List<OwnerDto> getAllOwners() {
+        List<OwnerDto> allOwnerDtos = ownerService.getAllOwners();
+        return allOwnerDtos;
     }
 
     @GetMapping("{id}")
-    public OwnerEntity getOwnerById(@PathVariable String id) {
-        OwnerEntity ownerEntity = ownerService.getOwnerById(id);
-        return ownerEntity;
+    public OwnerDto getOwnerById(@PathVariable String id) {
+        OwnerDto ownerDto = ownerService.getOwnerById(id);
+        return ownerDto;
     }
 
     @PostMapping
-    public OwnerEntity createNewOwner(@RequestBody OwnerEntity newOwnerEntity) {
-        ownerService.createNewOwner(newOwnerEntity);
-        return newOwnerEntity;
+    public OwnerDto createNewOwner(@RequestBody OwnerDto newOwnerDto) {
+        ownerService.createNewOwner(newOwnerDto);
+        return newOwnerDto;
     }
 
     @PutMapping("{id}")
-    public OwnerEntity updateOwner(@PathVariable String id, @RequestBody OwnerEntity ownerEntity) {
-        ownerService.updateOwner(id, ownerEntity);
-        return ownerEntity;
+    public OwnerDto updateOwner(@PathVariable String id, @RequestBody OwnerDto ownerDto) {
+        ownerService.updateOwner(id, ownerDto);
+        return ownerDto;
     }
 
     @DeleteMapping("{id")

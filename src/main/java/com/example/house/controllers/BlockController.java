@@ -1,5 +1,7 @@
 package com.example.house.controllers;
 
+import com.example.house.dto.BlockDto;
+import com.example.house.dto.FlatDto;
 import com.example.house.entities.BlockEntity;
 import com.example.house.entities.FlatEntity;
 import com.example.house.services.BlockService;
@@ -22,20 +24,20 @@ public class BlockController {
     }
 
     @GetMapping
-    public List<BlockEntity> getAllBlocks() {
-        List<BlockEntity> blockEntities = blockService.getAllBlocks();
-        return blockEntities;
+    public List<BlockDto> getAllBlocks() {
+        List<BlockDto> blockDtos = blockService.getAllBlocks();
+        return blockDtos;
     }
 
     @GetMapping("{id}")
-    public BlockEntity getBlockById(@PathVariable String id) {
-        BlockEntity blockEntity = blockService.getBlockById(id);
-        return blockEntity;
+    public BlockDto getBlockById(@PathVariable String id) {
+        BlockDto blockDto = blockService.getBlockById(id);
+        return blockDto;
     }
 
     @GetMapping("{id}/flats")
-    public List<FlatEntity> getBlockFlats(@PathVariable String id) {
-        List<FlatEntity> blockFlatEntities = blockService.getBlockFlatsById(id);
-        return blockFlatEntities;
+    public List<FlatDto> getBlockFlats(@PathVariable String id) {
+        List<FlatDto> blockFlatDtos = blockService.getBlockFlatsById(id);
+        return blockFlatDtos;
     }
 }

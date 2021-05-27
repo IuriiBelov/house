@@ -1,5 +1,6 @@
 package com.example.house.controllers;
 
+import com.example.house.dto.BillDto;
 import com.example.house.entities.BillEntity;
 import com.example.house.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,14 @@ public class BillController {
     }
 
     @GetMapping
-    public List<BillEntity> getAllBills() {
-        List<BillEntity> allBillEntities = billService.getAllBills();
-        return allBillEntities;
+    public List<BillDto> getAllBills() {
+        List<BillDto> allBillDtos = billService.getAllBills();
+        return allBillDtos;
     }
 
     @GetMapping("{id}")
-    public BillEntity getBillById(@PathVariable String id) {
-        BillEntity billEntity = billService.getBillById(id);
-        return billEntity;
+    public BillDto getBillById(@PathVariable String id) {
+        BillDto billDto = billService.getBillById(id);
+        return billDto;
     }
 }
