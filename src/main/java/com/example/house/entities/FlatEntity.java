@@ -47,9 +47,11 @@ public class FlatEntity {
         return id;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
 
-
-    public BlockEntity getBlock() {
+    public BlockEntity getBlockEntity() {
         return blockEntity;
     }
 
@@ -61,11 +63,11 @@ public class FlatEntity {
         return area;
     }
 
-    public List<BillEntity> getBills() {
+    public List<BillEntity> getBillEntities() {
         return billEntities;
     }
 
-    public List<FlatOwnerEntity> getFlatOwners() {
+    public List<FlatOwnerEntity> getFlatOwnerEntities() {
         return flatOwnerEntities;
     }
 
@@ -73,7 +75,11 @@ public class FlatEntity {
         this.id = id;
     }
 
-    public void setBlock(BlockEntity blockEntity) {
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public void setBlockEntity(BlockEntity blockEntity) {
         this.blockEntity = blockEntity;
     }
 
@@ -85,11 +91,11 @@ public class FlatEntity {
         this.area = area;
     }
 
-    public void setBills(List<BillEntity> billEntities) {
+    public void setBillEntities(List<BillEntity> billEntities) {
         this.billEntities = billEntities;
     }
 
-    public void setFlatOwners(List<FlatOwnerEntity> flatOwnerEntities) {
+    public void setFlatOwnerEntities(List<FlatOwnerEntity> flatOwnerEntities) {
         this.flatOwnerEntities = flatOwnerEntities;
     }
 }
