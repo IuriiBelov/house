@@ -1,7 +1,5 @@
 package com.example.house.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,6 @@ public class FlatEntity {
     @Column(name = "number")
     private Integer number;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "block_id")
     private BlockEntity blockEntity;

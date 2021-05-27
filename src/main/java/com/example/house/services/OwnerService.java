@@ -1,43 +1,61 @@
 package com.example.house.services;
 
+import com.example.house.dto.OwnerDto;
 import com.example.house.entities.OwnerEntity;
 import com.example.house.repositories.OwnerRepository;
+import com.example.house.utils.MappingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OwnerService {
     private OwnerRepository ownerRepository;
+    private MappingUtils mappingUtils;
 
     @Autowired
-    public void setOwnerRepository(OwnerRepository ownerRepository) {
+    public OwnerService(OwnerRepository ownerRepository, MappingUtils mappingUtils) {
         this.ownerRepository = ownerRepository;
+        this.mappingUtils = mappingUtils;
     }
 
-    public List<OwnerEntity> getAllOwners() {
-        List<OwnerEntity> allOwnerEntities = ownerRepository.findAll();
-        return allOwnerEntities;
+    public List<OwnerDto> getAllOwners() {
+        List<OwnerDto> allOwnerDtos = ownerRepository
+                .findAll()
+                .stream()
+                .map(mappingUtils::mapToOwnerDto)
+                .collect(Collectors.toList());
+        return allOwnerDtos;
     }
 
-    public OwnerEntity getOwnerById(String id) {
-        OwnerEntity ownerEntity = ownerRepository.getOneById(Long.parseLong(id));
-        return ownerEntity;
+    public OwnerDto getOwnerById(String id) {
+        OwnerDto ownerDto = mappingUtils.mapToOwnerDto(
+                ownerRepository.getOneById(Long.parseLong(id)));
+        return ownerDto;
     }
 
-    public void createNewOwner(OwnerEntity newOwnerEntity) {
-        ownerRepository.save(newOwnerEntity);
+    public void createNewOwner(OwnerDto newOwnerDto) {
+        ownerRepository.save(mappingUtils.mapToOwnerEntity(newOwnerDto));
     }
 
-    public void updateOwner(String id, OwnerEntity newOwnerEntity) {
-        OwnerEntity oldOwnerEntity = ownerRepository.getOneById(Long.parseLong(id));
+    public void updateOwner(String id, OwnerDto newOwnerDto) {
+        OwnerDto oldOwnerDto = new OwnerDto();
+        oldOwnerDto.setId(Long.parseLong(id));
+        OwnerEntity oldOwnerEntity = mappingUtils.mapToOwnerEntity(oldOwnerDto);
+
+        oldOwnerEntity = ownerRepository.getOneById(oldOwnerEntity.getId());
         if (oldOwnerEntity != null) {
-            ownerRepository.save(newOwnerEntity);
+            ownerRepository.save(mappingUtils.mapToOwnerEntity(newOwnerDto));
         }
     }
 
     public void deleteOwner(String id) {
-        ownerRepository.deleteById(Long.parseLong(id));
+        OwnerDto ownerDto = new OwnerDto();
+        ownerDto.setId(Long.parseLong(id));
+        OwnerEntity ownerEntity = mappingUtils.mapToOwnerEntity(ownerDto);
+
+        ownerRepository.deleteById(ownerEntity.getId());
     }
 }

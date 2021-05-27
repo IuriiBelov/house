@@ -1,7 +1,5 @@
 package com.example.house.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,12 +10,10 @@ public class FlatOwnerEntity {
     @Column(name = "id")
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "flat_id")
     private FlatEntity flatOwnerFlatEntity;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private OwnerEntity flatOwnerOwnerEntity;

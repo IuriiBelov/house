@@ -1,7 +1,6 @@
 package com.example.house.entities;
 
 import com.example.house.utils.BillStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -14,7 +13,6 @@ public class BillEntity {
     @Column(name = "id")
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "flat_id")
     private FlatEntity billFlatEntity;
