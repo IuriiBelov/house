@@ -1,7 +1,6 @@
 package com.example.house.controllers;
 
 import com.example.house.dto.BillDto;
-import com.example.house.entities.BillEntity;
 import com.example.house.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
