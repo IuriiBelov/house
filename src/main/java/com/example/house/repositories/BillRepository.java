@@ -10,6 +10,6 @@ import java.util.List;
 public interface BillRepository extends JpaRepository<BillEntity, Long> {
     BillEntity getOneById(Long id);
 
-    @Query("select * from bills where flat_id=:id")
+    @Query(value = "select * from bills where flat_id=:id", nativeQuery = true)
     List<BillEntity> findByFlatId(@Param("id") Long id);
 }

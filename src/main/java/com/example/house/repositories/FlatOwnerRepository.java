@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface FlatOwnerRepository extends JpaRepository<FlatOwnerEntity, Long> {
-    @Query("select * from flats_owners where flat_id=:id")
+    @Query(value = "select * from flats_owners where flat_id=:id", nativeQuery = true)
     List<FlatOwnerEntity> findByFlatId(@Param("id") Long id);
 
-    @Query("select * from flats_owners where owner_id=:id")
+    @Query(value = "select * from flats_owners where owner_id=:id", nativeQuery = true)
     List<FlatOwnerEntity> findByOwnerId(@Param("id") Long id);
 }

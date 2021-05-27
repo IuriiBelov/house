@@ -13,6 +13,6 @@ public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
 
     FlatEntity getOneByNumber(Integer number);
 
-    @Query("select * from flats where block_id=:id")
+    @Query(value = "select * from flats where block_id=:id", nativeQuery = true)
     List<FlatEntity> findByBlockId(@Param("id") Long id);
 }
