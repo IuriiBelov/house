@@ -21,7 +21,7 @@ public class OwnerEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "flatOwnerOwner")
+    @OneToMany(mappedBy = "flatOwnerOwnerEntity")
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public OwnerEntity() {}

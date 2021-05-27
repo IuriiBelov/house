@@ -25,10 +25,10 @@ public class FlatEntity {
     @Column(name = "area")
     private Double area;
 
-    @OneToMany(mappedBy = "billFlat")
+    @OneToMany(mappedBy = "billFlatEntity")
     private List<BillEntity> billEntities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "flatOwnerFlat")
+    @OneToMany(mappedBy = "flatOwnerFlatEntity")
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public FlatEntity() {}

@@ -15,7 +15,7 @@ public class BlockEntity {
     @Column(name = "number")
     private Integer number;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "block")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blockEntity")
     private List<FlatEntity> flatEntities = new ArrayList<>();
 
     public BlockEntity() {}
