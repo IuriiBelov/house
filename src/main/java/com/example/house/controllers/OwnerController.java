@@ -1,6 +1,6 @@
 package com.example.house.controllers;
 
-import com.example.house.dto.OwnerDto;
+import com.example.house.dtos.OwnerDto;
 import com.example.house.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,9 @@
 package com.example.house.utils;
 
-import com.example.house.dto.BillDto;
-import com.example.house.dto.BlockDto;
-import com.example.house.dto.FlatDto;
-import com.example.house.dto.OwnerDto;
+import com.example.house.dtos.BillDto;
+import com.example.house.dtos.BlockDto;
+import com.example.house.dtos.FlatDto;
+import com.example.house.dtos.OwnerDto;
 import com.example.house.entities.BillEntity;
 import com.example.house.entities.BlockEntity;
 import com.example.house.entities.FlatEntity;

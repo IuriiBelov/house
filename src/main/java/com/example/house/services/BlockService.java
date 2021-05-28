@@ -1,7 +1,7 @@
 package com.example.house.services;
 
-import com.example.house.dto.BlockDto;
-import com.example.house.dto.FlatDto;
+import com.example.house.dtos.BlockDto;
+import com.example.house.dtos.FlatDto;
 import com.example.house.repositories.BlockRepository;
 import com.example.house.utils.MappingUtils;
 import org.springframework.beans.factory.annotation.Autowired;

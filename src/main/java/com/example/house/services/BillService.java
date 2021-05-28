@@ -1,6 +1,6 @@
 package com.example.house.services;
 
-import com.example.house.dto.BillDto;
+import com.example.house.dtos.BillDto;
 import com.example.house.repositories.BillRepository;
 import com.example.house.utils.MappingUtils;
 import org.springframework.beans.factory.annotation.Autowired;

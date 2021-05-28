@@ -1,4 +1,4 @@
-package com.example.house.dto;
+package com.example.house.dtos;
 
 public class FlatDto {
     private Long id;

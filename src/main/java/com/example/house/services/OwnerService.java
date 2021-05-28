@@ -1,6 +1,6 @@
 package com.example.house.services;
 
-import com.example.house.dto.OwnerDto;
+import com.example.house.dtos.OwnerDto;
 import com.example.house.entities.OwnerEntity;
 import com.example.house.repositories.OwnerRepository;
 import com.example.house.utils.MappingUtils;

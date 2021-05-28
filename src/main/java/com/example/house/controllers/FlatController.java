@@ -1,6 +1,8 @@
 package com.example.house.controllers;
 
-import com.example.house.dto.FlatDto;
+import com.example.house.dtos.BillDto;
+import com.example.house.dtos.FlatDto;
+import com.example.house.dtos.OwnerDto;
 import com.example.house.services.FlatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,5 +32,17 @@ public class FlatController {
     public FlatDto getFlatById(@PathVariable String id) {
         FlatDto flatDto = flatService.getFlatById(id);
         return flatDto;
+    }
+
+    @GetMapping("{id}/bills")
+    public List<BillDto> getFlatBills(@PathVariable String id) {
+        List<BillDto> flatBillDtos = flatService.getFlatBillsById(id);
+        return flatBillDtos;
+    }
+
+    @GetMapping("{id}/owners")
+    public List<OwnerDto> getFlatOwners(@PathVariable String id) {
+        List<OwnerDto> flatOwnerDtos = flatService.getFlatOwnersById(id);
+        return flatOwnerDtos;
     }
 }

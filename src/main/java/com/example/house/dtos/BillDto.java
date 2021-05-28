@@ -1,4 +1,4 @@
-package com.example.house.dto;
+package com.example.house.dtos;
 
 import com.example.house.utils.BillStatus;
 
