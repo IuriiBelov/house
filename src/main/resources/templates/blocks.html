@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
 
-  <title>All blocks</title>
+  <title>All blockEntities</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,7 +14,7 @@
 
 <body>
 <div class="container">
-  <h1>List of all blocks of the house:</h1>
+  <h1>List of all blockEntities of the house:</h1>
   <table class="table table-hover">
     <thead class="thead-dark">
     <tr>
@@ -26,11 +26,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="block : ${blocks}">
-      <td th:text="${block.id}"/>
-      <td th:text="${block.number}"/>
-      <td th:text="${block.flats}"/>
-      <td><a class="btn btn-secondary" th:href="@{'/flats/' + ${block.id}}">Flats</a></td>
+    <tr th:each="blockEntity : ${blockEntities}">
+      <td th:text="${blockEntity.id}"/>
+      <td th:text="${blockEntity.number}"/>
+      <td th:text="${blockEntity.flatEntities}"/>
+      <td><a class="btn btn-secondary" th:href="@{'/flatEntities/' + ${blockEntity.id}}">Flats</a></td>
       <!--
       <td><a class="btn btn-secondary" th:href="@{'/products/delete/' + ${product.id}}">Owners</a></td>
       -->

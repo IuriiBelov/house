@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "owners")
-public class Owner {
+public class OwnerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -21,12 +21,12 @@ public class Owner {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "flatOwnerOwner")
-    private List<FlatOwner> flatOwners = new ArrayList<>();
+    @OneToMany(mappedBy = "flatOwnerOwnerEntity")
+    private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
-    public Owner() {}
+    public OwnerEntity() {}
 
-    public Owner(String firstName, String lastName, String phoneNumber) {
+    public OwnerEntity(String firstName, String lastName, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -48,8 +48,8 @@ public class Owner {
         return phoneNumber;
     }
 
-    public List<FlatOwner> getFlatOwners() {
-        return flatOwners;
+    public List<FlatOwnerEntity> getFlatOwners() {
+        return flatOwnerEntities;
     }
 
     public void setId(Long id) {
@@ -68,7 +68,7 @@ public class Owner {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setFlatOwners(List<FlatOwner> flatOwners) {
-        this.flatOwners = flatOwners;
+    public void setFlatOwners(List<FlatOwnerEntity> flatOwnerEntities) {
+        this.flatOwnerEntities = flatOwnerEntities;
     }
 }

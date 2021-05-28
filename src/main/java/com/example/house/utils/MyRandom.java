@@ -1,6 +1,6 @@
 package com.example.house.utils;
 
-import com.example.house.entities.Bill;
+import com.example.house.entities.BillEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
@@ -94,8 +94,8 @@ public class MyRandom {
                 random.nextInt(MyConstants.MONTHS_PER_YEAR), MyConstants.BILLS_DAY);
     }
 
-    public Bill.BillStatus getRandomBillStatus() {
-        return Bill.BillStatus.values()[random.nextInt(Bill.BillStatus.values().length)];
+    public BillStatus getRandomBillStatus() {
+        return BillStatus.values()[random.nextInt(BillStatus.values().length)];
     }
 
     public boolean flatBelongsToOwner() {

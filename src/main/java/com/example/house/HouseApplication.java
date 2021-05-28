@@ -25,21 +25,21 @@ public class HouseApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BlockRepository blockRepository,
-								  OwnerRepository ownerRepository,
-								  FlatRepository flatRepository,
-								  BillRepository billRepository,
-								  FlatOwnerRepository flatOwnerRepository) {
+	public CommandLineRunner fillDatabase(BlockRepository blockRepository,
+								          OwnerRepository ownerRepository,
+										  FlatRepository flatRepository,
+										  BillRepository billRepository,
+										  FlatOwnerRepository flatOwnerRepository) {
 		return (args) -> {
 			if (blockRepository.findAll().size() == 0) {
 				for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
-					blockRepository.save(new Block(i + 1));
+					blockRepository.save(new BlockEntity(i + 1));
 				}
 			}
 
 			if (ownerRepository.findAll().size() == 0) {
 				for (int i = 0; i < MyConstants.NUMBER_OF_OWNERS; ++i) {
-					ownerRepository.save(new Owner(myRandom.getRandomFirstName(),
+					ownerRepository.save(new OwnerEntity(myRandom.getRandomFirstName(),
 							myRandom.getRandomLastName(), myRandom.getRandomPhoneNumber()));
 				}
 			}
@@ -49,7 +49,7 @@ public class HouseApplication {
 				for (int i = 0; i < MyConstants.NUMBER_OF_BLOCKS; ++i) {
 					for (int j = 0; j < MyConstants.NUMBER_OF_FLOORS; ++j) {
 						for (int k = 0; k < MyConstants.NUMBER_OF_FLATS_PER_FLOOR; ++k) {
-							flatRepository.save(new Flat(flatNumber++,
+							flatRepository.save(new FlatEntity(flatNumber++,
 									blockRepository.getOneByNumber(i + 1), j + 1,
 									myRandom.getRandomArea()));
 						}
@@ -59,7 +59,7 @@ public class HouseApplication {
 
 			if (billRepository.findAll().size() == 0) {
 				for (int i = 0; i < MyConstants.NUMBER_OF_BILLS; ++i) {
-					billRepository.save(new Bill(
+					billRepository.save(new BillEntity(
 							flatRepository.getOneByNumber(myRandom.getRandomFlatNumber()),
 							myRandom.getRandomDate(), myRandom.getRandomBillStatus()));
 				}
@@ -69,7 +69,7 @@ public class HouseApplication {
 				for (int i = 0; i < MyConstants.NUMBER_OF_FLATS; ++i) {
 					for (int j = 0; j < MyConstants.NUMBER_OF_OWNERS; ++j) {
 						if (myRandom.flatBelongsToOwner()) {
-							flatOwnerRepository.save(new FlatOwner(flatRepository.getOne((long) (i + 1)),
+							flatOwnerRepository.save(new FlatOwnerEntity(flatRepository.getOne((long) (i + 1)),
 									ownerRepository.getOne((long) (j + 1))));
 						}
 					}

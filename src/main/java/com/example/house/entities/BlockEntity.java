@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "blocks")
-public class Block {
+public class BlockEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -15,12 +15,12 @@ public class Block {
     @Column(name = "number")
     private Integer number;
 
-    @OneToMany(mappedBy = "block")
-    private List<Flat> flats = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "blockEntity")
+    private List<FlatEntity> flatEntities = new ArrayList<>();
 
-    public Block() {}
+    public BlockEntity() {}
 
-    public Block(Integer number) {
+    public BlockEntity(Integer number) {
         this.number = number;
     }
 
@@ -32,8 +32,8 @@ public class Block {
         return number;
     }
 
-    public List<Flat> getFlats() {
-        return flats;
+    public List<FlatEntity> getFlats() {
+        return flatEntities;
     }
 
     public void setId(Long id) {
@@ -44,7 +44,7 @@ public class Block {
         this.number = number;
     }
 
-    public void setFlats(List<Flat> flats) {
-        this.flats = flats;
+    public void setFlats(List<FlatEntity> flatEntities) {
+        this.flatEntities = flatEntities;
     }
 }
