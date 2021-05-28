@@ -1,7 +1,7 @@
 package com.example.house.controllers;
 
 import com.example.house.dtos.BillDto;
-import com.example.house.services.BillService;
+import com.example.house.services.impl.BillServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,22 +13,19 @@ import java.util.List;
 @RestController
 @RequestMapping("bills")
 public class BillController {
-    private BillService billService;
+    private final BillServiceImpl billService;
 
-    @Autowired
-    public void setBillService(BillService billService) {
+    public BillController(BillServiceImpl billService) {
         this.billService = billService;
     }
 
     @GetMapping
     public List<BillDto> getAllBills() {
-        List<BillDto> allBillDtos = billService.getAllBills();
-        return allBillDtos;
+        return billService.getAllBills();
     }
 
     @GetMapping("{id}")
-    public BillDto getBillById(@PathVariable String id) {
-        BillDto billDto = billService.getBillById(id);
-        return billDto;
+    public BillDto getBillById(@PathVariable Long id) {
+        return billService.getBillById(id);
     }
 }

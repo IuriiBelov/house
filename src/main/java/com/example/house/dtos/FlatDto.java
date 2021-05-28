@@ -1,11 +1,15 @@
 package com.example.house.dtos;
 
+import java.util.List;
+
 public class FlatDto {
     private Long id;
     private Integer number;
     private Long blockId;
     private Integer floor;
     private Double area;
+    private List<OwnerDto> owners;
+    private List<BillDto> bills;
 
     public FlatDto() {}
 
@@ -29,6 +33,14 @@ public class FlatDto {
         return area;
     }
 
+    public List<OwnerDto> getOwners() {
+        return owners;
+    }
+
+    public List<BillDto> getBills() {
+        return bills;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -47,5 +59,13 @@ public class FlatDto {
 
     public void setArea(Double area) {
         this.area = area;
+    }
+
+    public void setOwners(List<OwnerDto> owners) {
+        this.owners = owners;
+    }
+
+    public void setBills(List<BillDto> bills) {
+        this.bills = bills;
     }
 }

@@ -12,6 +12,8 @@ import com.example.house.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 public class MappingUtils {
     private BillRepository billRepository;
@@ -55,6 +57,11 @@ public class MappingUtils {
 
         blockDto.setId(blockEntity.getId());
         blockDto.setNumber(blockEntity.getNumber());
+        blockDto.setFlats(blockEntity
+                .getFlats()
+                .stream()
+                .map(this::mapToFlatDto)
+                .collect(Collectors.toList()));
 
         return blockDto;
     }
@@ -64,7 +71,11 @@ public class MappingUtils {
 
         blockEntity.setId(blockDto.getId());
         blockEntity.setNumber(blockDto.getNumber());
-        blockEntity.setFlats(flatRepository.findByBlockId(blockDto.getId()));
+        blockEntity.setFlats(blockDto
+                .getFlats()
+                .stream()
+                .map(this::mapToFlatEntity)
+                .collect(Collectors.toList()));
 
         return blockEntity;
     }
@@ -77,6 +88,19 @@ public class MappingUtils {
         flatDto.setBlockId(flatEntity.getBlockEntity().getId());
         flatDto.setFloor(flatEntity.getFloor());
         flatDto.setArea(flatEntity.getArea());
+        flatDto.setOwners(flatEntity
+                .getFlatOwnerEntities()
+                .stream()
+                .map(elem -> elem.getFlatOwnerOwner())
+                .collect(Collectors.toList())
+                .stream()
+                .map(this::mapToOwnerDto)
+                .collect(Collectors.toList()));
+        flatDto.setBills(flatEntity
+                .getBillEntities()
+                .stream()
+                .map(this::mapToBillDto)
+                .collect(Collectors.toList()));
 
         return flatDto;
     }
@@ -89,7 +113,10 @@ public class MappingUtils {
         flatEntity.setBlockEntity(blockRepository.getOneById(flatDto.getBlockId()));
         flatEntity.setFloor(flatEntity.getFloor());
         flatEntity.setArea(flatDto.getArea());
-        flatEntity.setBillEntities(billRepository.findByFlatId(flatDto.getId()));
+
+        //flatRepository.findById(flatDto.getId()).ifPresent();
+        flatEntity.setBillEntities(billRepository.findBillsByFlatId(flatDto.getId()));
+
         flatEntity.setFlatOwnerEntities(flatOwnerRepository.findByFlatId(flatDto.getId()));
 
         return flatEntity;
