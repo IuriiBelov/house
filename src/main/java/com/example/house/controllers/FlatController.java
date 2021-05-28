@@ -1,7 +1,6 @@
 package com.example.house.controllers;
 
 import com.example.house.dto.FlatDto;
-import com.example.house.entities.FlatEntity;
 import com.example.house.services.FlatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

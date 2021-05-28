@@ -1,7 +1,6 @@
 package com.example.house.controllers;
 
 import com.example.house.dto.OwnerDto;
-import com.example.house.entities.OwnerEntity;
 import com.example.house.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +41,7 @@ public class OwnerController {
         return ownerDto;
     }
 
-    @DeleteMapping("{id")
+    @DeleteMapping("{id}")
     public void deleteOwner(@PathVariable String id) {
         ownerService.deleteOwner(id);
     }
