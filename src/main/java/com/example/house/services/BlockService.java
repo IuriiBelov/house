@@ -2,48 +2,32 @@ package com.example.house.services;
 
 import com.example.house.dtos.BlockDto;
 import com.example.house.dtos.FlatDto;
-import com.example.house.repositories.BlockRepository;
-import com.example.house.utils.MappingUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
-public class BlockService {
-    private BlockRepository blockRepository;
-    private MappingUtils mappingUtils;
+/**
+ * Сервис получения информации о подъездах многоквартирного дома
+ */
+public interface BlockService {
 
-    @Autowired
-    public BlockService(BlockRepository blockRepository, MappingUtils mappingUtils) {
-        this.blockRepository = blockRepository;
-        this.mappingUtils = mappingUtils;
-    }
+    /**
+     * Возвращает все подъезды многоквартирного дома
+     * @return все подъезды многоквартирного дома
+     */
+    List<BlockDto> getAllBlocks();
 
+    /**
+     * Возвращает подъезд по его уникальному идентификатору
+     * @param id идентификатор подъезда
+     * @return трансферный объект подъезда
+     * @see BlockDto
+     */
+    BlockDto getBlockById(String id);
 
-    public List<BlockDto> getAllBlocks() {
-        List<BlockDto> allBlockDtos = blockRepository
-                .findAll()
-                .stream()
-                .map(mappingUtils::mapToBlockDto)
-                .collect(Collectors.toList());
-        return allBlockDtos;
-    }
-
-    public BlockDto getBlockById(String id) {
-        BlockDto blockDto = mappingUtils.mapToBlockDto(
-                blockRepository.getOneById(Long.parseLong(id)));
-        return blockDto;
-    }
-
-    public List<FlatDto> getBlockFlatsById(String id) {
-        List<FlatDto> blockFlatDtos = blockRepository
-                .getOneById(Long.parseLong(id))
-                .getFlats()
-                .stream()
-                .map(mappingUtils::mapToFlatDto)
-                .collect(Collectors.toList());
-        return blockFlatDtos;
-    }
+    /**
+     * Возвращает все квартиры подъезда с данным уникальным идентификатором
+     * @param id идентификатор подъезда
+     * @return все квартиры подъезда
+     */
+    List<FlatDto> getBlockFlatsById(String id);
 }
