@@ -1,10 +1,13 @@
 package com.example.house.dtos;
 
+import java.util.List;
+
 public class OwnerDto {
     private Long id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private List<FlatDto> flats;
 
     public OwnerDto() {}
 
@@ -24,6 +27,10 @@ public class OwnerDto {
         return phoneNumber;
     }
 
+    public List<FlatDto> getFlats() {
+        return flats;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -38,5 +45,9 @@ public class OwnerDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setFlats(List<FlatDto> flats) {
+        this.flats = flats;
     }
 }
