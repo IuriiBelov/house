@@ -28,6 +28,7 @@ public interface BlockService {
      * Возвращает все квартиры подъезда с данным уникальным идентификатором
      * @param id идентификатор подъезда
      * @return все квартиры подъезда
+     * @see FlatDto
      */
     List<FlatDto> getBlockFlatsById(String id);
 }

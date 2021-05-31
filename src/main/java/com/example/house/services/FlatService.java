@@ -17,9 +17,27 @@ public interface FlatService {
      */
     List<FlatDto> getAllFlats();
 
+    /**
+     * Возвращает квартиру по её уникальному идентификатору
+     * @param id идентификатор квартиры
+     * @return трансферный объект квартиры
+     * @see FlatDto
+     */
     FlatDto getFlatById(String id);
 
+    /**
+     * Возвращает все счета квартиры с данным уникальным идентификатором
+     * @param id идентификатор квартиры
+     * @return все счета квартиры
+     * @see BillDto
+     */
     List<BillDto> getFlatBillsById(String id);
 
+    /**
+     * Возвращает всех владельцев квартиры с данным уникальным идентификатором
+     * @param id идентификатор квартиры
+     * @return все владельцы квартиры
+     * @see OwnerDto
+     */
     List<OwnerDto> getFlatOwnersById(String id);
 }
