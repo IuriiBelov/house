@@ -8,6 +8,7 @@ import java.util.Calendar;
 @Entity
 @Table(name = "bills")
 public class BillEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

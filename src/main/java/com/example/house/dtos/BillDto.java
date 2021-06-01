@@ -5,6 +5,7 @@ import com.example.house.utils.BillStatus;
 import java.util.Calendar;
 
 public class BillDto {
+
     private Long id;
     private Long flatId;
     private Calendar date;

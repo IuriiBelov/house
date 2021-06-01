@@ -2,7 +2,6 @@ package com.example.house.controllers;
 
 import com.example.house.dtos.OwnerDto;
 import com.example.house.services.impl.OwnerServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("owners")
 public class OwnerController {
+
     private OwnerServiceImpl ownerServiceImpl;
 
-    @Autowired
     public void setOwnerService(OwnerServiceImpl ownerServiceImpl) {
         this.ownerServiceImpl = ownerServiceImpl;
     }

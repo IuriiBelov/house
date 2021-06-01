@@ -1,7 +1,5 @@
 package com.example.house.utils.mappings;
 
-import org.springframework.stereotype.Service;
-
 /**
  * Сервис перевода объектов из Dto в Entity и обратно
  * @param <E> класс Entity

@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "flats")
 public class FlatEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

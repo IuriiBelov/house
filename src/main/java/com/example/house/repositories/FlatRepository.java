@@ -9,6 +9,7 @@ import java.util.List;
 
 
 public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
+
     FlatEntity getOneById(Long id);
 
     FlatEntity getOneByNumber(Integer number);

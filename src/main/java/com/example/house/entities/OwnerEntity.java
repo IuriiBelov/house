@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "owners")
 public class OwnerEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

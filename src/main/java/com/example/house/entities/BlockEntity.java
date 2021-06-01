@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "blocks")
 public class BlockEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

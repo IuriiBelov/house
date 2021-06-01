@@ -3,6 +3,7 @@ package com.example.house.dtos;
 import java.util.List;
 
 public class FlatDto {
+
     private Long id;
     private Integer number;
     private Long blockId;

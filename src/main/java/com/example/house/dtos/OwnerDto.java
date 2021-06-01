@@ -3,6 +3,7 @@ package com.example.house.dtos;
 import java.util.List;
 
 public class OwnerDto {
+
     private Long id;
     private String firstName;
     private String lastName;

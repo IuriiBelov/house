@@ -3,7 +3,6 @@ package com.example.house.controllers;
 import com.example.house.dtos.BlockDto;
 import com.example.house.dtos.FlatDto;
 import com.example.house.services.impl.BlockServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("blocks")
 public class BlockController {
+
     private BlockServiceImpl blockServiceImpl;
 
-    @Autowired
     public void setBlockService(BlockServiceImpl blockServiceImpl) {
         this.blockServiceImpl = blockServiceImpl;
     }
