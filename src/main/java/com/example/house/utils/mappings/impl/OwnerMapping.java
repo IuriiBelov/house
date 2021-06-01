@@ -6,13 +6,18 @@ import com.example.house.repositories.FlatOwnerRepository;
 import com.example.house.utils.mappings.Mapping;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
 
     private FlatOwnerRepository flatOwnerRepository;
 
-    public OwnerMapping(FlatOwnerRepository flatOwnerRepository) {
+    private FlatMapping flatMapping;
+
+    public OwnerMapping(FlatOwnerRepository flatOwnerRepository, FlatMapping flatMapping) {
         this.flatOwnerRepository = flatOwnerRepository;
+        this.flatMapping = flatMapping;
     }
 
     @Override
@@ -23,6 +28,14 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setFlats(entity
+                .getFlatOwners()
+                .stream()
+                .map(elem -> elem.getFlatOwnerFlat())
+                .collect(Collectors.toList())
+                .stream()
+                .map(flatMapping::mapToDto)
+                .collect(Collectors.toList()));
 
         return dto;
     }
