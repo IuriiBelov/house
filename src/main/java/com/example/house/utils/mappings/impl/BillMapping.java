@@ -32,7 +32,7 @@ public class BillMapping implements Mapping<BillEntity, BillDto> {
         BillEntity entity = new BillEntity();
 
         entity.setId(dto.getId());
-        entity.setBillFlat(flatRepository.findById(dto.getFlatId()).orElseThrow());
+        entity.setBillFlat(flatRepository.getOneById(dto.getId()));
         entity.setDate(dto.getDate());
         entity.setBillStatus(dto.getBillStatus());
 

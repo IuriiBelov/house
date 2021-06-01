@@ -1,6 +1,5 @@
 package com.example.house.utils;
 
-import com.example.house.entities.BillEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
