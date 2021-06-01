@@ -5,7 +5,9 @@ import com.example.house.dtos.FlatDto;
 import com.example.house.dtos.OwnerDto;
 import com.example.house.repositories.FlatRepository;
 import com.example.house.services.FlatService;
-import com.example.house.utils.MappingUtils;
+import com.example.house.utils.mappings.impl.BillMapping;
+import com.example.house.utils.mappings.impl.FlatMapping;
+import com.example.house.utils.mappings.impl.OwnerMapping;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +17,18 @@ import java.util.stream.Collectors;
 public class FlatServiceImpl implements FlatService {
 
     private FlatRepository flatRepository;
-    private MappingUtils mappingUtils;
+    private FlatMapping flatMapping;
+    private BillMapping billMapping;
+    private OwnerMapping ownerMapping;
 
-    public FlatServiceImpl(FlatRepository flatRepository, MappingUtils mappingUtils) {
+    public FlatServiceImpl(FlatRepository flatRepository,
+                           FlatMapping flatMapping,
+                           BillMapping billMapping,
+                           OwnerMapping ownerMapping) {
         this.flatRepository = flatRepository;
-        this.mappingUtils = mappingUtils;
+        this.flatMapping = flatMapping;
+        this.billMapping = billMapping;
+        this.ownerMapping = ownerMapping;
     }
 
     @Override
@@ -27,14 +36,14 @@ public class FlatServiceImpl implements FlatService {
         List<FlatDto> allFlatDtos = flatRepository
                 .findAll()
                 .stream()
-                .map(mappingUtils::mapToFlatDto)
+                .map(flatMapping::mapToDto)
                 .collect(Collectors.toList());
         return allFlatDtos;
     }
 
     @Override
     public FlatDto getFlatById(String id) {
-        FlatDto flatDto = mappingUtils.mapToFlatDto(
+        FlatDto flatDto = flatMapping.mapToDto(
                 flatRepository.getOneById(Long.parseLong(id)));
         return flatDto;
     }
@@ -45,7 +54,7 @@ public class FlatServiceImpl implements FlatService {
                 .getOneById(Long.parseLong(id))
                 .getBillEntities()
                 .stream()
-                .map(mappingUtils::mapToBillDto)
+                .map(billMapping::mapToDto)
                 .collect(Collectors.toList());
         return flatBillDtos;
     }
@@ -59,7 +68,7 @@ public class FlatServiceImpl implements FlatService {
                 .map(elem -> elem.getFlatOwnerOwner())
                 .collect(Collectors.toList())
                 .stream()
-                .map(mappingUtils::mapToOwnerDto)
+                .map(ownerMapping::mapToDto)
                 .collect(Collectors.toList());
         return flatOwnerDtos;
     }

@@ -4,7 +4,7 @@ import com.example.house.dtos.BillDto;
 import com.example.house.entities.BillEntity;
 import com.example.house.repositories.BillRepository;
 import com.example.house.services.BillService;
-import com.example.house.utils.MappingUtils;
+import com.example.house.utils.mappings.impl.BillMapping;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class BillServiceImpl implements BillService {
 
     private final BillRepository billRepository;
-    private final MappingUtils mappingUtils;
+    private final BillMapping billMapping;
 
-    public BillServiceImpl(BillRepository billRepository, MappingUtils mappingUtils) {
+    public BillServiceImpl(BillRepository billRepository, BillMapping billMapping) {
         this.billRepository = billRepository;
-        this.mappingUtils = mappingUtils;
+        this.billMapping = billMapping;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class BillServiceImpl implements BillService {
         List<BillDto> allBillDtos = billRepository
                 .findAll()
                 .stream()
-                .map(mappingUtils::mapToBillDto)
+                .map(billMapping::mapToDto)
                 .collect(Collectors.toList());
         return allBillDtos;
     }
@@ -35,6 +35,6 @@ public class BillServiceImpl implements BillService {
     @Override
     public BillDto getBillById(Long id) {
         Optional<BillEntity> bill = billRepository.findById(id);
-        return mappingUtils.mapToBillDto(bill.orElseThrow(IllegalArgumentException::new));
+        return billMapping.mapToDto(bill.orElseThrow(IllegalArgumentException::new));
     }
 }

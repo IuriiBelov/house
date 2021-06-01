@@ -4,7 +4,8 @@ import com.example.house.dtos.BlockDto;
 import com.example.house.dtos.FlatDto;
 import com.example.house.repositories.BlockRepository;
 import com.example.house.services.BlockService;
-import com.example.house.utils.MappingUtils;
+import com.example.house.utils.mappings.impl.BlockMapping;
+import com.example.house.utils.mappings.impl.FlatMapping;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +15,15 @@ import java.util.stream.Collectors;
 public class BlockServiceImpl implements BlockService {
 
     private BlockRepository blockRepository;
-    private MappingUtils mappingUtils;
+    private BlockMapping blockMapping;
+    private FlatMapping flatMapping;
 
-    public BlockServiceImpl(BlockRepository blockRepository, MappingUtils mappingUtils) {
+    public BlockServiceImpl(BlockRepository blockRepository,
+                            BlockMapping blockMapping,
+                            FlatMapping flatMapping) {
         this.blockRepository = blockRepository;
-        this.mappingUtils = mappingUtils;
+        this.blockMapping = blockMapping;
+        this.flatMapping = flatMapping;
     }
 
     @Override
@@ -26,14 +31,14 @@ public class BlockServiceImpl implements BlockService {
         List<BlockDto> allBlockDtos = blockRepository
                 .findAll()
                 .stream()
-                .map(mappingUtils::mapToBlockDto)
+                .map(blockMapping::mapToDto)
                 .collect(Collectors.toList());
         return allBlockDtos;
     }
 
     @Override
     public BlockDto getBlockById(String id) {
-        BlockDto blockDto = mappingUtils.mapToBlockDto(
+        BlockDto blockDto = blockMapping.mapToDto(
                 blockRepository.getOneById(Long.parseLong(id)));
         return blockDto;
     }
@@ -44,7 +49,7 @@ public class BlockServiceImpl implements BlockService {
                 .getOneById(Long.parseLong(id))
                 .getFlats()
                 .stream()
-                .map(mappingUtils::mapToFlatDto)
+                .map(flatMapping::mapToDto)
                 .collect(Collectors.toList());
         return blockFlatDtos;
     }
