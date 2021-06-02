@@ -84,7 +84,7 @@ public class MyRandom {
     }
 
     public Integer getRandomFlatNumber() {
-        return random.nextInt(MyConstants.NUMBER_OF_BLOCKS * MyConstants.NUMBER_OF_FLOORS *
+        return 1 + random.nextInt(MyConstants.NUMBER_OF_BLOCKS * MyConstants.NUMBER_OF_FLOORS *
                 MyConstants.NUMBER_OF_FLATS_PER_FLOOR);
     }
 
