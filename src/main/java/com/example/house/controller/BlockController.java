@@ -3,7 +3,6 @@ package com.example.house.controller;
 import com.example.house.dto.BlockDto;
 import com.example.house.dto.FlatDto;
 import com.example.house.service.BlockService;
-import com.example.house.service.impl.BlockServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -49,7 +49,7 @@ public class BlockServiceImpl implements BlockService {
     public List<FlatDto> getBlockFlatsById(String id) {
         List<FlatDto> blockFlatDtos = blockRepository
                 .getOneById(Long.parseLong(id))
-                .getFlats()
+                .getFlatEntities()
                 .stream()
                 .map(flatMapping::mapToDto)
                 .collect(Collectors.toList());

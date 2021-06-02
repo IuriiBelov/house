@@ -38,7 +38,7 @@ public class BillEntity {
         return id;
     }
 
-    public FlatEntity getBillFlat() {
+    public FlatEntity getBillFlatEntity() {
         return billFlatEntity;
     }
 
@@ -54,7 +54,7 @@ public class BillEntity {
         this.id = id;
     }
 
-    public void setBillFlat(FlatEntity billFlatEntity) {
+    public void setBillFlatEntity(FlatEntity billFlatEntity) {
         this.billFlatEntity = billFlatEntity;
     }
 

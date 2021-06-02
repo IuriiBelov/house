@@ -33,7 +33,7 @@ public class BlockEntity {
         return number;
     }
 
-    public List<FlatEntity> getFlats() {
+    public List<FlatEntity> getFlatEntities() {
         return flatEntities;
     }
 
@@ -45,7 +45,7 @@ public class BlockEntity {
         this.number = number;
     }
 
-    public void setFlats(List<FlatEntity> flatEntities) {
+    public void setFlatEntities(List<FlatEntity> flatEntities) {
         this.flatEntities = flatEntities;
     }
 }

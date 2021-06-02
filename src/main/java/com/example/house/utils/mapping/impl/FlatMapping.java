@@ -46,7 +46,7 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
         dto.setOwners(entity
                 .getFlatOwnerEntities()
                 .stream()
-                .map(elem -> elem.getFlatOwnerOwner())
+                .map(elem -> elem.getFlatOwnerOwnerEntity())
                 .collect(Collectors.toList())
                 .stream()
                 .map(ownerMapping::mapToDto)

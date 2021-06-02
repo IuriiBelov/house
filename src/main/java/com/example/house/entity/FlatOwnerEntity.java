@@ -30,11 +30,11 @@ public class FlatOwnerEntity {
         return id;
     }
 
-    public FlatEntity getFlatOwnerFlat() {
+    public FlatEntity getFlatOwnerFlatEntity() {
         return flatOwnerFlatEntity;
     }
 
-    public OwnerEntity getFlatOwnerOwner() {
+    public OwnerEntity getFlatOwnerOwnerEntity() {
         return flatOwnerOwnerEntity;
     }
 
@@ -42,11 +42,11 @@ public class FlatOwnerEntity {
         this.id = id;
     }
 
-    public void setFlatOwnerFlat(FlatEntity flatOwnerFlatEntity) {
+    public void setFlatOwnerFlatEntity(FlatEntity flatOwnerFlatEntity) {
         this.flatOwnerFlatEntity = flatOwnerFlatEntity;
     }
 
-    public void setFlatOwnerOwner(OwnerEntity flatOwnerOwnerEntity) {
+    public void setFlatOwnerOwnerEntity(OwnerEntity flatOwnerOwnerEntity) {
         this.flatOwnerOwnerEntity = flatOwnerOwnerEntity;
     }
 }

@@ -23,7 +23,7 @@ public class BlockMapping implements Mapping<BlockEntity, BlockDto> {
         dto.setId(entity.getId());
         dto.setNumber(entity.getNumber());
         dto.setFlats(entity
-                .getFlats()
+                .getFlatEntities()
                 .stream()
                 .map(flatMapping::mapToDto)
                 .collect(Collectors.toList()));

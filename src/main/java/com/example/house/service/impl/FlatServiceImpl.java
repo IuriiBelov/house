@@ -65,7 +65,7 @@ public class FlatServiceImpl implements FlatService {
                 .getOneById(Long.parseLong(id))
                 .getFlatOwnerEntities()
                 .stream()
-                .map(elem -> elem.getFlatOwnerOwner())
+                .map(elem -> elem.getFlatOwnerOwnerEntity())
                 .collect(Collectors.toList())
                 .stream()
                 .map(ownerMapping::mapToDto)

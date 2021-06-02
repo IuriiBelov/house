@@ -29,9 +29,9 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         dto.setLastName(entity.getLastName());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setFlats(entity
-                .getFlatOwners()
+                .getFlatOwnerEntities()
                 .stream()
-                .map(elem -> elem.getFlatOwnerFlat())
+                .map(elem -> elem.getFlatOwnerFlatEntity())
                 .collect(Collectors.toList())
                 .stream()
                 .map(flatMapping::mapToDto)
@@ -48,7 +48,7 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setFlatOwners(flatOwnerRepository.findByOwnerId(dto.getId()));
+        entity.setFlatOwnerEntities(flatOwnerRepository.findByOwnerId(dto.getId()));
 
         return entity;
     }

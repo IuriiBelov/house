@@ -1,6 +1,7 @@
 package com.example.house.dto;
 
 import com.example.house.utils.BillStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Calendar;
 

@@ -49,7 +49,7 @@ public class OwnerEntity {
         return phoneNumber;
     }
 
-    public List<FlatOwnerEntity> getFlatOwners() {
+    public List<FlatOwnerEntity> getFlatOwnerEntities() {
         return flatOwnerEntities;
     }
 
@@ -69,7 +69,7 @@ public class OwnerEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setFlatOwners(List<FlatOwnerEntity> flatOwnerEntities) {
+    public void setFlatOwnerEntities(List<FlatOwnerEntity> flatOwnerEntities) {
         this.flatOwnerEntities = flatOwnerEntities;
     }
 }
