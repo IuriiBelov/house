@@ -1,7 +1,7 @@
 package com.example.house;
 
-import com.example.house.entities.*;
-import com.example.house.repositories.*;
+import com.example.house.entity.*;
+import com.example.house.repository.*;
 import com.example.house.utils.MyConstants;
 import com.example.house.utils.MyRandom;
 import org.springframework.beans.factory.annotation.Autowired;
