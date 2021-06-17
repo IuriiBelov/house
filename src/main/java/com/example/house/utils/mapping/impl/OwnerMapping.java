@@ -1,6 +1,7 @@
 package com.example.house.utils.mapping.impl;
 
 import com.example.house.dto.OwnerDto;
+import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
 import com.example.house.repository.FlatOwnerRepository;
 import com.example.house.utils.mapping.Mapping;
@@ -11,9 +12,9 @@ import java.util.stream.Collectors;
 @Service
 public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
 
-    private FlatOwnerRepository flatOwnerRepository;
+    private final FlatOwnerRepository flatOwnerRepository;
 
-    private FlatMapping flatMapping;
+    private final FlatMapping flatMapping;
 
     public OwnerMapping(FlatOwnerRepository flatOwnerRepository, FlatMapping flatMapping) {
         this.flatOwnerRepository = flatOwnerRepository;
@@ -31,7 +32,7 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         dto.setFlats(entity
                 .getFlatOwnerEntities()
                 .stream()
-                .map(elem -> elem.getFlatOwnerFlatEntity())
+                .map(FlatOwnerEntity::getFlatOwnerFlatEntity)
                 .collect(Collectors.toList())
                 .stream()
                 .map(flatMapping::mapToDto)

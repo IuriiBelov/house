@@ -23,9 +23,22 @@ public interface BillService {
      */
     BillDto getBillById(Long id);
 
+    /**
+     * Создаёт новый счёт
+     * @param newBillDto трансферный объект нового счёта
+     */
     void createNewBill(BillDto newBillDto);
 
+    /**
+     * Обновляет информацию о счёте по его уникальному идентификатору
+     * @param id идентификатор счёта
+     * @param newBillDto обновлённый трансферный объект счёта
+     */
     void updateBill(Long id, BillDto newBillDto);
 
+    /**
+     * Удаляет счёт по его уникальному идентификатору
+     * @param id идентификатор счёта
+     */
     void deleteBill(Long id);
 }

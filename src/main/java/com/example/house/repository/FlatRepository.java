@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
 
-    FlatEntity getOneByNumber(Integer number);
+    FlatEntity findByNumber(Integer number);
 
     @Query(value = "select * from flats where block_id=:id", nativeQuery = true)
     List<FlatEntity> findByBlockId(@Param("id") Long id);

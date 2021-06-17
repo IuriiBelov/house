@@ -1,7 +1,5 @@
 package com.example.house.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.util.List;
 
 public class OwnerDto {

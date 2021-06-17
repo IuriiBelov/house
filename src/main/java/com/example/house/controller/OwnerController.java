@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("owners")
 public class OwnerController {
 
-    private OwnerService ownerService;
+    private final OwnerService ownerService;
 
     public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
@@ -18,14 +18,12 @@ public class OwnerController {
 
     @GetMapping
     public List<OwnerDto> getAllOwners() {
-        List<OwnerDto> allOwnerDtos = ownerService.getAllOwners();
-        return allOwnerDtos;
+        return ownerService.getAllOwners();
     }
 
     @GetMapping("{id}")
     public OwnerDto getOwnerById(@PathVariable Long id) {
-        OwnerDto ownerDto = ownerService.getOwnerById(id);
-        return ownerDto;
+        return ownerService.getOwnerById(id);
     }
 
     @PostMapping

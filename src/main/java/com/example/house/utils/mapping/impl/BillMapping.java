@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BillMapping implements Mapping<BillEntity, BillDto> {
 
-    private FlatRepository flatRepository;
+    private final FlatRepository flatRepository;
 
     public BillMapping(FlatRepository flatRepository) {
         this.flatRepository = flatRepository;

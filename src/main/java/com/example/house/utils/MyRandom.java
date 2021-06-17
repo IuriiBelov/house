@@ -8,7 +8,7 @@ import java.util.Random;
 
 @Component
 public class MyRandom {
-    private static String firstNames[] = {
+    private static final String[] firstNames = {
             "Alexey", "Andrey", "Alexander",
             "Bogdan", "Boris", "Bulat",
             "Victor", "Vladimir", "Vladislav",
@@ -32,7 +32,7 @@ public class MyRandom {
             "Iakov", "Ian", "Jaroslav"
     };
 
-    private static String lastNames[] = {
+    private static final String[] lastNames = {
             "Alexeev", "Alexandrov", "Antonov",
             "Basov", "Bobrov", "Borisov",
             "Vavilov", "Vinokurov", "Voronin",
@@ -61,7 +61,7 @@ public class MyRandom {
             "Iakovlev", "Iashin", "Iankovskiy"
     };
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public String getRandomFirstName() {
         return firstNames[random.nextInt(firstNames.length)];

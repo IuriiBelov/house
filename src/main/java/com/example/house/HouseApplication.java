@@ -50,7 +50,7 @@ public class HouseApplication {
 					for (int j = 0; j < MyConstants.NUMBER_OF_FLOORS; ++j) {
 						for (int k = 0; k < MyConstants.NUMBER_OF_FLATS_PER_FLOOR; ++k) {
 							flatRepository.save(new FlatEntity(flatNumber++,
-									blockRepository.getOneByNumber(i + 1), j + 1,
+									blockRepository.findByNumber(i + 1), j + 1,
 									myRandom.getRandomArea()));
 						}
 					}
@@ -60,7 +60,7 @@ public class HouseApplication {
 			if (billRepository.findAll().size() == 0) {
 				for (int i = 0; i < MyConstants.NUMBER_OF_BILLS; ++i) {
 					billRepository.save(new BillEntity(
-							flatRepository.getOneByNumber(myRandom.getRandomFlatNumber()),
+							flatRepository.findByNumber(myRandom.getRandomFlatNumber()),
 							myRandom.getRandomDate(), myRandom.getRandomBillStatus()));
 				}
 			}

@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("flats")
 public class FlatController {
 
-    private FlatService flatService;
+    private final FlatService flatService;
 
     public FlatController(FlatService flatService) {
         this.flatService = flatService;
@@ -23,25 +23,21 @@ public class FlatController {
 
     @GetMapping
     public List<FlatDto> getAllFlats() {
-        List<FlatDto> flatDtos = flatService.getAllFlats();
-        return flatDtos;
+        return flatService.getAllFlats();
     }
 
     @GetMapping("{id}")
     public FlatDto getFlatById(@PathVariable Long id) {
-        FlatDto flatDto = flatService.getFlatById(id);
-        return flatDto;
+        return flatService.getFlatById(id);
     }
 
     @GetMapping("{id}/bills")
     public List<BillDto> getFlatBills(@PathVariable Long id) {
-        List<BillDto> flatBillDtos = flatService.getFlatBillsById(id);
-        return flatBillDtos;
+        return flatService.getFlatBillsById(id);
     }
 
     @GetMapping("{id}/owners")
     public List<OwnerDto> getFlatOwners(@PathVariable Long id) {
-        List<OwnerDto> flatOwnerDtos = flatService.getFlatOwnersById(id);
-        return flatOwnerDtos;
+        return flatService.getFlatOwnersById(id);
     }
 }

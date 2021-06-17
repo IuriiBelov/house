@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class BlockMapping implements Mapping<BlockEntity, BlockDto> {
 
-    private FlatMapping flatMapping;
+    private final FlatMapping flatMapping;
 
     public BlockMapping(FlatMapping flatMapping) {
         this.flatMapping = flatMapping;
@@ -27,6 +27,7 @@ public class BlockMapping implements Mapping<BlockEntity, BlockDto> {
                 .stream()
                 .map(flatMapping::mapToDto)
                 .collect(Collectors.toList()));
+
         return dto;
     }
 
@@ -36,13 +37,11 @@ public class BlockMapping implements Mapping<BlockEntity, BlockDto> {
 
         entity.setId(dto.getId());
         entity.setNumber(dto.getNumber());
-        /*
-        entity.setFlats(dto
+        entity.setFlatEntities(dto
                 .getFlats()
                 .stream()
                 .map(flatMapping::mapToEntity)
                 .collect(Collectors.toList()));
-         */
 
         return entity;
     }

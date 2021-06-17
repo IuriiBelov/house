@@ -2,6 +2,7 @@ package com.example.house.utils.mapping.impl;
 
 import com.example.house.dto.FlatDto;
 import com.example.house.entity.FlatEntity;
+import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.repository.BillRepository;
 import com.example.house.repository.BlockRepository;
 import com.example.house.repository.FlatOwnerRepository;
@@ -14,12 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
 
-    private OwnerMapping ownerMapping;
-    private BillMapping billMapping;
+    private final OwnerMapping ownerMapping;
+    private final BillMapping billMapping;
 
-    private BlockRepository blockRepository;
-    private BillRepository billRepository;
-    private FlatOwnerRepository flatOwnerRepository;
+    private final BlockRepository blockRepository;
+    private final BillRepository billRepository;
+    private final FlatOwnerRepository flatOwnerRepository;
 
     public FlatMapping(@Lazy OwnerMapping ownerMapping,
                        BillMapping billMapping,
@@ -46,7 +47,7 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
         dto.setOwners(entity
                 .getFlatOwnerEntities()
                 .stream()
-                .map(elem -> elem.getFlatOwnerOwnerEntity())
+                .map(FlatOwnerEntity::getFlatOwnerOwnerEntity)
                 .collect(Collectors.toList())
                 .stream()
                 .map(ownerMapping::mapToDto)
@@ -71,10 +72,7 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
                 .orElseThrow(IllegalArgumentException::new));
         entity.setFloor(entity.getFloor());
         entity.setArea(dto.getArea());
-
-        //flatRepository.findById(flatDto.getId()).ifPresent();
         entity.setBillEntities(billRepository.findBillsByFlatId(dto.getId()));
-
         entity.setFlatOwnerEntities(flatOwnerRepository.findByFlatId(dto.getId()));
 
         return entity;

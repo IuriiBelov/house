@@ -14,7 +14,7 @@ import java.util.*;
 @RequestMapping("blocks")
 public class BlockController {
 
-    private BlockService blockService;
+    private final BlockService blockService;
 
     public BlockController(BlockService blockService) {
         this.blockService = blockService;
@@ -22,19 +22,16 @@ public class BlockController {
 
     @GetMapping
     public List<BlockDto> getAllBlocks() {
-        List<BlockDto> blockDtos = blockService.getAllBlocks();
-        return blockDtos;
+        return blockService.getAllBlocks();
     }
 
     @GetMapping("{id}")
     public BlockDto getBlockById(@PathVariable Long id) {
-        BlockDto blockDto = blockService.getBlockById(id);
-        return blockDto;
+        return blockService.getBlockById(id);
     }
 
     @GetMapping("{id}/flats")
     public List<FlatDto> getBlockFlats(@PathVariable Long id) {
-        List<FlatDto> blockFlatDtos = blockService.getBlockFlatsById(id);
-        return blockFlatDtos;
+        return blockService.getBlockFlatsById(id);
     }
 }
