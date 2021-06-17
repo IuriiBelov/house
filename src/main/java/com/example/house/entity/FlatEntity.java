@@ -29,7 +29,8 @@ public class FlatEntity {
     @OneToMany(mappedBy = "billFlatEntity")
     private List<BillEntity> billEntities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "flatOwnerFlatEntity")
+    // change list to set
+    @OneToMany(mappedBy = "ownerId")
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public FlatEntity() {}

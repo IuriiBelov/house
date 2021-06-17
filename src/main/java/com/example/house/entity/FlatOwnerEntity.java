@@ -1,52 +1,63 @@
 package com.example.house.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "flats_owners")
 public class FlatOwnerEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Embeddable
+    public static class Id implements Serializable {
+        @Column(name = "owner_id")
+        protected Long ownerId;
+
+        @Column(name = "flat_id")
+        protected Long flatId;
+
+        public Id() {
+        }
+
+        public Id(Long ownerId, Long flatId) {
+            this.ownerId = ownerId;
+            this.flatId = flatId;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Id)) return false;
+            Id id = (Id) o;
+            return Objects.equals(ownerId, id.ownerId) && Objects.equals(flatId, id.flatId);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(ownerId, flatId);
+        }
+    };
+
+    @EmbeddedId
+    protected Id id;
 
     @ManyToOne
-    @JoinColumn(name = "flat_id")
-    private FlatEntity flatOwnerFlatEntity;
+    @JoinColumn(name = "flat_id", insertable = false, updatable = false)
+    private FlatEntity flatEntity;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private OwnerEntity flatOwnerOwnerEntity;
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
+    private OwnerEntity ownerEntity;
 
     public FlatOwnerEntity() {}
 
-    public FlatOwnerEntity(FlatEntity flatOwnerFlatEntity, OwnerEntity flatOwnerOwnerEntity) {
-        this.flatOwnerFlatEntity = flatOwnerFlatEntity;
-        this.flatOwnerOwnerEntity = flatOwnerOwnerEntity;
-    }
+    public FlatOwnerEntity(FlatEntity flatEntity, OwnerEntity ownerEntity) {
+        this.flatEntity = flatEntity;
+        this.ownerEntity = ownerEntity;
 
-    public Long getId() {
-        return id;
-    }
+        this.id.flatId = flatEntity.getId();
+        this.id.ownerId = ownerEntity.getId();
 
-    public FlatEntity getFlatOwnerFlatEntity() {
-        return flatOwnerFlatEntity;
-    }
-
-    public OwnerEntity getFlatOwnerOwnerEntity() {
-        return flatOwnerOwnerEntity;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFlatOwnerFlatEntity(FlatEntity flatOwnerFlatEntity) {
-        this.flatOwnerFlatEntity = flatOwnerFlatEntity;
-    }
-
-    public void setFlatOwnerOwnerEntity(OwnerEntity flatOwnerOwnerEntity) {
-        this.flatOwnerOwnerEntity = flatOwnerOwnerEntity;
+        //add
     }
 }
