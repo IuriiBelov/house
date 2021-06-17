@@ -22,7 +22,7 @@ public interface BlockService {
      * @return трансферный объект подъезда
      * @see BlockDto
      */
-    BlockDto getBlockById(String id);
+    BlockDto getBlockById(Long id);
 
     /**
      * Возвращает все квартиры подъезда с данным уникальным идентификатором
@@ -30,5 +30,5 @@ public interface BlockService {
      * @return все квартиры подъезда
      * @see FlatDto
      */
-    List<FlatDto> getBlockFlatsById(String id);
+    List<FlatDto> getBlockFlatsById(Long id);
 }

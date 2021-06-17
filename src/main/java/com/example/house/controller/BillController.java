@@ -1,11 +1,9 @@
 package com.example.house.controller;
 
 import com.example.house.dto.BillDto;
+import com.example.house.dto.OwnerDto;
 import com.example.house.service.BillService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,22 @@ public class BillController {
     @GetMapping("{id}")
     public BillDto getBillById(@PathVariable Long id) {
         return billService.getBillById(id);
+    }
+
+    @PostMapping
+    public BillDto createNewBill(@RequestBody BillDto newBillDto) {
+        billService.createNewBill(newBillDto);
+        return newBillDto;
+    }
+
+    @PutMapping("{id}")
+    public BillDto updateBill(@PathVariable Long id, @RequestBody BillDto billDto) {
+        billService.updateBill(id, billDto);
+        return billDto;
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteBill(@PathVariable Long id) {
+        billService.deleteBill(id);
     }
 }

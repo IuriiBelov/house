@@ -27,13 +27,13 @@ public class BlockController {
     }
 
     @GetMapping("{id}")
-    public BlockDto getBlockById(@PathVariable String id) {
+    public BlockDto getBlockById(@PathVariable Long id) {
         BlockDto blockDto = blockService.getBlockById(id);
         return blockDto;
     }
 
     @GetMapping("{id}/flats")
-    public List<FlatDto> getBlockFlats(@PathVariable String id) {
+    public List<FlatDto> getBlockFlats(@PathVariable Long id) {
         List<FlatDto> blockFlatDtos = blockService.getBlockFlatsById(id);
         return blockFlatDtos;
     }

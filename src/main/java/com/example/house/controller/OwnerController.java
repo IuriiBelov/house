@@ -23,7 +23,7 @@ public class OwnerController {
     }
 
     @GetMapping("{id}")
-    public OwnerDto getOwnerById(@PathVariable String id) {
+    public OwnerDto getOwnerById(@PathVariable Long id) {
         OwnerDto ownerDto = ownerService.getOwnerById(id);
         return ownerDto;
     }
@@ -35,13 +35,13 @@ public class OwnerController {
     }
 
     @PutMapping("{id}")
-    public OwnerDto updateOwner(@PathVariable String id, @RequestBody OwnerDto ownerDto) {
+    public OwnerDto updateOwner(@PathVariable Long id, @RequestBody OwnerDto ownerDto) {
         ownerService.updateOwner(id, ownerDto);
         return ownerDto;
     }
 
     @DeleteMapping("{id}")
-    public void deleteOwner(@PathVariable String id) {
+    public void deleteOwner(@PathVariable Long id) {
         ownerService.deleteOwner(id);
     }
 }

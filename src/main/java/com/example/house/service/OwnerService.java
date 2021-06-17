@@ -21,7 +21,7 @@ public interface OwnerService {
      * @return трансферный объект владельца
      * @see OwnerDto
      */
-    OwnerDto getOwnerById(String id);
+    OwnerDto getOwnerById(Long id);
 
     /**
      * Создаёт нового владельца
@@ -34,11 +34,11 @@ public interface OwnerService {
      * @param id идентификатор владельца
      * @param newOwnerDto обновлённый трансферный объект владельца
      */
-    void updateOwner(String id, OwnerDto newOwnerDto);
+    void updateOwner(Long id, OwnerDto newOwnerDto);
 
     /**
      * Удаляет владельца по его уникальному идентификатору
      * @param id идентификатор владельца
      */
-    void deleteOwner(String id);
+    void deleteOwner(Long id);
 }

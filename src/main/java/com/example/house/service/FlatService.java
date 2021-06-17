@@ -23,7 +23,7 @@ public interface FlatService {
      * @return трансферный объект квартиры
      * @see FlatDto
      */
-    FlatDto getFlatById(String id);
+    FlatDto getFlatById(Long id);
 
     /**
      * Возвращает все счета квартиры с данным уникальным идентификатором
@@ -31,7 +31,7 @@ public interface FlatService {
      * @return все счета квартиры
      * @see BillDto
      */
-    List<BillDto> getFlatBillsById(String id);
+    List<BillDto> getFlatBillsById(Long id);
 
     /**
      * Возвращает всех владельцев квартиры с данным уникальным идентификатором
@@ -39,5 +39,5 @@ public interface FlatService {
      * @return все владельцы квартиры
      * @see OwnerDto
      */
-    List<OwnerDto> getFlatOwnersById(String id);
+    List<OwnerDto> getFlatOwnersById(Long id);
 }

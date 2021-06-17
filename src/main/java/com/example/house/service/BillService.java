@@ -22,4 +22,10 @@ public interface BillService {
      * @see BillDto
      */
     BillDto getBillById(Long id);
+
+    void createNewBill(BillDto newBillDto);
+
+    void updateBill(Long id, BillDto newBillDto);
+
+    void deleteBill(Long id);
 }

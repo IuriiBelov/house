@@ -28,19 +28,19 @@ public class FlatController {
     }
 
     @GetMapping("{id}")
-    public FlatDto getFlatById(@PathVariable String id) {
+    public FlatDto getFlatById(@PathVariable Long id) {
         FlatDto flatDto = flatService.getFlatById(id);
         return flatDto;
     }
 
     @GetMapping("{id}/bills")
-    public List<BillDto> getFlatBills(@PathVariable String id) {
+    public List<BillDto> getFlatBills(@PathVariable Long id) {
         List<BillDto> flatBillDtos = flatService.getFlatBillsById(id);
         return flatBillDtos;
     }
 
     @GetMapping("{id}/owners")
-    public List<OwnerDto> getFlatOwners(@PathVariable String id) {
+    public List<OwnerDto> getFlatOwners(@PathVariable Long id) {
         List<OwnerDto> flatOwnerDtos = flatService.getFlatOwnersById(id);
         return flatOwnerDtos;
     }

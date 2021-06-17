@@ -8,6 +8,7 @@ import com.example.house.utils.mapping.impl.OwnerMapping;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,10 +33,9 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDto getOwnerById(String id) {
-        OwnerDto ownerDto = ownerMapping.mapToDto(
-                ownerRepository.getOneById(Long.parseLong(id)));
-        return ownerDto;
+    public OwnerDto getOwnerById(Long id) {
+        Optional<OwnerEntity> owner = ownerRepository.findById(id);
+        return ownerMapping.mapToDto(owner.orElseThrow(IllegalArgumentException::new));
     }
 
     @Override
@@ -44,21 +44,20 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public void updateOwner(String id, OwnerDto newOwnerDto) {
+    public void updateOwner(Long id, OwnerDto newOwnerDto) {
         OwnerDto oldOwnerDto = new OwnerDto();
-        oldOwnerDto.setId(Long.parseLong(id));
+        oldOwnerDto.setId(id);
         OwnerEntity oldOwnerEntity = ownerMapping.mapToEntity(oldOwnerDto);
 
-        oldOwnerEntity = ownerRepository.getOneById(oldOwnerEntity.getId());
-        if (oldOwnerEntity != null) {
+        if (ownerRepository.findById(oldOwnerEntity.getId()).isPresent()) {
             ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto));
         }
     }
 
     @Override
-    public void deleteOwner(String id) {
+    public void deleteOwner(Long id) {
         OwnerDto ownerDto = new OwnerDto();
-        ownerDto.setId(Long.parseLong(id));
+        ownerDto.setId(id);
         OwnerEntity ownerEntity = ownerMapping.mapToEntity(ownerDto);
 
         ownerRepository.deleteById(ownerEntity.getId());

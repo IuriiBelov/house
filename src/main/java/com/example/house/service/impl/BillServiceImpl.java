@@ -37,4 +37,29 @@ public class BillServiceImpl implements BillService {
         Optional<BillEntity> bill = billRepository.findById(id);
         return billMapping.mapToDto(bill.orElseThrow(IllegalArgumentException::new));
     }
+
+    @Override
+    public void createNewBill(BillDto newBillDto) {
+        billRepository.save(billMapping.mapToEntity(newBillDto));
+    }
+
+    @Override
+    public void updateBill(Long id, BillDto newBillDto) {
+        BillDto oldBillDto = new BillDto();
+        oldBillDto.setId(id);
+        BillEntity oldBillEntity = billMapping.mapToEntity(oldBillDto);
+
+        if (billRepository.findById(oldBillEntity.getId()).isPresent()) {
+            billRepository.save(billMapping.mapToEntity(newBillDto));
+        }
+    }
+
+    @Override
+    public void deleteBill(Long id) {
+        BillDto billDto = new BillDto();
+        billDto.setId(id);
+        BillEntity billEntity = billMapping.mapToEntity(billDto);
+
+        billRepository.deleteById(billEntity.getId());
+    }
 }
