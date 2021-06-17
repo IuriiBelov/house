@@ -66,7 +66,9 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
 
         entity.setId(dto.getId());
         entity.setNumber(dto.getNumber());
-        entity.setBlockEntity(blockRepository.getOneById(dto.getBlockId()));
+        entity.setBlockEntity(blockRepository
+                .findById(dto.getBlockId())
+                .orElseThrow(IllegalArgumentException::new));
         entity.setFloor(entity.getFloor());
         entity.setArea(dto.getArea());
 
