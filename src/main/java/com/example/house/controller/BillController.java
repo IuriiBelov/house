@@ -1,7 +1,6 @@
 package com.example.house.controller;
 
 import com.example.house.dto.BillDto;
-import com.example.house.dto.OwnerDto;
 import com.example.house.service.BillService;
 import org.springframework.web.bind.annotation.*;
 
