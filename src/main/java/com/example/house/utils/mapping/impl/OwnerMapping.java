@@ -32,7 +32,7 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         dto.setFlats(entity
                 .getFlatOwnerEntities()
                 .stream()
-                .map(FlatOwnerEntity::getFlatOwnerFlatEntity)
+                .map(FlatOwnerEntity::getFlatEntity)
                 .collect(Collectors.toList())
                 .stream()
                 .map(flatMapping::mapToDto)

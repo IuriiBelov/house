@@ -22,7 +22,7 @@ public class OwnerEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "flatId")
+    @OneToMany(mappedBy = "flatEntity")
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public OwnerEntity() {}

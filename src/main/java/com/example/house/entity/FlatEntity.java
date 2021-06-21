@@ -30,7 +30,7 @@ public class FlatEntity {
     private List<BillEntity> billEntities = new ArrayList<>();
 
     // change list to set
-    @OneToMany(mappedBy = "ownerId")
+    @OneToMany(mappedBy = "ownerEntity")
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public FlatEntity() {}

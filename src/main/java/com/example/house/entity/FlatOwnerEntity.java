@@ -6,6 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "flats_owners")
+@org.hibernate.annotations.Immutable
 public class FlatOwnerEntity {
 
     @Embeddable
@@ -39,7 +40,7 @@ public class FlatOwnerEntity {
     };
 
     @EmbeddedId
-    protected Id id;
+    protected Id id = new Id();
 
     @ManyToOne
     @JoinColumn(name = "flat_id", insertable = false, updatable = false)
@@ -58,6 +59,31 @@ public class FlatOwnerEntity {
         this.id.flatId = flatEntity.getId();
         this.id.ownerId = ownerEntity.getId();
 
-        //add
+        flatEntity.getFlatOwnerEntities().add(this);
+        ownerEntity.getFlatOwnerEntities().add(this);
+    }
+
+    public Id getId() {
+        return id;
+    }
+
+    public void setId(Id id) {
+        this.id = id;
+    }
+
+    public FlatEntity getFlatEntity() {
+        return flatEntity;
+    }
+
+    public void setFlatEntity(FlatEntity flatEntity) {
+        this.flatEntity = flatEntity;
+    }
+
+    public OwnerEntity getOwnerEntity() {
+        return ownerEntity;
+    }
+
+    public void setOwnerEntity(OwnerEntity ownerEntity) {
+        this.ownerEntity = ownerEntity;
     }
 }
