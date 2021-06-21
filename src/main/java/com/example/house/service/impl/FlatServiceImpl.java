@@ -68,7 +68,7 @@ public class FlatServiceImpl implements FlatService {
                 .orElseThrow(IllegalArgumentException::new)
                 .getFlatOwnerEntities()
                 .stream()
-                .map(elem -> elem.getFlatOwnerOwnerEntity())
+                .map(elem -> elem.getOwnerEntity())
                 .collect(Collectors.toList())
                 .stream()
                 .map(ownerMapping::mapToDto)
