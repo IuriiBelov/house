@@ -3,6 +3,7 @@ package com.example.house.utils.mapping.impl;
 import com.example.house.dto.FlatDto;
 import com.example.house.entity.FlatEntity;
 import com.example.house.entity.FlatOwnerEntity;
+import com.example.house.entity.OwnerEntity;
 import com.example.house.repository.BillRepository;
 import com.example.house.repository.BlockRepository;
 import com.example.house.repository.FlatOwnerRepository;
@@ -10,6 +11,7 @@ import com.example.house.utils.mapping.Mapping;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,14 +46,36 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
         dto.setBlockId(entity.getBlockEntity().getId());
         dto.setFloor(entity.getFloor());
         dto.setArea(entity.getArea());
-        dto.setOwners(entity
+
+        List<OwnerEntity> ownerEntities = entity
                 .getFlatOwnerEntities()
                 .stream()
                 .map(FlatOwnerEntity::getOwnerEntity)
-                .collect(Collectors.toList())
+                .collect(Collectors.toList());
+        dto.setOwners(ownerEntities
                 .stream()
-                .map(ownerMapping::mapToDto)
+                .map(ownerMapping::mapToDtoWithNull)
                 .collect(Collectors.toList()));
+
+        dto.setBills(entity
+                .getBillEntities()
+                .stream()
+                .map(billMapping::mapToDto)
+                .collect(Collectors.toList()));
+
+        return dto;
+    }
+
+    public FlatDto mapToDtoWithNull(FlatEntity entity) {
+        FlatDto dto = new FlatDto();
+
+        dto.setId(entity.getId());
+        dto.setNumber(entity.getNumber());
+        dto.setBlockId(entity.getBlockEntity().getId());
+        dto.setFloor(entity.getFloor());
+        dto.setArea(entity.getArea());
+        dto.setOwners(null);
+
         dto.setBills(entity
                 .getBillEntities()
                 .stream()

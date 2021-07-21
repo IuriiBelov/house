@@ -1,12 +1,14 @@
 package com.example.house.utils.mapping.impl;
 
 import com.example.house.dto.OwnerDto;
+import com.example.house.entity.FlatEntity;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
 import com.example.house.repository.FlatOwnerRepository;
 import com.example.house.utils.mapping.Mapping;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,14 +31,28 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setPhoneNumber(entity.getPhoneNumber());
-        dto.setFlats(entity
+
+        List<FlatEntity> flatEntities = entity
                 .getFlatOwnerEntities()
                 .stream()
                 .map(FlatOwnerEntity::getFlatEntity)
-                .collect(Collectors.toList())
+                .collect(Collectors.toList());
+        dto.setFlats(flatEntities
                 .stream()
-                .map(flatMapping::mapToDto)
+                .map(flatMapping::mapToDtoWithNull)
                 .collect(Collectors.toList()));
+
+        return dto;
+    }
+
+    public OwnerDto mapToDtoWithNull(OwnerEntity entity) {
+        OwnerDto dto = new OwnerDto();
+
+        dto.setId(entity.getId());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
+        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setFlats(null);
 
         return dto;
     }

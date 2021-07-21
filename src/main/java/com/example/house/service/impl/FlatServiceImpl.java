@@ -4,6 +4,7 @@ import com.example.house.dto.BillDto;
 import com.example.house.dto.FlatDto;
 import com.example.house.dto.OwnerDto;
 import com.example.house.entity.FlatEntity;
+import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.repository.FlatRepository;
 import com.example.house.service.FlatService;
 import com.example.house.utils.mapping.impl.BillMapping;
@@ -68,9 +69,7 @@ public class FlatServiceImpl implements FlatService {
                 .orElseThrow(IllegalArgumentException::new)
                 .getFlatOwnerEntities()
                 .stream()
-                .map(elem -> elem.getOwnerEntity())
-                .collect(Collectors.toList())
-                .stream()
+                .map(FlatOwnerEntity::getOwnerEntity)
                 .map(ownerMapping::mapToDto)
                 .collect(Collectors.toList());
         return flatOwnerDtos;

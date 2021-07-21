@@ -45,11 +45,13 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public void updateOwner(Long id, OwnerDto newOwnerDto) {
+/*
         OwnerDto oldOwnerDto = new OwnerDto();
         oldOwnerDto.setId(id);
         OwnerEntity oldOwnerEntity = ownerMapping.mapToEntity(oldOwnerDto);
+*/
 
-        if (ownerRepository.findById(oldOwnerEntity.getId()).isPresent()) {
+        if (ownerRepository.findById(id).isPresent()) {
             ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto));
         }
     }
