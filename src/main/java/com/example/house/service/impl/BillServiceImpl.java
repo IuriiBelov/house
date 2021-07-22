@@ -24,12 +24,11 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public List<BillDto> getAllBills() {
-        List<BillDto> allBillDtos = billRepository
+        return billRepository
                 .findAll()
                 .stream()
                 .map(billMapping::mapToDto)
                 .collect(Collectors.toList());
-        return allBillDtos;
     }
 
     @Override
@@ -45,21 +44,15 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public void updateBill(Long id, BillDto newBillDto) {
-        BillDto oldBillDto = new BillDto();
-        oldBillDto.setId(id);
-        BillEntity oldBillEntity = billMapping.mapToEntity(oldBillDto);
-
-        if (billRepository.findById(oldBillEntity.getId()).isPresent()) {
+        if (billRepository.findById(id).isPresent()) {
             billRepository.save(billMapping.mapToEntity(newBillDto));
         }
     }
 
     @Override
     public void deleteBill(Long id) {
-        BillDto billDto = new BillDto();
-        billDto.setId(id);
-        BillEntity billEntity = billMapping.mapToEntity(billDto);
-
-        billRepository.deleteById(billEntity.getId());
+        if (billRepository.findById(id).isPresent()) {
+            billRepository.deleteById(id);
+        }
     }
 }

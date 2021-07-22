@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class OwnerServiceImpl implements OwnerService {
 
-    private OwnerRepository ownerRepository;
-    private OwnerMapping ownerMapping;
+    private final OwnerRepository ownerRepository;
+    private final OwnerMapping ownerMapping;
 
     public OwnerServiceImpl(OwnerRepository ownerRepository, OwnerMapping ownerMapping) {
         this.ownerRepository = ownerRepository;
@@ -24,12 +24,11 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public List<OwnerDto> getAllOwners() {
-        List<OwnerDto> allOwnerDtos = ownerRepository
+        return ownerRepository
                 .findAll()
                 .stream()
                 .map(ownerMapping::mapToDto)
                 .collect(Collectors.toList());
-        return allOwnerDtos;
     }
 
     @Override
@@ -45,12 +44,6 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public void updateOwner(Long id, OwnerDto newOwnerDto) {
-/*
-        OwnerDto oldOwnerDto = new OwnerDto();
-        oldOwnerDto.setId(id);
-        OwnerEntity oldOwnerEntity = ownerMapping.mapToEntity(oldOwnerDto);
-*/
-
         if (ownerRepository.findById(id).isPresent()) {
             ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto));
         }
@@ -58,10 +51,8 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public void deleteOwner(Long id) {
-        OwnerDto ownerDto = new OwnerDto();
-        ownerDto.setId(id);
-        OwnerEntity ownerEntity = ownerMapping.mapToEntity(ownerDto);
-
-        ownerRepository.deleteById(ownerEntity.getId());
+        if (ownerRepository.findById(id).isPresent()) {
+            ownerRepository.deleteById(id);
+        }
     }
 }

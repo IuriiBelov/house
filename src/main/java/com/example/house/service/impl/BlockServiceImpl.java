@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 @Service
 public class BlockServiceImpl implements BlockService {
 
-    private BlockRepository blockRepository;
-    private BlockMapping blockMapping;
-    private FlatMapping flatMapping;
+    private final BlockRepository blockRepository;
+    private final BlockMapping blockMapping;
+    private final FlatMapping flatMapping;
 
     public BlockServiceImpl(BlockRepository blockRepository,
                             BlockMapping blockMapping,
@@ -30,14 +30,11 @@ public class BlockServiceImpl implements BlockService {
 
     @Override
     public List<BlockDto> getAllBlocks() {
-
-        List<BlockDto> allBlockDtos = blockRepository
+        return blockRepository
                 .findAll()
                 .stream()
                 .map(blockMapping::mapToDto)
                 .collect(Collectors.toList());
-
-        return allBlockDtos;
     }
 
     @Override
@@ -48,13 +45,12 @@ public class BlockServiceImpl implements BlockService {
 
     @Override
     public List<FlatDto> getBlockFlatsById(Long id) {
-        List<FlatDto> blockFlatDtos = blockRepository
+        return blockRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)
                 .getFlatEntities()
                 .stream()
                 .map(flatMapping::mapToDto)
                 .collect(Collectors.toList());
-        return blockFlatDtos;
     }
 }

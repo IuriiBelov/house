@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 @Service
 public class FlatServiceImpl implements FlatService {
 
-    private FlatRepository flatRepository;
-    private FlatMapping flatMapping;
-    private BillMapping billMapping;
-    private OwnerMapping ownerMapping;
+    private final FlatRepository flatRepository;
+    private final FlatMapping flatMapping;
+    private final BillMapping billMapping;
+    private final OwnerMapping ownerMapping;
 
     public FlatServiceImpl(FlatRepository flatRepository,
                            FlatMapping flatMapping,
@@ -36,12 +36,11 @@ public class FlatServiceImpl implements FlatService {
 
     @Override
     public List<FlatDto> getAllFlats() {
-        List<FlatDto> allFlatDtos = flatRepository
+        return flatRepository
                 .findAll()
                 .stream()
                 .map(flatMapping::mapToDto)
                 .collect(Collectors.toList());
-        return allFlatDtos;
     }
 
     @Override
@@ -52,19 +51,18 @@ public class FlatServiceImpl implements FlatService {
 
     @Override
     public List<BillDto> getFlatBillsById(Long id) {
-        List<BillDto> flatBillDtos = flatRepository
+        return flatRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)
                 .getBillEntities()
                 .stream()
                 .map(billMapping::mapToDto)
                 .collect(Collectors.toList());
-        return flatBillDtos;
     }
 
     @Override
     public List<OwnerDto> getFlatOwnersById(Long id) {
-        List<OwnerDto> flatOwnerDtos = flatRepository
+        return flatRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)
                 .getFlatOwnerEntities()
@@ -72,6 +70,5 @@ public class FlatServiceImpl implements FlatService {
                 .map(FlatOwnerEntity::getOwnerEntity)
                 .map(ownerMapping::mapToDto)
                 .collect(Collectors.toList());
-        return flatOwnerDtos;
     }
 }
