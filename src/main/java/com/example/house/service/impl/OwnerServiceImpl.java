@@ -38,15 +38,21 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public void createNewOwner(OwnerDto newOwnerDto) {
-        ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto));
+    public OwnerDto createNewOwner(OwnerDto newOwnerDto) {
+        return ownerMapping.mapToDto(ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto)));
     }
 
     @Override
-    public void updateOwner(Long id, OwnerDto newOwnerDto) {
-        if (ownerRepository.findById(id).isPresent()) {
-            ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto));
-        }
+    public OwnerDto updateOwner(Long id, OwnerDto newOwnerDto) {
+        OwnerEntity ownerEntity = ownerRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        OwnerEntity newOwnerEntity = ownerMapping.mapToEntity(newOwnerDto);
+
+        ownerEntity.setFlatOwnerEntities(newOwnerEntity.getFlatOwnerEntities());
+        ownerEntity.setFirstName(newOwnerEntity.getFirstName());
+        ownerEntity.setLastName(newOwnerEntity.getLastName());
+        ownerEntity.setPhoneNumber(newOwnerEntity.getPhoneNumber());
+
+        return ownerMapping.mapToDto(ownerRepository.save(ownerEntity));
     }
 
     @Override

@@ -44,4 +44,14 @@ public class BillDto {
     public void setBillStatus(BillStatus billStatus) {
         this.billStatus = billStatus;
     }
+
+    @Override
+    public String toString() {
+        return "BillDto{" +
+                "id=" + id +
+                ", flatId=" + flatId +
+                ", date=" + date +
+                ", billStatus=" + billStatus +
+                '}';
+    }
 }

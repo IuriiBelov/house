@@ -51,4 +51,15 @@ public class OwnerDto {
     public void setFlats(List<FlatDto> flats) {
         this.flats = flats;
     }
+
+    @Override
+    public String toString() {
+        return "OwnerDto{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", flats=" + flats +
+                '}';
+    }
 }

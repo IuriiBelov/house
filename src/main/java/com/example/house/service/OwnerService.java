@@ -27,14 +27,14 @@ public interface OwnerService {
      * Создаёт нового владельца
      * @param newOwnerDto трансферный объект нового владельца
      */
-    void createNewOwner(OwnerDto newOwnerDto);
+    OwnerDto createNewOwner(OwnerDto newOwnerDto);
 
     /**
      * Обновляет информацию о владельце по его уникальному идентификатору
      * @param id идентификатор владельца
      * @param newOwnerDto обновлённый трансферный объект владельца
      */
-    void updateOwner(Long id, OwnerDto newOwnerDto);
+    OwnerDto updateOwner(Long id, OwnerDto newOwnerDto);
 
     /**
      * Удаляет владельца по его уникальному идентификатору

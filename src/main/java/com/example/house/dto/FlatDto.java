@@ -69,4 +69,17 @@ public class FlatDto {
     public void setBills(List<BillDto> bills) {
         this.bills = bills;
     }
+
+    @Override
+    public String toString() {
+        return "FlatDto{" +
+                "id=" + id +
+                ", number=" + number +
+                ", blockId=" + blockId +
+                ", floor=" + floor +
+                ", area=" + area +
+                ", owners=" + owners +
+                ", bills=" + bills +
+                '}';
+    }
 }

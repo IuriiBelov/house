@@ -34,8 +34,7 @@ public class OwnerController {
 
     @PutMapping("{id}")
     public OwnerDto updateOwner(@PathVariable Long id, @RequestBody OwnerDto ownerDto) {
-        ownerService.updateOwner(id, ownerDto);
-        return ownerDto;
+        return ownerService.updateOwner(id, ownerDto);
     }
 
     @DeleteMapping("{id}")

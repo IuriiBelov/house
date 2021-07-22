@@ -1,5 +1,6 @@
 package com.example.house.service.impl;
 
+import com.example.house.controller.BillController;
 import com.example.house.dto.BillDto;
 import com.example.house.entity.BillEntity;
 import com.example.house.repository.BillRepository;
@@ -11,11 +12,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class BillServiceImpl implements BillService {
 
     private final BillRepository billRepository;
     private final BillMapping billMapping;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BillController.class);
 
     public BillServiceImpl(BillRepository billRepository, BillMapping billMapping) {
         this.billRepository = billRepository;
@@ -44,10 +50,14 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public BillDto updateBill(Long id, BillDto newBillDto) {
-        if (billRepository.findById(id).isPresent()) {
-            return billMapping.mapToDto(billRepository.save(billMapping.mapToEntity(newBillDto)));
-        }
-        return null;
+        BillEntity billEntity = billRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        BillEntity newBillEntity = billMapping.mapToEntity(newBillDto);
+
+        billEntity.setBillFlatEntity(newBillEntity.getBillFlatEntity());
+        billEntity.setBillStatus(newBillEntity.getBillStatus());
+        billEntity.setDate(newBillEntity.getDate());
+
+        return billMapping.mapToDto(billRepository.save(billEntity));
     }
 
     @Override
