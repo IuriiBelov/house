@@ -31,7 +31,7 @@ public class BillMapping implements Mapping<BillEntity, BillDto> {
     public BillEntity mapToEntity(BillDto dto) {
         BillEntity entity = new BillEntity();
 
-        entity.setId(dto.getId());
+        //entity.setId(dto.getId());
         entity.setBillFlatEntity(flatRepository
                 .findById(dto.getId())
                 .orElseThrow(IllegalArgumentException::new));

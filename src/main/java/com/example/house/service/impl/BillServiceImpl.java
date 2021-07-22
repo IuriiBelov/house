@@ -38,15 +38,16 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public void createNewBill(BillDto newBillDto) {
-        billRepository.save(billMapping.mapToEntity(newBillDto));
+    public BillDto createNewBill(BillDto newBillDto) {
+        return billMapping.mapToDto(billRepository.save(billMapping.mapToEntity(newBillDto)));
     }
 
     @Override
-    public void updateBill(Long id, BillDto newBillDto) {
+    public BillDto updateBill(Long id, BillDto newBillDto) {
         if (billRepository.findById(id).isPresent()) {
-            billRepository.save(billMapping.mapToEntity(newBillDto));
+            return billMapping.mapToDto(billRepository.save(billMapping.mapToEntity(newBillDto)));
         }
+        return null;
     }
 
     @Override
