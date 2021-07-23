@@ -15,7 +15,7 @@ public interface FlatService {
      * Возвращает все квартиры многоквартирного дома
      * @return все квартиры многоквартирного дома
      */
-    List<FlatDto> getAllFlats();
+    List<FlatDto> getAllFlats(int page, int size);
 
     /**
      * Возвращает квартиру по её уникальному идентификатору

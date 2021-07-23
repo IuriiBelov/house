@@ -10,6 +10,8 @@ import com.example.house.service.FlatService;
 import com.example.house.utils.mapping.impl.BillMapping;
 import com.example.house.utils.mapping.impl.FlatMapping;
 import com.example.house.utils.mapping.impl.OwnerMapping;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,9 +37,9 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public List<FlatDto> getAllFlats() {
+    public List<FlatDto> getAllFlats(int page, int size) {
         return flatRepository
-                .findAll()
+                .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
                 .map(flatMapping::mapToDto)
                 .collect(Collectors.toList());

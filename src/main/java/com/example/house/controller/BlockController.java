@@ -3,10 +3,7 @@ package com.example.house.controller;
 import com.example.house.dto.BlockDto;
 import com.example.house.dto.FlatDto;
 import com.example.house.service.BlockService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -21,8 +18,9 @@ public class BlockController {
     }
 
     @GetMapping
-    public List<BlockDto> getAllBlocks() {
-        return blockService.getAllBlocks();
+    public List<BlockDto> getAllBlocks(@RequestParam("page") int page,
+                                       @RequestParam("size") int size) {
+        return blockService.getAllBlocks(page, size);
     }
 
     @GetMapping("{id}")

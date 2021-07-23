@@ -14,7 +14,7 @@ public interface BlockService {
      * Возвращает все подъезды многоквартирного дома
      * @return все подъезды многоквартирного дома
      */
-    List<BlockDto> getAllBlocks();
+    List<BlockDto> getAllBlocks(int page, int size);
 
     /**
      * Возвращает подъезд по его уникальному идентификатору

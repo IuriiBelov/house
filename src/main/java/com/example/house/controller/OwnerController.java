@@ -17,8 +17,9 @@ public class OwnerController {
     }
 
     @GetMapping
-    public List<OwnerDto> getAllOwners() {
-        return ownerService.getAllOwners();
+    public List<OwnerDto> getAllOwners(@RequestParam("page") int page,
+                                       @RequestParam("size") int size) {
+        return ownerService.getAllOwners(page, size);
     }
 
     @GetMapping("{id}")

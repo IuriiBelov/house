@@ -13,7 +13,7 @@ public interface OwnerService {
      * Возвращает всех владельцев квартир многоквартирного дома
      * @return все владельцы квартир многоквартирного дома
      */
-    List<OwnerDto> getAllOwners();
+    List<OwnerDto> getAllOwners(int page, int size);
 
     /**
      * Возвращает владельца по его уникальному идентификатору

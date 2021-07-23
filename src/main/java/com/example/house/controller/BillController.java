@@ -17,8 +17,9 @@ public class BillController {
     }
 
     @GetMapping
-    public List<BillDto> getAllBills() {
-        return billService.getAllBills();
+    public List<BillDto> getAllBills(@RequestParam("page") int page,
+                                     @RequestParam("size") int size) {
+        return billService.getAllBills(page, size);
     }
 
     @GetMapping("{id}")

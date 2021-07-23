@@ -7,6 +7,8 @@ import com.example.house.repository.BlockRepository;
 import com.example.house.service.BlockService;
 import com.example.house.utils.mapping.impl.BlockMapping;
 import com.example.house.utils.mapping.impl.FlatMapping;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,9 +31,9 @@ public class BlockServiceImpl implements BlockService {
     }
 
     @Override
-    public List<BlockDto> getAllBlocks() {
+    public List<BlockDto> getAllBlocks(int page, int size) {
         return blockRepository
-                .findAll()
+                .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
                 .map(blockMapping::mapToDto)
                 .collect(Collectors.toList());

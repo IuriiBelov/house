@@ -5,6 +5,8 @@ import com.example.house.entity.OwnerEntity;
 import com.example.house.repository.OwnerRepository;
 import com.example.house.service.OwnerService;
 import com.example.house.utils.mapping.impl.OwnerMapping;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +25,9 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public List<OwnerDto> getAllOwners() {
+    public List<OwnerDto> getAllOwners(int page, int size) {
         return ownerRepository
-                .findAll()
+                .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
                 .map(ownerMapping::mapToDto)
                 .collect(Collectors.toList());

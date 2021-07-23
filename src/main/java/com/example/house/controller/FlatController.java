@@ -4,10 +4,7 @@ import com.example.house.dto.BillDto;
 import com.example.house.dto.FlatDto;
 import com.example.house.dto.OwnerDto;
 import com.example.house.service.FlatService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +19,9 @@ public class FlatController {
     }
 
     @GetMapping
-    public List<FlatDto> getAllFlats() {
-        return flatService.getAllFlats();
+    public List<FlatDto> getAllFlats(@RequestParam("page") int page,
+                                     @RequestParam("size") int size) {
+        return flatService.getAllFlats(page, size);
     }
 
     @GetMapping("{id}")

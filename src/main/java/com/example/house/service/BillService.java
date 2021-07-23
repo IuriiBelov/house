@@ -13,7 +13,7 @@ public interface BillService {
      * Возвращает все счета многоквартирного дома
      * @return все счета многоквартирного дома
      */
-    List<BillDto> getAllBills();
+    List<BillDto> getAllBills(int page, int size);
 
     /**
      * Возвращает счет по его уникальному идентификатору

@@ -1,19 +1,18 @@
 package com.example.house.service.impl;
 
-import com.example.house.controller.BillController;
 import com.example.house.dto.BillDto;
 import com.example.house.entity.BillEntity;
 import com.example.house.repository.BillRepository;
 import com.example.house.service.BillService;
 import com.example.house.utils.mapping.impl.BillMapping;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class BillServiceImpl implements BillService {
@@ -21,17 +20,15 @@ public class BillServiceImpl implements BillService {
     private final BillRepository billRepository;
     private final BillMapping billMapping;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BillController.class);
-
     public BillServiceImpl(BillRepository billRepository, BillMapping billMapping) {
         this.billRepository = billRepository;
         this.billMapping = billMapping;
     }
 
     @Override
-    public List<BillDto> getAllBills() {
+    public List<BillDto> getAllBills(int page, int size) {
         return billRepository
-                .findAll()
+                .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
                 .map(billMapping::mapToDto)
                 .collect(Collectors.toList());
