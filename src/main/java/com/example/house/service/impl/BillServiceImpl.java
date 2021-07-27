@@ -58,9 +58,13 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public void deleteBill(Long id) {
-        if (billRepository.findById(id).isPresent()) {
+    public BillDto deleteBill(Long id) {
+        BillDto bill = billMapping.mapToDto(billRepository.findById(id).orElse(null));
+
+        if (bill != null) {
             billRepository.deleteById(id);
         }
+
+        return bill;
     }
 }

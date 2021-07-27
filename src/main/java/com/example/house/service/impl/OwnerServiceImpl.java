@@ -1,7 +1,9 @@
 package com.example.house.service.impl;
 
 import com.example.house.dto.OwnerDto;
+import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
+import com.example.house.entity.converter.OwnerName;
 import com.example.house.repository.OwnerRepository;
 import com.example.house.service.OwnerService;
 import com.example.house.utils.mapping.impl.OwnerMapping;
@@ -41,7 +43,14 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public OwnerDto createNewOwner(OwnerDto newOwnerDto) {
-        return ownerMapping.mapToDto(ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto)));
+        OwnerEntity newOwnerEntity = new OwnerEntity();
+        FlatOwnerEntity flatOwnerEntity1 = new FlatOwnerEntity();
+        FlatOwnerEntity flatOwnerEntity2 = new FlatOwnerEntity();
+        newOwnerEntity.setFlatOwnerEntities(List.of(flatOwnerEntity1, flatOwnerEntity2));
+        ownerRepository.save(newOwnerEntity);
+
+        return newOwnerDto;
+        //return ownerMapping.mapToDto(ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto)));
     }
 
     @Override
@@ -50,17 +59,24 @@ public class OwnerServiceImpl implements OwnerService {
         OwnerEntity newOwnerEntity = ownerMapping.mapToEntity(newOwnerDto);
 
         ownerEntity.setFlatOwnerEntities(newOwnerEntity.getFlatOwnerEntities());
+        /*
         ownerEntity.setFirstName(newOwnerEntity.getFirstName());
         ownerEntity.setLastName(newOwnerEntity.getLastName());
+         */
+        ownerEntity.setName(newOwnerEntity.getName());
         ownerEntity.setPhoneNumber(newOwnerEntity.getPhoneNumber());
 
         return ownerMapping.mapToDto(ownerRepository.save(ownerEntity));
     }
 
     @Override
-    public void deleteOwner(Long id) {
-        if (ownerRepository.findById(id).isPresent()) {
+    public OwnerDto deleteOwner(Long id) {
+        OwnerDto owner = ownerMapping.mapToDto(ownerRepository.findById(id).orElse(null));
+
+        if (owner != null) {
             ownerRepository.deleteById(id);
         }
+
+        return owner;
     }
 }

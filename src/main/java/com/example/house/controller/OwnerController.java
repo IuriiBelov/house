@@ -2,6 +2,8 @@ package com.example.house.controller;
 
 import com.example.house.dto.OwnerDto;
 import com.example.house.service.OwnerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,29 +19,29 @@ public class OwnerController {
     }
 
     @GetMapping
-    public List<OwnerDto> getAllOwners(@RequestParam("page") int page,
+    public ResponseEntity<List<OwnerDto>> getAllOwners(@RequestParam("page") int page,
                                        @RequestParam("size") int size) {
-        return ownerService.getAllOwners(page, size);
+        return new ResponseEntity<>(ownerService.getAllOwners(page, size), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public OwnerDto getOwnerById(@PathVariable Long id) {
-        return ownerService.getOwnerById(id);
+    public ResponseEntity<OwnerDto> getOwnerById(@PathVariable Long id) {
+        return new ResponseEntity<>(ownerService.getOwnerById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public OwnerDto createNewOwner(@RequestBody OwnerDto newOwnerDto) {
+    public ResponseEntity<OwnerDto> createNewOwner(@RequestBody OwnerDto newOwnerDto) {
         ownerService.createNewOwner(newOwnerDto);
-        return newOwnerDto;
+        return new ResponseEntity<>(newOwnerDto, HttpStatus.OK);
     }
 
     @PutMapping("{id}")
-    public OwnerDto updateOwner(@PathVariable Long id, @RequestBody OwnerDto ownerDto) {
-        return ownerService.updateOwner(id, ownerDto);
+    public ResponseEntity<OwnerDto> updateOwner(@PathVariable Long id, @RequestBody OwnerDto ownerDto) {
+        return new ResponseEntity<>(ownerService.updateOwner(id, ownerDto), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public void deleteOwner(@PathVariable Long id) {
-        ownerService.deleteOwner(id);
+    public ResponseEntity<OwnerDto> deleteOwner(@PathVariable Long id) {
+        return new ResponseEntity<>(ownerService.deleteOwner(id), HttpStatus.OK);
     }
 }

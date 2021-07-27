@@ -1,5 +1,8 @@
 package com.example.house.entity;
 
+import com.example.house.entity.converter.OwnerName;
+import com.example.house.entity.converter.OwnerNameConverter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,23 +16,27 @@ public class OwnerEntity {
     @Column(name = "id")
     private Long id;
 
+    /*
     @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
+     */
+    @Column(name = "name")
+    @Convert(converter = OwnerNameConverter.class)
+    private OwnerName name;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "flatEntity")
+    @OneToMany(mappedBy = "flatEntity", cascade = CascadeType.ALL)
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public OwnerEntity() {}
 
-    public OwnerEntity(String firstName, String lastName, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public OwnerEntity(OwnerName name, String phoneNumber) {
+        this.name = name;
         this.phoneNumber = phoneNumber;
     }
 
@@ -37,12 +44,8 @@ public class OwnerEntity {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public OwnerName getName() {
+        return name;
     }
 
     public String getPhoneNumber() {
@@ -57,12 +60,8 @@ public class OwnerEntity {
         this.id = id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(OwnerName name) {
+        this.name = name;
     }
 
     public void setPhoneNumber(String phoneNumber) {

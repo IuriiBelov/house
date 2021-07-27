@@ -45,7 +45,7 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
         dto.setNumber(entity.getNumber());
         dto.setBlockId(entity.getBlockEntity().getId());
         dto.setFloor(entity.getFloor());
-        dto.setArea(entity.getArea());
+        //dto.setMeasurements(entity.getMeasurements());
 
         List<OwnerEntity> ownerEntities = entity
                 .getFlatOwnerEntities()
@@ -73,7 +73,7 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
         dto.setNumber(entity.getNumber());
         dto.setBlockId(entity.getBlockEntity().getId());
         dto.setFloor(entity.getFloor());
-        dto.setArea(entity.getArea());
+        //dto.setMeasurements(entity.getMeasurements());
         dto.setOwners(null);
 
         dto.setBills(entity
@@ -95,7 +95,7 @@ public class FlatMapping implements Mapping<FlatEntity, FlatDto> {
                 .findById(dto.getBlockId())
                 .orElseThrow(IllegalArgumentException::new));
         entity.setFloor(entity.getFloor());
-        entity.setArea(dto.getArea());
+        //entity.setMeasurements(dto.getMeasurements());
         entity.setBillEntities(billRepository.findBillsByFlatId(dto.getId()));
         entity.setFlatOwnerEntities(flatOwnerRepository.findByFlatId(dto.getId()));
 

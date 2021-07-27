@@ -24,6 +24,7 @@ public class HouseApplication {
 		SpringApplication.run(HouseApplication.class, args);
 	}
 
+	/*
 	@Bean
 	public CommandLineRunner fillDatabase(BlockRepository blockRepository,
 								          OwnerRepository ownerRepository,
@@ -97,4 +98,5 @@ public class HouseApplication {
 			}
 		}
 	}
+	 */
 }

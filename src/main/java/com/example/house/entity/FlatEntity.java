@@ -1,5 +1,7 @@
 package com.example.house.entity;
 
+import com.example.house.entity.embeddable.FlatMeasurements;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,23 +25,23 @@ public class FlatEntity {
     @Column(name = "floor")
     private Integer floor;
 
-    @Column(name = "area")
-    private Double area;
+    //@Embedded // Not needed
+    private FlatMeasurements measurements;
 
     @OneToMany(mappedBy = "billFlatEntity")
     private List<BillEntity> billEntities = new ArrayList<>();
 
-    // change list to set
     @OneToMany(mappedBy = "ownerEntity")
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public FlatEntity() {}
 
-    public FlatEntity(Integer number, BlockEntity blockEntity, Integer floor, Double area) {
+    public FlatEntity(Integer number, BlockEntity blockEntity, Integer floor,
+                      FlatMeasurements measurements) {
         this.number = number;
         this.blockEntity = blockEntity;
         this.floor = floor;
-        this.area = area;
+        this.measurements = measurements;
     }
 
     public Long getId() {
@@ -58,8 +60,8 @@ public class FlatEntity {
         return floor;
     }
 
-    public Double getArea() {
-        return area;
+    public FlatMeasurements getMeasurements() {
+        return measurements;
     }
 
     public List<BillEntity> getBillEntities() {
@@ -86,8 +88,8 @@ public class FlatEntity {
         this.floor = floor;
     }
 
-    public void setArea(Double area) {
-        this.area = area;
+    public void setMeasurements(FlatMeasurements measurements) {
+        this.measurements = measurements;
     }
 
     public void setBillEntities(List<BillEntity> billEntities) {

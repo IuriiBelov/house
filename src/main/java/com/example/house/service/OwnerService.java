@@ -40,5 +40,5 @@ public interface OwnerService {
      * Удаляет владельца по его уникальному идентификатору
      * @param id идентификатор владельца
      */
-    void deleteOwner(Long id);
+    OwnerDto deleteOwner(Long id);
 }

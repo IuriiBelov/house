@@ -2,6 +2,7 @@ package com.example.house.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -11,6 +12,10 @@ public class FlatOwnerEntity {
 
     @Embeddable
     public static class Id implements Serializable {
+
+        @Column(name = "CREATE_DATE")
+        protected LocalDateTime createDate = LocalDateTime.now();
+
         @Column(name = "owner_id")
         protected Long ownerId;
 

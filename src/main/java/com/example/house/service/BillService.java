@@ -40,5 +40,5 @@ public interface BillService {
      * Удаляет счёт по его уникальному идентификатору
      * @param id идентификатор счёта
      */
-    void deleteBill(Long id);
+    BillDto deleteBill(Long id);
 }

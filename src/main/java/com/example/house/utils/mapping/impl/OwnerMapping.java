@@ -1,11 +1,15 @@
 package com.example.house.utils.mapping.impl;
 
+import com.example.house.dto.FlatDto;
 import com.example.house.dto.OwnerDto;
 import com.example.house.entity.FlatEntity;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
+import com.example.house.entity.converter.OwnerName;
 import com.example.house.repository.FlatOwnerRepository;
 import com.example.house.utils.mapping.Mapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +22,8 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
 
     private final FlatMapping flatMapping;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger("logger");
+
     public OwnerMapping(FlatOwnerRepository flatOwnerRepository, FlatMapping flatMapping) {
         this.flatOwnerRepository = flatOwnerRepository;
         this.flatMapping = flatMapping;
@@ -28,8 +34,8 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         OwnerDto dto = new OwnerDto();
 
         dto.setId(entity.getId());
-        dto.setFirstName(entity.getFirstName());
-        dto.setLastName(entity.getLastName());
+        dto.setFirstName(entity.getName().getFirstName());
+        dto.setLastName(entity.getName().getLastName());
         dto.setPhoneNumber(entity.getPhoneNumber());
 
         List<FlatEntity> flatEntities = entity
@@ -49,8 +55,8 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         OwnerDto dto = new OwnerDto();
 
         dto.setId(entity.getId());
-        dto.setFirstName(entity.getFirstName());
-        dto.setLastName(entity.getLastName());
+        dto.setFirstName(entity.getName().getFirstName());
+        dto.setLastName(entity.getName().getLastName());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setFlats(null);
 
@@ -62,10 +68,8 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         OwnerEntity entity = new OwnerEntity();
 
         entity.setId(dto.getId());
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
+        entity.setName(new OwnerName(dto.getFirstName(), dto.getLastName()));
         entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setFlatOwnerEntities(flatOwnerRepository.findByOwnerId(dto.getId()));
 
         return entity;
     }
