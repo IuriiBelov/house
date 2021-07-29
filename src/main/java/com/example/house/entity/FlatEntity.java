@@ -25,7 +25,6 @@ public class FlatEntity {
     @Column(name = "floor")
     private Integer floor;
 
-    //@Embedded // Not needed
     private FlatMeasurements measurements;
 
     @OneToMany(mappedBy = "billFlatEntity")
