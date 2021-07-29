@@ -1,5 +1,7 @@
 package com.example.house.dto;
 
+import com.example.house.entity.embeddable.FlatMeasurements;
+
 import java.util.List;
 
 public class FlatDto {
@@ -8,7 +10,7 @@ public class FlatDto {
     private Integer number;
     private Long blockId;
     private Integer floor;
-    private Double area;
+    private FlatMeasurements measurements;
     private List<OwnerDto> owners;
     private List<BillDto> bills;
 
@@ -30,8 +32,8 @@ public class FlatDto {
         return floor;
     }
 
-    public Double getArea() {
-        return area;
+    public FlatMeasurements getMeasurements() {
+        return measurements;
     }
 
     public List<OwnerDto> getOwners() {
@@ -58,8 +60,8 @@ public class FlatDto {
         this.floor = floor;
     }
 
-    public void setArea(Double area) {
-        this.area = area;
+    public void setMeasurements(FlatMeasurements measurements) {
+        this.measurements = measurements;
     }
 
     public void setOwners(List<OwnerDto> owners) {
@@ -68,18 +70,5 @@ public class FlatDto {
 
     public void setBills(List<BillDto> bills) {
         this.bills = bills;
-    }
-
-    @Override
-    public String toString() {
-        return "FlatDto{" +
-                "id=" + id +
-                ", number=" + number +
-                ", blockId=" + blockId +
-                ", floor=" + floor +
-                ", area=" + area +
-                ", owners=" + owners +
-                ", bills=" + bills +
-                '}';
     }
 }

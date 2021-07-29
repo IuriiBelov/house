@@ -1,6 +1,7 @@
 package com.example.house.entity.converter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class OwnerName implements Serializable {
 
@@ -29,5 +30,18 @@ public class OwnerName implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OwnerName)) return false;
+        OwnerName ownerName = (OwnerName) o;
+        return Objects.equals(getFirstName(), ownerName.getFirstName()) && Objects.equals(getLastName(), ownerName.getLastName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFirstName(), getLastName());
     }
 }

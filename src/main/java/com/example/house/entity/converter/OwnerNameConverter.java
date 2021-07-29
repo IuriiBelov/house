@@ -9,10 +9,10 @@ public class OwnerNameConverter implements AttributeConverter<OwnerName, String>
     @Override
     public String convertToDatabaseColumn(OwnerName ownerName) {
         if (ownerName == null) {
-            return null;
+            return "";
         }
 
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
 
         if (ownerName.getLastName() != null && !ownerName.getLastName().isEmpty()) {
             sb.append(ownerName.getLastName());
@@ -21,7 +21,7 @@ public class OwnerNameConverter implements AttributeConverter<OwnerName, String>
             sb.append(" ").append(ownerName.getFirstName());
         }
 
-        return new String(sb);
+        return sb.toString();
     }
 
     @Override

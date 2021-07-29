@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,15 +43,15 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDto createNewOwner(OwnerDto newOwnerDto) {
+    public Optional<OwnerDto> createNewOwner(OwnerDto newOwnerDto) {
         OwnerEntity newOwnerEntity = new OwnerEntity();
-        FlatOwnerEntity flatOwnerEntity1 = new FlatOwnerEntity();
-        FlatOwnerEntity flatOwnerEntity2 = new FlatOwnerEntity();
-        newOwnerEntity.setFlatOwnerEntities(List.of(flatOwnerEntity1, flatOwnerEntity2));
-        ownerRepository.save(newOwnerEntity);
 
-        return newOwnerDto;
-        //return ownerMapping.mapToDto(ownerRepository.save(ownerMapping.mapToEntity(newOwnerDto)));
+        newOwnerEntity.setName(newOwnerDto.getName());
+        newOwnerEntity.setPhoneNumber(newOwnerDto.getPhoneNumber());
+        List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>(newOwnerDto.getFlats().size());
+        newOwnerEntity.setFlatOwnerEntities(flatOwnerEntities);
+
+        return Optional.of(ownerMapping.mapToDto(ownerRepository.save(newOwnerEntity)));
     }
 
     @Override
@@ -59,10 +60,6 @@ public class OwnerServiceImpl implements OwnerService {
         OwnerEntity newOwnerEntity = ownerMapping.mapToEntity(newOwnerDto);
 
         ownerEntity.setFlatOwnerEntities(newOwnerEntity.getFlatOwnerEntities());
-        /*
-        ownerEntity.setFirstName(newOwnerEntity.getFirstName());
-        ownerEntity.setLastName(newOwnerEntity.getLastName());
-         */
         ownerEntity.setName(newOwnerEntity.getName());
         ownerEntity.setPhoneNumber(newOwnerEntity.getPhoneNumber());
 

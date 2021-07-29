@@ -33,13 +33,4 @@ public class BlockDto {
     public void setFlats(List<FlatDto> flats) {
         this.flats = flats;
     }
-
-    @Override
-    public String toString() {
-        return "BlockDto{" +
-                "id=" + id +
-                ", number=" + number +
-                ", flats=" + flats +
-                '}';
-    }
 }

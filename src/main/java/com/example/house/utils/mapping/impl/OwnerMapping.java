@@ -1,6 +1,5 @@
 package com.example.house.utils.mapping.impl;
 
-import com.example.house.dto.FlatDto;
 import com.example.house.dto.OwnerDto;
 import com.example.house.entity.FlatEntity;
 import com.example.house.entity.FlatOwnerEntity;
@@ -34,8 +33,7 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         OwnerDto dto = new OwnerDto();
 
         dto.setId(entity.getId());
-        dto.setFirstName(entity.getName().getFirstName());
-        dto.setLastName(entity.getName().getLastName());
+        dto.setName(entity.getName());
         dto.setPhoneNumber(entity.getPhoneNumber());
 
         List<FlatEntity> flatEntities = entity
@@ -55,8 +53,7 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         OwnerDto dto = new OwnerDto();
 
         dto.setId(entity.getId());
-        dto.setFirstName(entity.getName().getFirstName());
-        dto.setLastName(entity.getName().getLastName());
+        dto.setName(entity.getName());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setFlats(null);
 
@@ -68,7 +65,8 @@ public class OwnerMapping implements Mapping<OwnerEntity, OwnerDto> {
         OwnerEntity entity = new OwnerEntity();
 
         entity.setId(dto.getId());
-        entity.setName(new OwnerName(dto.getFirstName(), dto.getLastName()));
+        entity.setName(new OwnerName(dto.getName().getFirstName(),
+                dto.getName().getLastName()));
         entity.setPhoneNumber(dto.getPhoneNumber());
 
         return entity;

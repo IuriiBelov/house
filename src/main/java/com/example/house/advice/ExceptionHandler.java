@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Object> handleIllegalArgException(IllegalArgumentException ex,
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex,
                                                             WebRequest wr) {
         String body = "Not found ";
         return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);

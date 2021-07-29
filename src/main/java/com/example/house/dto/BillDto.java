@@ -13,6 +13,13 @@ public class BillDto {
 
     public BillDto() {}
 
+    public BillDto(Long id, Long flatId, Calendar date, BillStatus billStatus) {
+        this.id = id;
+        this.flatId = flatId;
+        this.date = date;
+        this.billStatus = billStatus;
+    }
+
     public Long getId() {
         return id;
     }
@@ -43,15 +50,5 @@ public class BillDto {
 
     public void setBillStatus(BillStatus billStatus) {
         this.billStatus = billStatus;
-    }
-
-    @Override
-    public String toString() {
-        return "BillDto{" +
-                "id=" + id +
-                ", flatId=" + flatId +
-                ", date=" + date +
-                ", billStatus=" + billStatus +
-                '}';
     }
 }

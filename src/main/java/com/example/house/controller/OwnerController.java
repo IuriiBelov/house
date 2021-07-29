@@ -31,8 +31,8 @@ public class OwnerController {
 
     @PostMapping
     public ResponseEntity<OwnerDto> createNewOwner(@RequestBody OwnerDto newOwnerDto) {
-        ownerService.createNewOwner(newOwnerDto);
-        return new ResponseEntity<>(newOwnerDto, HttpStatus.OK);
+        OwnerDto ownerDto = ownerService.createNewOwner(newOwnerDto).orElseThrow(IllegalStateException::new);
+        return new ResponseEntity<>(ownerDto, HttpStatus.OK);
     }
 
     @PutMapping("{id}")

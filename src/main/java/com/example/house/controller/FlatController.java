@@ -19,7 +19,7 @@ public class FlatController {
 
     private final FlatService flatService;
 
-    private Logger LOGGER = LoggerFactory.getLogger("logger");
+    //private Logger LOGGER = LoggerFactory.getLogger("logger");
 
     public FlatController(FlatService flatService) {
         this.flatService = flatService;
@@ -28,13 +28,11 @@ public class FlatController {
     @GetMapping
     public ResponseEntity<List<FlatDto>> getAllFlats(@RequestParam("page") int page,
                                                     @RequestParam("size") int size) {
-        LOGGER.info("ALL FLATS");
         return new ResponseEntity<>(flatService.getAllFlats(page, size), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<FlatDto> getFlatById(@PathVariable Long id) {
-        LOGGER.info("ONE FLAT");
         return new ResponseEntity<>(flatService.getFlatById(id), HttpStatus.OK);
     }
 

@@ -3,6 +3,7 @@ package com.example.house.service;
 import com.example.house.dto.OwnerDto;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Сервис получения информации о владельцах квартир многоквартирного дома
@@ -27,7 +28,7 @@ public interface OwnerService {
      * Создаёт нового владельца
      * @param newOwnerDto трансферный объект нового владельца
      */
-    OwnerDto createNewOwner(OwnerDto newOwnerDto);
+    Optional<OwnerDto> createNewOwner(OwnerDto newOwnerDto);
 
     /**
      * Обновляет информацию о владельце по его уникальному идентификатору

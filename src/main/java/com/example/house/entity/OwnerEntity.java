@@ -30,12 +30,18 @@ public class OwnerEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "flatEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ownerEntity", cascade = CascadeType.ALL)
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public OwnerEntity() {}
 
     public OwnerEntity(OwnerName name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public OwnerEntity(Long id, OwnerName name, String phoneNumber) {
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
     }

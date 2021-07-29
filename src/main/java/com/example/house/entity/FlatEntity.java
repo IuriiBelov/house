@@ -31,7 +31,7 @@ public class FlatEntity {
     @OneToMany(mappedBy = "billFlatEntity")
     private List<BillEntity> billEntities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "ownerEntity")
+    @OneToMany(mappedBy = "flatEntity", cascade = CascadeType.ALL)
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public FlatEntity() {}

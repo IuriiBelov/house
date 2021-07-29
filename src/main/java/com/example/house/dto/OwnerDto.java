@@ -1,27 +1,35 @@
 package com.example.house.dto;
 
+import com.example.house.entity.converter.OwnerName;
+
 import java.util.List;
 
 public class OwnerDto {
 
     private Long id;
-    private String firstName;
-    private String lastName;
+    private OwnerName name;
     private String phoneNumber;
     private List<FlatDto> flats;
 
     public OwnerDto() {}
 
+    public OwnerDto(OwnerName ownerName, String phoneNumber) {
+        this.name = ownerName;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public OwnerDto(Long id, OwnerName name, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public OwnerName getName() {
+        return name;
     }
 
     public String getPhoneNumber() {
@@ -36,12 +44,8 @@ public class OwnerDto {
         this.id = id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(OwnerName name) {
+        this.name = name;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -50,16 +54,5 @@ public class OwnerDto {
 
     public void setFlats(List<FlatDto> flats) {
         this.flats = flats;
-    }
-
-    @Override
-    public String toString() {
-        return "OwnerDto{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", flats=" + flats +
-                '}';
     }
 }
