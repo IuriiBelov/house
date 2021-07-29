@@ -27,10 +27,12 @@ public class FlatEntity {
 
     private FlatMeasurements measurements;
 
-    @OneToMany(mappedBy = "billFlatEntity")
+    @OneToMany(mappedBy = "billFlatEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
     private List<BillEntity> billEntities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "flatEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "flatEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public FlatEntity() {}

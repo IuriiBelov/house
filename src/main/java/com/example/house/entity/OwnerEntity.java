@@ -23,7 +23,8 @@ public class OwnerEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "ownerEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ownerEntity", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
     private List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
     public OwnerEntity() {}
