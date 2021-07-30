@@ -1,20 +1,21 @@
 package com.example.house.dto;
 
+import com.example.house.entity.converter.OwnerName;
 import com.example.house.entity.embeddable.FlatMeasurements;
 
 import java.util.List;
 
-public class FlatDto {
+public class FlatDtoResponse {
 
     private Long id;
     private Integer number;
-    private Long blockId;
+    private Integer blockNumber;
     private Integer floor;
     private FlatMeasurements measurements;
-    private List<OwnerDto> owners;
-    private List<BillDto> bills;
+    private List<OwnerName> ownerNames;
+    private List<BillDtoResponse> bills;
 
-    public FlatDto() {}
+    public FlatDtoResponse() {}
 
     public Long getId() {
         return id;
@@ -24,8 +25,8 @@ public class FlatDto {
         return number;
     }
 
-    public Long getBlockId() {
-        return blockId;
+    public Integer getBlockNumber() {
+        return blockNumber;
     }
 
     public Integer getFloor() {
@@ -36,11 +37,11 @@ public class FlatDto {
         return measurements;
     }
 
-    public List<OwnerDto> getOwners() {
-        return owners;
+    public List<OwnerName> getOwnerNames() {
+        return ownerNames;
     }
 
-    public List<BillDto> getBills() {
+    public List<BillDtoResponse> getBills() {
         return bills;
     }
 
@@ -52,8 +53,8 @@ public class FlatDto {
         this.number = number;
     }
 
-    public void setBlockId(Long blockId) {
-        this.blockId = blockId;
+    public void setBlockNumber(Integer blockNumber) {
+        this.blockNumber = blockNumber;
     }
 
     public void setFloor(Integer floor) {
@@ -64,11 +65,11 @@ public class FlatDto {
         this.measurements = measurements;
     }
 
-    public void setOwners(List<OwnerDto> owners) {
-        this.owners = owners;
+    public void setOwnerNames(List<OwnerName> ownerNames) {
+        this.ownerNames = ownerNames;
     }
 
-    public void setBills(List<BillDto> bills) {
+    public void setBills(List<BillDtoResponse> bills) {
         this.bills = bills;
     }
 }

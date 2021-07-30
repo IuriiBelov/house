@@ -1,10 +1,10 @@
 package com.example.house.service.impl;
 
-import com.example.house.dto.OwnerDto;
+import com.example.house.dto.OwnerDtoResponse;
 import com.example.house.entity.OwnerEntity;
 import com.example.house.entity.converter.OwnerName;
 import com.example.house.repository.OwnerRepository;
-import com.example.house.utils.mapping.impl.OwnerMapping;
+import com.example.house.utils.mapping.OwnerMapping;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class OwnerServiceImplTest {
 
         OwnerEntity ownerEntity = new OwnerEntity(id, new OwnerName("Ivan", "Ivanov"),
                 "1234567");
-        OwnerDto expectedOwnerDto = new OwnerDto(id, new OwnerName("Ivan", "Ivanov"),
+        OwnerDtoResponse expectedOwnerDto = new OwnerDtoResponse(id, new OwnerName("Ivan", "Ivanov"),
                 "1234567");
 
         Mockito
@@ -44,7 +44,7 @@ class OwnerServiceImplTest {
                 .when(ownerMapping.mapToDto(Mockito.any(OwnerEntity.class)))
                 .thenReturn(expectedOwnerDto);
 
-        OwnerDto actualOwnerDto = ownerService.getOwnerById(id);
+        OwnerDtoResponse actualOwnerDto = ownerService.getOwnerById(id);
 
         Assertions
                 .assertThat(actualOwnerDto.getId())
@@ -63,6 +63,6 @@ class OwnerServiceImplTest {
         Long flatId = 5L;
 
         OwnerName ownerName = new OwnerName("Ivan", "Ivanov");
-        OwnerDto newOwnerDto = new OwnerDto(ownerName, "1234567");
+        OwnerDtoResponse newOwnerDto = new OwnerDtoResponse(ownerName, "1234567");
     }
 }

@@ -1,15 +1,15 @@
 package com.example.house.service.impl;
 
-import com.example.house.dto.BillDto;
-import com.example.house.dto.FlatDto;
-import com.example.house.dto.OwnerDto;
+import com.example.house.dto.BillDtoResponse;
+import com.example.house.dto.FlatDtoResponse;
+import com.example.house.dto.OwnerDtoResponse;
 import com.example.house.entity.FlatEntity;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.repository.FlatRepository;
 import com.example.house.service.FlatService;
-import com.example.house.utils.mapping.impl.BillMapping;
-import com.example.house.utils.mapping.impl.FlatMapping;
-import com.example.house.utils.mapping.impl.OwnerMapping;
+import com.example.house.utils.mapping.BillMapping;
+import com.example.house.utils.mapping.FlatMapping;
+import com.example.house.utils.mapping.OwnerMapping;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public List<FlatDto> getAllFlats(int page, int size) {
+    public List<FlatDtoResponse> getAllFlats(int page, int size) {
         return flatRepository
                 .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
@@ -46,13 +46,13 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public FlatDto getFlatById(Long id) {
+    public FlatDtoResponse getFlatById(Long id) {
         Optional<FlatEntity> flat = flatRepository.findById(id);
         return flatMapping.mapToDto(flat.orElseThrow(IllegalArgumentException::new));
     }
 
     @Override
-    public List<BillDto> getFlatBillsById(Long id) {
+    public List<BillDtoResponse> getFlatBillsById(Long id) {
         return flatRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)
@@ -63,7 +63,7 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public List<OwnerDto> getFlatOwnersById(Long id) {
+    public List<OwnerDtoResponse> getFlatOwnersById(Long id) {
         return flatRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)

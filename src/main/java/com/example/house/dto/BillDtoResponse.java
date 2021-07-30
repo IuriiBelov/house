@@ -4,18 +4,18 @@ import com.example.house.utils.BillStatus;
 
 import java.util.Calendar;
 
-public class BillDto {
+public class BillDtoResponse {
 
     private Long id;
-    private Long flatId;
+    private Integer flatNumber;
     private Calendar date;
     private BillStatus billStatus;
 
-    public BillDto() {}
+    public BillDtoResponse() {}
 
-    public BillDto(Long id, Long flatId, Calendar date, BillStatus billStatus) {
+    public BillDtoResponse(Long id, Integer flatNumber, Calendar date, BillStatus billStatus) {
         this.id = id;
-        this.flatId = flatId;
+        this.flatNumber = flatNumber;
         this.date = date;
         this.billStatus = billStatus;
     }
@@ -24,8 +24,8 @@ public class BillDto {
         return id;
     }
 
-    public Long getFlatId() {
-        return flatId;
+    public Integer getFlatNumber() {
+        return flatNumber;
     }
 
     public Calendar getDate() {
@@ -40,8 +40,8 @@ public class BillDto {
         this.id = id;
     }
 
-    public void setFlatId(Long flatId) {
-        this.flatId = flatId;
+    public void setFlatNumber(Integer flatNumber) {
+        this.flatNumber = flatNumber;
     }
 
     public void setDate(Calendar date) {

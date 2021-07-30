@@ -1,8 +1,8 @@
 package com.example.house.service;
 
-import com.example.house.dto.BillDto;
-import com.example.house.dto.FlatDto;
-import com.example.house.dto.OwnerDto;
+import com.example.house.dto.BillDtoResponse;
+import com.example.house.dto.FlatDtoResponse;
+import com.example.house.dto.OwnerDtoResponse;
 
 import java.util.List;
 
@@ -15,29 +15,29 @@ public interface FlatService {
      * Возвращает все квартиры многоквартирного дома
      * @return все квартиры многоквартирного дома
      */
-    List<FlatDto> getAllFlats(int page, int size);
+    List<FlatDtoResponse> getAllFlats(int page, int size);
 
     /**
      * Возвращает квартиру по её уникальному идентификатору
      * @param id идентификатор квартиры
      * @return трансферный объект квартиры
-     * @see FlatDto
+     * @see FlatDtoResponse
      */
-    FlatDto getFlatById(Long id);
+    FlatDtoResponse getFlatById(Long id);
 
     /**
      * Возвращает все счета квартиры с данным уникальным идентификатором
      * @param id идентификатор квартиры
      * @return все счета квартиры
-     * @see BillDto
+     * @see BillDtoResponse
      */
-    List<BillDto> getFlatBillsById(Long id);
+    List<BillDtoResponse> getFlatBillsById(Long id);
 
     /**
      * Возвращает всех владельцев квартиры с данным уникальным идентификатором
      * @param id идентификатор квартиры
      * @return все владельцы квартиры
-     * @see OwnerDto
+     * @see OwnerDtoResponse
      */
-    List<OwnerDto> getFlatOwnersById(Long id);
+    List<OwnerDtoResponse> getFlatOwnersById(Long id);
 }

@@ -4,21 +4,21 @@ import com.example.house.entity.converter.OwnerName;
 
 import java.util.List;
 
-public class OwnerDto {
+public class OwnerDtoResponse {
 
     private Long id;
     private OwnerName name;
     private String phoneNumber;
-    private List<FlatDto> flats;
+    private List<Integer> flatsNumbers;
 
-    public OwnerDto() {}
+    public OwnerDtoResponse() {}
 
-    public OwnerDto(OwnerName ownerName, String phoneNumber) {
+    public OwnerDtoResponse(OwnerName ownerName, String phoneNumber) {
         this.name = ownerName;
         this.phoneNumber = phoneNumber;
     }
 
-    public OwnerDto(Long id, OwnerName name, String phoneNumber) {
+    public OwnerDtoResponse(Long id, OwnerName name, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -36,8 +36,8 @@ public class OwnerDto {
         return phoneNumber;
     }
 
-    public List<FlatDto> getFlats() {
-        return flats;
+    public List<Integer> getFlatsNumbers() {
+        return flatsNumbers;
     }
 
     public void setId(Long id) {
@@ -52,7 +52,7 @@ public class OwnerDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setFlats(List<FlatDto> flats) {
-        this.flats = flats;
+    public void setFlatsNumbers(List<Integer> flatsNumbers) {
+        this.flatsNumbers = flatsNumbers;
     }
 }

@@ -2,13 +2,13 @@ package com.example.house.dto;
 
 import java.util.List;
 
-public class BlockDto {
+public class BlockDtoResponse {
 
     private Long id;
     private Integer number;
-    private List<FlatDto> flats;
+    private List<Integer> flatsNumbers;
 
-    public BlockDto() {}
+    public BlockDtoResponse() {}
 
     public Long getId() {
         return id;
@@ -18,8 +18,8 @@ public class BlockDto {
         return number;
     }
 
-    public List<FlatDto> getFlats() {
-        return flats;
+    public List<Integer> getFlatsNumbers() {
+        return flatsNumbers;
     }
 
     public void setId(Long id) {
@@ -30,7 +30,7 @@ public class BlockDto {
         this.number = number;
     }
 
-    public void setFlats(List<FlatDto> flats) {
-        this.flats = flats;
+    public void setFlatsNumbers(List<Integer> flatsNumbers) {
+        this.flatsNumbers = flatsNumbers;
     }
 }
