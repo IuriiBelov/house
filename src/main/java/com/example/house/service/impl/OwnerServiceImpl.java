@@ -4,6 +4,7 @@ import com.example.house.dto.OwnerDtoRequest;
 import com.example.house.dto.OwnerDtoResponse;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
+import com.example.house.repository.FlatOwnerRepository;
 import com.example.house.repository.FlatRepository;
 import com.example.house.repository.OwnerRepository;
 import com.example.house.service.OwnerService;
@@ -22,14 +23,17 @@ public class OwnerServiceImpl implements OwnerService {
 
     private final OwnerRepository ownerRepository;
     private final FlatRepository flatRepository;
+    private final FlatOwnerRepository flatOwnerRepository;
     private final OwnerMapping ownerMapping;
 
     public OwnerServiceImpl(OwnerRepository ownerRepository,
                             FlatRepository flatRepository,
+                            FlatOwnerRepository flatOwnerRepository,
                             OwnerMapping ownerMapping) {
 
         this.ownerRepository = ownerRepository;
         this.flatRepository = flatRepository;
+        this.flatOwnerRepository = flatOwnerRepository;
         this.ownerMapping = ownerMapping;
     }
 
@@ -80,8 +84,10 @@ public class OwnerServiceImpl implements OwnerService {
         List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
         for (Integer number: ownerDtoRequest.getFlatsNumbers()) {
-            flatOwnerEntities.add(new FlatOwnerEntity(flatRepository.findByNumber(number).get(0),
-                    ownerEntity));
+            FlatOwnerEntity flatOwnerEntity = new FlatOwnerEntity(
+                    flatRepository.findByNumber(number).get(0), ownerEntity);
+            flatOwnerRepository.save(flatOwnerEntity);
+            flatOwnerEntities.add(flatOwnerEntity);
         }
 
         ownerEntity.setFlatOwnerEntities(flatOwnerEntities);
