@@ -1,9 +1,9 @@
 package com.example.house.service.impl;
 
-import com.example.house.dto.OwnerDtoRequest;
-import com.example.house.dto.OwnerDtoResponse;
+import com.example.house.dto.OwnerDto;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
+import com.example.house.entity.converter.OwnerName;
 import com.example.house.repository.FlatOwnerRepository;
 import com.example.house.repository.FlatRepository;
 import com.example.house.repository.OwnerRepository;
@@ -38,7 +38,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public List<OwnerDtoResponse> getAllOwners(int page, int size) {
+    public List<OwnerDto> getAllOwners(int page, int size) {
         return ownerRepository
                 .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
@@ -47,13 +47,14 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDtoResponse getOwnerById(Long id) {
-        Optional<OwnerEntity> owner = ownerRepository.findById(id);
-        return ownerMapping.mapToDto(owner.orElseThrow(IllegalArgumentException::new));
+    public OwnerDto getOwnerById(Long id) {
+        return ownerMapping.mapToDto(ownerRepository
+                .findById(id)
+                .orElseThrow(IllegalArgumentException::new));
     }
 
     @Override
-    public Optional<OwnerDtoResponse> createNewOwner(OwnerDtoRequest newOwnerDto) {
+    public Optional<OwnerDto> createNewOwner(OwnerDto newOwnerDto) {
         OwnerEntity newOwnerEntity = ownerMapping.mapToEntity(newOwnerDto);
 
         ownerRepository.save(newOwnerEntity);
@@ -64,7 +65,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDtoResponse updateOwner(Long id, OwnerDtoRequest newOwnerDto)
+    public OwnerDto updateOwnerById(Long id, OwnerDto newOwnerDto)
             throws IllegalArgumentException {
 
         OwnerEntity ownerEntity = ownerRepository
@@ -79,11 +80,11 @@ public class OwnerServiceImpl implements OwnerService {
         return ownerMapping.mapToDto(ownerRepository.save(ownerEntity));
     }
 
-    private void setNewFlatsForOwner(OwnerEntity ownerEntity, OwnerDtoRequest ownerDtoRequest) {
+    private void setNewFlatsForOwner(OwnerEntity ownerEntity, OwnerDto ownerDto) {
 
         List<FlatOwnerEntity> flatOwnerEntities = new ArrayList<>();
 
-        for (Integer number: ownerDtoRequest.getFlatsNumbers()) {
+        for (Integer number: ownerDto.getFlatsNumbers()) {
             FlatOwnerEntity flatOwnerEntity = new FlatOwnerEntity(
                     flatRepository.findByNumber(number).get(0), ownerEntity);
             flatOwnerRepository.save(flatOwnerEntity);
@@ -94,13 +95,15 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public OwnerDtoResponse deleteOwner(Long id) {
-        OwnerDtoResponse owner = ownerMapping.mapToDto(ownerRepository.findById(id).get());
+    public OwnerDto deleteOwnerById(Long id) {
+        OwnerEntity ownerEntity = ownerRepository
+                .findById(id)
+                .orElseThrow(IllegalArgumentException::new);
 
-        if (owner != null) {
-            ownerRepository.deleteById(id);
-        }
+        OwnerDto ownerDto = ownerMapping.mapToDto(ownerEntity);
 
-        return owner;
+        ownerRepository.deleteById(ownerEntity.getId());
+
+        return ownerDto;
     }
 }

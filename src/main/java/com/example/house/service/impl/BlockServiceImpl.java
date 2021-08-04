@@ -1,7 +1,7 @@
 package com.example.house.service.impl;
 
-import com.example.house.dto.BlockDtoResponse;
-import com.example.house.dto.FlatDtoResponse;
+import com.example.house.dto.BlockDto;
+import com.example.house.dto.FlatDto;
 import com.example.house.entity.BlockEntity;
 import com.example.house.repository.BlockRepository;
 import com.example.house.service.BlockService;
@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +30,7 @@ public class BlockServiceImpl implements BlockService {
     }
 
     @Override
-    public List<BlockDtoResponse> getAllBlocks(int page, int size) {
+    public List<BlockDto> getAllBlocks(int page, int size) {
         return blockRepository
                 .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
@@ -40,13 +39,16 @@ public class BlockServiceImpl implements BlockService {
     }
 
     @Override
-    public BlockDtoResponse getBlockById(Long id) {
-        Optional<BlockEntity> block = blockRepository.findById(id);
-        return blockMapping.mapToDto(block.orElseThrow(IllegalArgumentException::new));
+    public BlockDto getBlockById(Long id) {
+        BlockEntity block = blockRepository
+                .findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+
+        return blockMapping.mapToDto(block);
     }
 
     @Override
-    public List<FlatDtoResponse> getBlockFlatsById(Long id) {
+    public List<FlatDto> getBlockFlatsById(Long id) {
         return blockRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)

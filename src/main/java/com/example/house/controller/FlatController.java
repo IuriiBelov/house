@@ -1,8 +1,8 @@
 package com.example.house.controller;
 
-import com.example.house.dto.BillDtoResponse;
-import com.example.house.dto.FlatDtoResponse;
-import com.example.house.dto.OwnerDtoResponse;
+import com.example.house.dto.BillDto;
+import com.example.house.dto.FlatDto;
+import com.example.house.dto.OwnerDto;
 import com.example.house.service.FlatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,23 +24,23 @@ public class FlatController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FlatDtoResponse>> getAllFlats(@RequestParam("page") int page,
-                                                             @RequestParam("size") int size) {
+    public ResponseEntity<List<FlatDto>> getAllFlats(@RequestParam("page") int page,
+                                                     @RequestParam("size") int size) {
         return new ResponseEntity<>(flatService.getAllFlats(page, size), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<FlatDtoResponse> getFlatById(@PathVariable Long id) {
+    public ResponseEntity<FlatDto> getFlatById(@PathVariable Long id) {
         return new ResponseEntity<>(flatService.getFlatById(id), HttpStatus.OK);
     }
 
     @GetMapping("{id}/bills")
-    public ResponseEntity<List<BillDtoResponse>> getFlatBills(@PathVariable Long id) {
+    public ResponseEntity<List<BillDto>> getFlatBills(@PathVariable Long id) {
         return new ResponseEntity<>(flatService.getFlatBillsById(id), HttpStatus.OK);
     }
 
     @GetMapping("{id}/owners")
-    public ResponseEntity<List<OwnerDtoResponse>> getFlatOwners(@PathVariable Long id) {
+    public ResponseEntity<List<OwnerDto>> getFlatOwners(@PathVariable Long id) {
         return new ResponseEntity<>(flatService.getFlatOwnersById(id), HttpStatus.OK);
     }
 }

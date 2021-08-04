@@ -1,7 +1,6 @@
 package com.example.house.service.impl;
 
-import com.example.house.dto.BillDtoRequest;
-import com.example.house.dto.BillDtoResponse;
+import com.example.house.dto.BillDto;
 import com.example.house.entity.BillEntity;
 import com.example.house.repository.BillRepository;
 import com.example.house.service.BillService;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +24,7 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public List<BillDtoResponse> getAllBills(int page, int size) {
+    public List<BillDto> getAllBills(int page, int size) {
         return billRepository
                 .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
@@ -35,34 +33,46 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public BillDtoResponse getBillById(Long id) {
-        Optional<BillEntity> bill = billRepository.findById(id);
-        return billMapping.mapToDto(bill.orElseThrow(IllegalArgumentException::new));
+    public BillDto getBillById(Long id) {
+        BillEntity bill = billRepository
+                .findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+
+        return billMapping.mapToDto(bill);
     }
 
     @Override
-    public BillDtoResponse createNewBill(BillDtoRequest newBillDto) {
+    public BillDto createNewBill(BillDto newBillDto) throws IllegalArgumentException {
+        if (billRepository.findByNumber(newBillDto.getNumber()).size() != 0) {
+            throw new IllegalArgumentException("Bill with such number already exists");
+        }
         return billMapping.mapToDto(billRepository.save(billMapping.mapToEntity(newBillDto)));
     }
 
     @Override
-    public BillDtoResponse updateBill(Long id, BillDtoRequest newBillDto)
-            throws IllegalArgumentException {
+    public BillDto updateBillById(Long id, BillDto newBillDto) throws IllegalArgumentException {
 
         BillEntity billEntity = billRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new);
 
-        return billMapping.mapToDto(billRepository.save(billMapping.mapToEntity(newBillDto)));
+        BillEntity newBillEntity = billMapping.mapToEntity(newBillDto);
+
+        billEntity.setBillFlatEntity(newBillEntity.getBillFlatEntity());
+        billEntity.setBillStatus(newBillEntity.getBillStatus());
+        billEntity.setNumber(newBillEntity.getNumber());
+        billEntity.setDate(newBillEntity.getDate());
+
+        return billMapping.mapToDto(billRepository.save(billEntity));
     }
 
     @Override
-    public BillDtoResponse deleteBill(Long id) {
-        BillDtoResponse bill = billMapping.mapToDto(billRepository.findById(id).get());
+    public BillDto deleteBillById(Long id) {
+        BillDto bill = billMapping.mapToDto(billRepository
+                .findById(id)
+                .orElseThrow(IllegalArgumentException::new));
 
-        if (bill != null) {
-            billRepository.deleteById(id);
-        }
+        billRepository.deleteById(id);
 
         return bill;
     }

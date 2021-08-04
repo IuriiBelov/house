@@ -1,7 +1,6 @@
 package com.example.house.service;
 
-import com.example.house.dto.OwnerDtoRequest;
-import com.example.house.dto.OwnerDtoResponse;
+import com.example.house.dto.OwnerDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,32 +14,32 @@ public interface OwnerService {
      * Возвращает всех владельцев квартир многоквартирного дома
      * @return все владельцы квартир многоквартирного дома
      */
-    List<OwnerDtoResponse> getAllOwners(int page, int size);
+    List<OwnerDto> getAllOwners(int page, int size);
 
     /**
      * Возвращает владельца по его уникальному идентификатору
-     * @param id идентификатор владельца
+     * @param id уникальный идентификатор владельца
      * @return трансферный объект владельца
-     * @see OwnerDtoResponse
+     * @see OwnerDto
      */
-    OwnerDtoResponse getOwnerById(Long id);
+    OwnerDto getOwnerById(Long id);
 
     /**
      * Создаёт нового владельца
      * @param newOwnerDto трансферный объект нового владельца
      */
-    Optional<OwnerDtoResponse> createNewOwner(OwnerDtoRequest newOwnerDto);
+    Optional<OwnerDto> createNewOwner(OwnerDto newOwnerDto);
 
     /**
      * Обновляет информацию о владельце по его уникальному идентификатору
-     * @param id идентификатор владельца
+     * @param id уникальный идентификатор владельца
      * @param newOwnerDto обновлённый трансферный объект владельца
      */
-    OwnerDtoResponse updateOwner(Long id, OwnerDtoRequest newOwnerDto);
+    OwnerDto updateOwnerById(Long id, OwnerDto newOwnerDto);
 
     /**
      * Удаляет владельца по его уникальному идентификатору
-     * @param id идентификатор владельца
+     * @param id уникальный идентификатор владельца
      */
-    OwnerDtoResponse deleteOwner(Long id);
+    OwnerDto deleteOwnerById(Long id);
 }

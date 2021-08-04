@@ -18,6 +18,9 @@ public class BillEntity {
     @JoinColumn(name = "flat_id")
     private FlatEntity billFlatEntity;
 
+    @Column(name = "bill_number")
+    private Integer number;
+
     @Column(name = "bill_date")
     @Temporal(TemporalType.DATE)
     private Calendar date;
@@ -28,7 +31,8 @@ public class BillEntity {
 
     public BillEntity() {}
 
-    public BillEntity(FlatEntity billFlatEntity, Calendar date, BillStatus billStatus) {
+    public BillEntity(FlatEntity billFlatEntity, Integer number, Calendar date, BillStatus billStatus) {
+        this.number = number;
         this.billFlatEntity = billFlatEntity;
         this.date = date;
         this.billStatus = billStatus;
@@ -40,6 +44,10 @@ public class BillEntity {
 
     public FlatEntity getBillFlatEntity() {
         return billFlatEntity;
+    }
+
+    public Integer getNumber() {
+        return number;
     }
 
     public Calendar getDate() {
@@ -56,6 +64,10 @@ public class BillEntity {
 
     public void setBillFlatEntity(FlatEntity billFlatEntity) {
         this.billFlatEntity = billFlatEntity;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public void setDate(Calendar date) {

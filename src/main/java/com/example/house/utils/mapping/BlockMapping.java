@@ -1,6 +1,6 @@
 package com.example.house.utils.mapping;
 
-import com.example.house.dto.BlockDtoResponse;
+import com.example.house.dto.BlockDto;
 import com.example.house.entity.BlockEntity;
 import com.example.house.entity.FlatEntity;
 import org.springframework.stereotype.Component;
@@ -10,17 +10,16 @@ import java.util.stream.Collectors;
 @Component
 public class BlockMapping {
 
-    public BlockDtoResponse mapToDto(BlockEntity blockEntity) {
-        BlockDtoResponse blockDtoResponse = new BlockDtoResponse();
+    public BlockDto mapToDto(BlockEntity blockEntity) {
+        BlockDto blockDto = new BlockDto();
 
-        blockDtoResponse.setId(blockEntity.getId());
-        blockDtoResponse.setNumber(blockEntity.getNumber());
-        blockDtoResponse.setFlatsNumbers(blockEntity
+        blockDto.setNumber(blockEntity.getNumber());
+        blockDto.setFlatsNumbers(blockEntity
                 .getFlatEntities()
                 .stream()
                 .map(FlatEntity::getNumber)
                 .collect(Collectors.toList()));
 
-        return blockDtoResponse;
+        return blockDto;
     }
 }

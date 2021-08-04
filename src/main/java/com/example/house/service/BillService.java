@@ -1,7 +1,6 @@
 package com.example.house.service;
 
-import com.example.house.dto.BillDtoRequest;
-import com.example.house.dto.BillDtoResponse;
+import com.example.house.dto.BillDto;
 
 import java.util.List;
 
@@ -14,32 +13,32 @@ public interface BillService {
      * Возвращает все счета многоквартирного дома
      * @return все счета многоквартирного дома
      */
-    List<BillDtoResponse> getAllBills(int page, int size);
+    List<BillDto> getAllBills(int page, int size);
 
     /**
      * Возвращает счет по его уникальному идентификатору
-     * @param id идентификатор счета
+     * @param id уникальный идентификатор счета
      * @return трансферный объект счета
-     * @see BillDtoResponse
+     * @see BillDto
      */
-    BillDtoResponse getBillById(Long id);
+    BillDto getBillById(Long id);
 
     /**
      * Создаёт новый счёт
      * @param newBillDto трансферный объект нового счёта
      */
-    BillDtoResponse createNewBill(BillDtoRequest newBillDto);
+    BillDto createNewBill(BillDto newBillDto) throws IllegalArgumentException;
 
     /**
      * Обновляет информацию о счёте по его уникальному идентификатору
-     * @param id идентификатор счёта
+     * @param id уникальный идентификатор счёта
      * @param newBillDto обновлённый трансферный объект счёта
      */
-    BillDtoResponse updateBill(Long id, BillDtoRequest newBillDto);
+    BillDto updateBillById(Long id, BillDto newBillDto);
 
     /**
      * Удаляет счёт по его уникальному идентификатору
-     * @param id идентификатор счёта
+     * @param id уникальный идентификатор счёта
      */
-    BillDtoResponse deleteBill(Long id);
+    BillDto deleteBillById(Long id);
 }

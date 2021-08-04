@@ -1,6 +1,6 @@
 package com.example.house.service.impl;
 
-import com.example.house.dto.OwnerDtoResponse;
+import com.example.house.dto.OwnerDto;
 import com.example.house.entity.OwnerEntity;
 import com.example.house.entity.converter.OwnerName;
 import com.example.house.repository.OwnerRepository;
@@ -34,8 +34,8 @@ class OwnerServiceImplTest {
 
         OwnerEntity ownerEntity = new OwnerEntity(id, new OwnerName("Ivan", "Ivanov"),
                 "1234567");
-        OwnerDtoResponse expectedOwnerDto = new OwnerDtoResponse(id, new OwnerName("Ivan", "Ivanov"),
-                "1234567");
+        OwnerDto expectedOwnerDto = new OwnerDto(new OwnerName("Ivan", "Ivanov"),
+                "1234567", null);
 
         Mockito
                 .when(ownerRepository.findById(id))
@@ -44,11 +44,8 @@ class OwnerServiceImplTest {
                 .when(ownerMapping.mapToDto(Mockito.any(OwnerEntity.class)))
                 .thenReturn(expectedOwnerDto);
 
-        OwnerDtoResponse actualOwnerDto = ownerService.getOwnerById(id);
+        OwnerDto actualOwnerDto = ownerService.getOwnerById(id);
 
-        Assertions
-                .assertThat(actualOwnerDto.getId())
-                .isEqualTo(expectedOwnerDto.getId());
         Assertions
                 .assertThat(actualOwnerDto.getName())
                 .isEqualTo(expectedOwnerDto.getName());
@@ -63,6 +60,6 @@ class OwnerServiceImplTest {
         Long flatId = 5L;
 
         OwnerName ownerName = new OwnerName("Ivan", "Ivanov");
-        OwnerDtoResponse newOwnerDto = new OwnerDtoResponse(ownerName, "1234567");
+        OwnerDto newOwnerDto = new OwnerDto(ownerName, "1234567", null);
     }
 }

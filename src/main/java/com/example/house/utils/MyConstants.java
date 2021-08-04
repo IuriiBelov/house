@@ -16,5 +16,5 @@ public class MyConstants {
     public static final int CURRENT_YEAR = 2021;
     public static final int MONTHS_PER_YEAR = 12;
 
-    public static final int BILLS_DAY = 10;
+    public static final int BILLS_DAY = 23;
 }

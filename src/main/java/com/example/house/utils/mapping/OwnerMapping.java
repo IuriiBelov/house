@@ -1,7 +1,6 @@
 package com.example.house.utils.mapping;
 
-import com.example.house.dto.OwnerDtoRequest;
-import com.example.house.dto.OwnerDtoResponse;
+import com.example.house.dto.OwnerDto;
 import com.example.house.entity.FlatEntity;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
@@ -12,27 +11,26 @@ import java.util.stream.Collectors;
 @Component
 public class OwnerMapping {
 
-    public OwnerDtoResponse mapToDto(OwnerEntity ownerEntity) {
-        OwnerDtoResponse ownerDtoResponse = new OwnerDtoResponse();
+    public OwnerDto mapToDto(OwnerEntity ownerEntity) {
+        OwnerDto ownerDto = new OwnerDto();
 
-        ownerDtoResponse.setId(ownerEntity.getId());
-        ownerDtoResponse.setName(ownerEntity.getName());
-        ownerDtoResponse.setPhoneNumber(ownerEntity.getPhoneNumber());
-        ownerDtoResponse.setFlatsNumbers(ownerEntity
+        ownerDto.setName(ownerEntity.getName());
+        ownerDto.setPhoneNumber(ownerEntity.getPhoneNumber());
+        ownerDto.setFlatsNumbers(ownerEntity
                 .getFlatOwnerEntities()
                 .stream()
                 .map(FlatOwnerEntity::getFlatEntity)
                 .map(FlatEntity::getNumber)
                 .collect(Collectors.toList()));
 
-        return ownerDtoResponse;
+        return ownerDto;
     }
 
-    public OwnerEntity mapToEntity(OwnerDtoRequest ownerDtoRequest) {
+    public OwnerEntity mapToEntity(OwnerDto ownerDto) {
         OwnerEntity ownerEntity = new OwnerEntity();
 
-        ownerEntity.setName(ownerDtoRequest.getName());
-        ownerEntity.setPhoneNumber(ownerDtoRequest.getPhoneNumber());
+        ownerEntity.setName(ownerDto.getName());
+        ownerEntity.setPhoneNumber(ownerDto.getPhoneNumber());
 
         return ownerEntity;
     }

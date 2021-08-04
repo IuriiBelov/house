@@ -1,8 +1,8 @@
 package com.example.house.service.impl;
 
-import com.example.house.dto.BillDtoResponse;
-import com.example.house.dto.FlatDtoResponse;
-import com.example.house.dto.OwnerDtoResponse;
+import com.example.house.dto.BillDto;
+import com.example.house.dto.FlatDto;
+import com.example.house.dto.OwnerDto;
 import com.example.house.entity.FlatEntity;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.repository.FlatRepository;
@@ -15,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,7 +36,7 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public List<FlatDtoResponse> getAllFlats(int page, int size) {
+    public List<FlatDto> getAllFlats(int page, int size) {
         return flatRepository
                 .findAll(PageRequest.of(page - 1, size, Sort.by("id")))
                 .stream()
@@ -46,13 +45,16 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public FlatDtoResponse getFlatById(Long id) {
-        Optional<FlatEntity> flat = flatRepository.findById(id);
-        return flatMapping.mapToDto(flat.orElseThrow(IllegalArgumentException::new));
+    public FlatDto getFlatById(Long id) {
+        FlatEntity flat = flatRepository
+                .findById(id)
+                .orElseThrow(IllegalArgumentException::new);
+
+        return flatMapping.mapToDto(flat);
     }
 
     @Override
-    public List<BillDtoResponse> getFlatBillsById(Long id) {
+    public List<BillDto> getFlatBillsById(Long id) {
         return flatRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)
@@ -63,7 +65,7 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public List<OwnerDtoResponse> getFlatOwnersById(Long id) {
+    public List<OwnerDto> getFlatOwnersById(Long id) {
         return flatRepository
                 .findById(id)
                 .orElseThrow(IllegalArgumentException::new)

@@ -1,7 +1,6 @@
 package com.example.house.utils.mapping;
 
-import com.example.house.dto.BillDtoRequest;
-import com.example.house.dto.BillDtoResponse;
+import com.example.house.dto.BillDto;
 import com.example.house.entity.BillEntity;
 import com.example.house.entity.FlatEntity;
 import com.example.house.repository.FlatRepository;
@@ -18,30 +17,31 @@ public class BillMapping {
         this.flatRepository = flatRepository;
     }
 
-    public BillDtoResponse mapToDto(BillEntity billEntity) {
-        BillDtoResponse billDtoResponse = new BillDtoResponse();
+    public BillDto mapToDto(BillEntity billEntity) {
+        BillDto billDto = new BillDto();
 
-        billDtoResponse.setId(billEntity.getId());
-        billDtoResponse.setFlatNumber(billEntity.getBillFlatEntity().getNumber());
-        billDtoResponse.setDate(billEntity.getDate());
-        billDtoResponse.setBillStatus(billEntity.getBillStatus());
+        billDto.setFlatNumber(billEntity.getBillFlatEntity().getNumber());
+        billDto.setNumber(billEntity.getNumber());
+        billDto.setDate(billEntity.getDate());
+        billDto.setBillStatus(billEntity.getBillStatus());
 
-        return billDtoResponse;
+        return billDto;
     }
 
-    public BillEntity mapToEntity(BillDtoRequest billDtoRequest)
+    public BillEntity mapToEntity(BillDto billDto)
             throws IllegalArgumentException {
 
         BillEntity billEntity = new BillEntity();
 
-        List<FlatEntity> billFlat = flatRepository.findByNumber(billDtoRequest.getFlatNumber());
+        List<FlatEntity> billFlat = flatRepository.findByNumber(billDto.getFlatNumber());
         if (billFlat.isEmpty()) {
-            throw new IllegalArgumentException(billDtoRequest.getFlatNumber() +
+            throw new IllegalArgumentException(billDto.getFlatNumber() +
                     "Is an illegal flat number");
         }
         billEntity.setBillFlatEntity(billFlat.get(0));
-        billEntity.setDate(billDtoRequest.getDate());
-        billEntity.setBillStatus(billDtoRequest.getBillStatus());
+        billEntity.setNumber(billDto.getNumber());
+        billEntity.setDate(billDto.getDate());
+        billEntity.setBillStatus(billDto.getBillStatus());
 
         return billEntity;
     }

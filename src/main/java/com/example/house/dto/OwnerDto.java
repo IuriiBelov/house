@@ -4,16 +4,16 @@ import com.example.house.entity.converter.OwnerName;
 
 import java.util.List;
 
-public class OwnerDtoRequest {
+public class OwnerDto {
 
     private OwnerName name;
     private String phoneNumber;
     private List<Integer> flatsNumbers;
 
-    public OwnerDtoRequest() {
+    public OwnerDto() {
     }
 
-    public OwnerDtoRequest(OwnerName name, String phoneNumber, List<Integer> flatsNumbers) {
+    public OwnerDto(OwnerName name, String phoneNumber, List<Integer> flatsNumbers) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.flatsNumbers = flatsNumbers;

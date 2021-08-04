@@ -2,17 +2,12 @@ package com.example.house.dto;
 
 import java.util.List;
 
-public class BlockDtoResponse {
+public class BlockDto {
 
-    private Long id;
     private Integer number;
     private List<Integer> flatsNumbers;
 
-    public BlockDtoResponse() {}
-
-    public Long getId() {
-        return id;
-    }
+    public BlockDto() {}
 
     public Integer getNumber() {
         return number;
@@ -20,10 +15,6 @@ public class BlockDtoResponse {
 
     public List<Integer> getFlatsNumbers() {
         return flatsNumbers;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setNumber(Integer number) {
