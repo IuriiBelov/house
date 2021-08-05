@@ -7,7 +7,7 @@ import java.util.Calendar;
 public class BillDto {
 
     private Long id;
-    private Integer number;
+    private Integer billNumber;
     private Integer flatNumber;
     private Calendar date;
     private BillStatus billStatus;
@@ -15,11 +15,11 @@ public class BillDto {
     public BillDto() {
     }
 
-    public BillDto(Long id, Integer flatNumber, Integer number, Calendar date,
+    public BillDto(Long id, Integer flatNumber, Integer billNumber, Calendar date,
                    BillStatus billStatus) {
         this.id = id;
         this.flatNumber = flatNumber;
-        this.number = number;
+        this.billNumber = billNumber;
         this.date = date;
         this.billStatus = billStatus;
     }
@@ -40,12 +40,12 @@ public class BillDto {
         this.flatNumber = flatNumber;
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getBillNumber() {
+        return billNumber;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setBillNumber(Integer billNumber) {
+        this.billNumber = billNumber;
     }
 
     public Calendar getDate() {

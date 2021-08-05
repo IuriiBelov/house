@@ -43,7 +43,7 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public BillDto createNewBill(BillDto newBillDto) throws IllegalArgumentException {
-        if (billRepository.findByNumber(newBillDto.getNumber()).size() != 0) {
+        if (billRepository.findByNumber(newBillDto.getBillNumber()).size() != 0) {
             throw new IllegalArgumentException("Bill with such number already exists");
         }
         return billMapping.mapToDto(billRepository.save(billMapping.mapToEntity(newBillDto)));

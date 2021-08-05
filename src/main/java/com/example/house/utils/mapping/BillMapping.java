@@ -22,7 +22,7 @@ public class BillMapping {
 
         billDto.setId(billEntity.getId());
         billDto.setFlatNumber(billEntity.getBillFlatEntity().getNumber());
-        billDto.setNumber(billEntity.getNumber());
+        billDto.setBillNumber(billEntity.getNumber());
         billDto.setDate(billEntity.getDate());
         billDto.setBillStatus(billEntity.getBillStatus());
 
@@ -40,7 +40,7 @@ public class BillMapping {
                     "Is an illegal flat number");
         }
         billEntity.setBillFlatEntity(billFlat.get(0));
-        billEntity.setNumber(billDto.getNumber());
+        billEntity.setNumber(billDto.getBillNumber());
         billEntity.setDate(billDto.getDate());
         billEntity.setBillStatus(billDto.getBillStatus());
 

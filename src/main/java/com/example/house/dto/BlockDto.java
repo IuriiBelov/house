@@ -5,14 +5,14 @@ import java.util.List;
 public class BlockDto {
 
     private Long id;
-    private Integer number;
+    private Integer blockNumber;
     private List<Integer> flatsNumbers;
 
     public BlockDto() {}
 
-    public BlockDto(Long id, Integer number, List<Integer> flatsNumbers) {
+    public BlockDto(Long id, Integer blockNumber, List<Integer> flatsNumbers) {
         this.id = id;
-        this.number = number;
+        this.blockNumber = blockNumber;
         this.flatsNumbers = flatsNumbers;
     }
 
@@ -20,8 +20,8 @@ public class BlockDto {
         return id;
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getBlockNumber() {
+        return blockNumber;
     }
 
     public List<Integer> getFlatsNumbers() {
@@ -32,8 +32,8 @@ public class BlockDto {
         this.id = id;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setBlockNumber(Integer blockNumber) {
+        this.blockNumber = blockNumber;
     }
 
     public void setFlatsNumbers(List<Integer> flatsNumbers) {

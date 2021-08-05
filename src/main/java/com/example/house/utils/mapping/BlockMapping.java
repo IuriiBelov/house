@@ -14,7 +14,7 @@ public class BlockMapping {
         BlockDto blockDto = new BlockDto();
 
         blockDto.setId(blockEntity.getId());
-        blockDto.setNumber(blockEntity.getNumber());
+        blockDto.setBlockNumber(blockEntity.getNumber());
         blockDto.setFlatsNumbers(blockEntity
                 .getFlatEntities()
                 .stream()
