@@ -13,6 +13,7 @@ public class BlockMapping {
     public BlockDto mapToDto(BlockEntity blockEntity) {
         BlockDto blockDto = new BlockDto();
 
+        blockDto.setId(blockEntity.getId());
         blockDto.setNumber(blockEntity.getNumber());
         blockDto.setFlatsNumbers(blockEntity
                 .getFlatEntities()

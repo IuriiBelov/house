@@ -20,6 +20,7 @@ public class BillMapping {
     public BillDto mapToDto(BillEntity billEntity) {
         BillDto billDto = new BillDto();
 
+        billDto.setId(billEntity.getId());
         billDto.setFlatNumber(billEntity.getBillFlatEntity().getNumber());
         billDto.setNumber(billEntity.getNumber());
         billDto.setDate(billEntity.getDate());

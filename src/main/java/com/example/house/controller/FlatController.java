@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("flats")
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class FlatController {
 
     private final FlatService flatService;

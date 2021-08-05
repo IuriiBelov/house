@@ -17,7 +17,5 @@ public interface BillRepository extends JpaRepository<BillEntity, Long> {
 
     List<BillEntity> findByNumber(Integer number);
 
-    void deleteByNumber(Integer number);
-
     Page<BillEntity> findAll(Pageable pageable);
 }

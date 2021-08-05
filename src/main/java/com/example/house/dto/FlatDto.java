@@ -7,6 +7,7 @@ import java.util.List;
 
 public class FlatDto {
 
+    private Long id;
     private Integer number;
     private Integer blockNumber;
     private Integer floor;
@@ -14,6 +15,20 @@ public class FlatDto {
     private List<OwnerName> ownerNames;
 
     public FlatDto() {}
+
+    public FlatDto(Long id, Integer number, Integer blockNumber, Integer floor,
+                   FlatMeasurements measurements, List<OwnerName> ownerNames) {
+        this.id = id;
+        this.number = number;
+        this.blockNumber = blockNumber;
+        this.floor = floor;
+        this.measurements = measurements;
+        this.ownerNames = ownerNames;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public Integer getNumber() {
         return number;
@@ -33,6 +48,10 @@ public class FlatDto {
 
     public List<OwnerName> getOwnerNames() {
         return ownerNames;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setNumber(Integer number) {

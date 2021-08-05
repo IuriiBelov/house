@@ -6,6 +6,7 @@ import java.util.List;
 
 public class OwnerDto {
 
+    private Long id;
     private OwnerName name;
     private String phoneNumber;
     private List<Integer> flatsNumbers;
@@ -13,10 +14,19 @@ public class OwnerDto {
     public OwnerDto() {
     }
 
-    public OwnerDto(OwnerName name, String phoneNumber, List<Integer> flatsNumbers) {
+    public OwnerDto(Long id, OwnerName name, String phoneNumber, List<Integer> flatsNumbers) {
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.flatsNumbers = flatsNumbers;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public OwnerName getName() {

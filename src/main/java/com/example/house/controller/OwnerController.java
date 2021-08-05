@@ -1,7 +1,6 @@
 package com.example.house.controller;
 
 import com.example.house.dto.OwnerDto;
-import com.example.house.entity.converter.OwnerName;
 import com.example.house.service.OwnerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("owners")
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class OwnerController {
 
     private final OwnerService ownerService;

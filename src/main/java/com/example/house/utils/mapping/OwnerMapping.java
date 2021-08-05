@@ -14,6 +14,7 @@ public class OwnerMapping {
     public OwnerDto mapToDto(OwnerEntity ownerEntity) {
         OwnerDto ownerDto = new OwnerDto();
 
+        ownerDto.setId(ownerEntity.getId());
         ownerDto.setName(ownerEntity.getName());
         ownerDto.setPhoneNumber(ownerEntity.getPhoneNumber());
         ownerDto.setFlatsNumbers(ownerEntity

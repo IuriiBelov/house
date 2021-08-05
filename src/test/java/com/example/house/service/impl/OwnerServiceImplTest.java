@@ -34,7 +34,7 @@ class OwnerServiceImplTest {
 
         OwnerEntity ownerEntity = new OwnerEntity(id, new OwnerName("Ivan", "Ivanov"),
                 "1234567");
-        OwnerDto expectedOwnerDto = new OwnerDto(new OwnerName("Ivan", "Ivanov"),
+        OwnerDto expectedOwnerDto = new OwnerDto(5L, new OwnerName("Ivan", "Ivanov"),
                 "1234567", null);
 
         Mockito
@@ -60,6 +60,7 @@ class OwnerServiceImplTest {
         Long flatId = 5L;
 
         OwnerName ownerName = new OwnerName("Ivan", "Ivanov");
-        OwnerDto newOwnerDto = new OwnerDto(ownerName, "1234567", null);
+        OwnerDto newOwnerDto = new OwnerDto(5L, ownerName, "1234567",
+                null);
     }
 }

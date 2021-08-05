@@ -11,6 +11,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("blocks")
+@CrossOrigin(origins = {"http://localhost:4200"})
 public class BlockController {
 
     private final BlockService blockService;

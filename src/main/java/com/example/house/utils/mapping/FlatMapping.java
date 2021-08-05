@@ -14,6 +14,7 @@ public class FlatMapping {
     public FlatDto mapToDto(FlatEntity flatEntity) {
         FlatDto flatDto = new FlatDto();
 
+        flatDto.setId(flatEntity.getId());
         flatDto.setNumber(flatEntity.getNumber());
         flatDto.setBlockNumber(flatEntity.getBlockEntity().getNumber());
         flatDto.setFloor(flatEntity.getFloor());
