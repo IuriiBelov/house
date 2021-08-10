@@ -13,8 +13,8 @@ public class FlatOwnerEntity {
     @Embeddable
     public static class Id implements Serializable {
 
-        @Column(name = "CREATE_DATE")
-        protected LocalDateTime createDate = LocalDateTime.now();
+        //@Column(name = "CREATE_DATE")
+        //protected LocalDateTime createDate = LocalDateTime.now();
 
         @Column(name = "owner_id")
         protected Long ownerId;

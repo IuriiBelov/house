@@ -2,6 +2,8 @@ package com.example.house.controller;
 
 import com.example.house.dto.OwnerDto;
 import com.example.house.service.OwnerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import java.util.List;
 public class OwnerController {
 
     private final OwnerService ownerService;
+
+    private Logger LOGGER = LoggerFactory.getLogger("logger");
 
     public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
@@ -32,6 +36,9 @@ public class OwnerController {
 
     @PostMapping
     public ResponseEntity<OwnerDto> createNewOwner(@RequestBody OwnerDto newOwnerDto) {
+        LOGGER.info("Id: " + newOwnerDto.getId());
+        LOGGER.info("Name: " + newOwnerDto.getName());
+        LOGGER.info("Phone number: " + newOwnerDto.getPhoneNumber());
         OwnerDto ownerDto = ownerService
                 .createNewOwner(newOwnerDto)
                 .orElseThrow(IllegalStateException::new);

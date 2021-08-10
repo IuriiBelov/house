@@ -11,19 +11,22 @@ public class FlatDto {
     private Integer flatNumber;
     private Integer blockNumber;
     private Integer floor;
-    private FlatMeasurements measurements;
-    private List<OwnerName> ownerNames;
+    private FlatMeasurements flatMeasurements;
+    private List<BillDto> bills;
+    private List<OwnerName> ownersNames;
 
     public FlatDto() {}
 
     public FlatDto(Long id, Integer flatNumber, Integer blockNumber, Integer floor,
-                   FlatMeasurements measurements, List<OwnerName> ownerNames) {
+                   FlatMeasurements flatMeasurements, List<BillDto> bills,
+                   List<OwnerName> ownersNames) {
         this.id = id;
         this.flatNumber = flatNumber;
         this.blockNumber = blockNumber;
         this.floor = floor;
-        this.measurements = measurements;
-        this.ownerNames = ownerNames;
+        this.flatMeasurements = flatMeasurements;
+        this.bills = bills;
+        this.ownersNames = ownersNames;
     }
 
     public Long getId() {
@@ -42,12 +45,16 @@ public class FlatDto {
         return floor;
     }
 
-    public FlatMeasurements getMeasurements() {
-        return measurements;
+    public FlatMeasurements getFlatMeasurements() {
+        return flatMeasurements;
     }
 
-    public List<OwnerName> getOwnerNames() {
-        return ownerNames;
+    public List<BillDto> getBills() {
+        return bills;
+    }
+
+    public List<OwnerName> getOwnersNames() {
+        return ownersNames;
     }
 
     public void setId(Long id) {
@@ -66,11 +73,15 @@ public class FlatDto {
         this.floor = floor;
     }
 
-    public void setMeasurements(FlatMeasurements measurements) {
-        this.measurements = measurements;
+    public void setFlatMeasurements(FlatMeasurements flatMeasurements) {
+        this.flatMeasurements = flatMeasurements;
     }
 
-    public void setOwnerNames(List<OwnerName> ownerNames) {
-        this.ownerNames = ownerNames;
+    public void setBills(List<BillDto> bills) {
+        this.bills = bills;
+    }
+
+    public void setOwnersNames(List<OwnerName> ownersNames) {
+        this.ownersNames = ownersNames;
     }
 }

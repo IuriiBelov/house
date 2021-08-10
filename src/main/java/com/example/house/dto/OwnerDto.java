@@ -2,9 +2,10 @@ package com.example.house.dto;
 
 import com.example.house.entity.converter.OwnerName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class OwnerDto {
+public class OwnerDto implements Serializable {
 
     private Long id;
     private OwnerName name;
@@ -51,5 +52,15 @@ public class OwnerDto {
 
     public void setFlatsNumbers(List<Integer> flatsNumbers) {
         this.flatsNumbers = flatsNumbers;
+    }
+
+    @Override
+    public String toString() {
+        return "OwnerDto{" +
+                "id=" + id +
+                ", name=" + name.toString() +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", flatsNumbers=" + flatsNumbers.toString() +
+                '}';
     }
 }

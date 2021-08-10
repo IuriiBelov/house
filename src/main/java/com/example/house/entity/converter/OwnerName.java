@@ -44,4 +44,12 @@ public class OwnerName implements Serializable {
     public int hashCode() {
         return Objects.hash(getFirstName(), getLastName());
     }
+
+    @Override
+    public String toString() {
+        return "OwnerName{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
