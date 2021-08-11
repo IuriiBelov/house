@@ -11,5 +11,7 @@ public interface FlatRepository extends JpaRepository<FlatEntity, Long> {
 
     List<FlatEntity> findByNumber(Integer number);
 
+   FlatEntity findFlatEntityByNumber(Integer number);
+
     Page<FlatEntity> findAll(Pageable pageable);
 }

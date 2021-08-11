@@ -39,6 +39,7 @@ public class OwnerController {
         LOGGER.info("Id: " + newOwnerDto.getId());
         LOGGER.info("Name: " + newOwnerDto.getName());
         LOGGER.info("Phone number: " + newOwnerDto.getPhoneNumber());
+        LOGGER.info("Flats: " + newOwnerDto.getFlatsNumbers());
         OwnerDto ownerDto = ownerService
                 .createNewOwner(newOwnerDto)
                 .orElseThrow(IllegalStateException::new);

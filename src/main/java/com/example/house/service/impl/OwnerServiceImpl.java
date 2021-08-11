@@ -3,7 +3,6 @@ package com.example.house.service.impl;
 import com.example.house.dto.OwnerDto;
 import com.example.house.entity.FlatOwnerEntity;
 import com.example.house.entity.OwnerEntity;
-import com.example.house.entity.converter.OwnerName;
 import com.example.house.repository.FlatOwnerRepository;
 import com.example.house.repository.FlatRepository;
 import com.example.house.repository.OwnerRepository;
@@ -12,6 +11,7 @@ import com.example.house.utils.mapping.OwnerMapping;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +53,7 @@ public class OwnerServiceImpl implements OwnerService {
                 .orElseThrow(IllegalArgumentException::new));
     }
 
+    @Transactional
     @Override
     public Optional<OwnerDto> createNewOwner(OwnerDto newOwnerDto) {
         OwnerEntity newOwnerEntity = ownerMapping.mapToEntity(newOwnerDto);
@@ -61,7 +62,8 @@ public class OwnerServiceImpl implements OwnerService {
 
         setNewFlatsForOwner(newOwnerEntity, newOwnerDto);
 
-        return Optional.of(ownerMapping.mapToDto(ownerRepository.save(newOwnerEntity)));
+        return Optional.of(ownerMapping.mapToDto(newOwnerEntity));
+        //return Optional.of(ownerMapping.mapToDto(ownerRepository.save(newOwnerEntity)));
     }
 
     @Override
@@ -77,7 +79,7 @@ public class OwnerServiceImpl implements OwnerService {
 
         setNewFlatsForOwner(ownerEntity, newOwnerDto);
 
-        return ownerMapping.mapToDto(ownerRepository.save(ownerEntity));
+        return ownerMapping.mapToDto(ownerEntity);
     }
 
     private void setNewFlatsForOwner(OwnerEntity ownerEntity, OwnerDto ownerDto) {
@@ -86,8 +88,8 @@ public class OwnerServiceImpl implements OwnerService {
 
         for (Integer number: ownerDto.getFlatsNumbers()) {
             FlatOwnerEntity flatOwnerEntity = new FlatOwnerEntity(
-                    flatRepository.findByNumber(number).get(0), ownerEntity);
-            flatOwnerRepository.save(flatOwnerEntity);
+                    flatRepository.findFlatEntityByNumber(number), ownerEntity);
+            //flatOwnerRepository.save(flatOwnerEntity);
             flatOwnerEntities.add(flatOwnerEntity);
         }
 
